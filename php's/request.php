@@ -19,13 +19,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
             display: none;
         }
         #allergiesTextBox {
-        margin-bottom: -18px; /* Adjust the negative margin to compensate for default spacing */
+        margin-bottom: 0px; /* Adjust the negative margin to compensate for default spacing */
          }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Get the date input element
-            var dateInput = document.querySelector('input[name="date_of_birth"]');
+            var dateInput = document.querySelector('input[name="date_of_appointment"]');
 
             // Set the default date and time to today at 11 AM
             var defaultDate = new Date();
@@ -83,56 +83,56 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         <?php } ?>
 
         <label>
-            <span>First Name</span><br>
+            <span>First Name</span>
             <input type="text" name="first_name" value="<?php echo $_SESSION['first_name']; ?>" readonly>
         </label><br>
 
         <label>
-            <span>Middle Name</span><br>
+            <span>Middle Name</span>
             <input type="text" name="middle_name">
         </label><br>
 
         <label>
-            <span>Last Name</span><br>
+            <span>Last Name</span>
             <input type="text" name="last_name" value="<?php echo $_SESSION['last_name']; ?>" readonly>
         </label><br>
 
         <label>
-            <span>Contact Number</span><br>
+            <span>Contact Number</span>
             <input type="text" name="Contact_Number">
         </label><br>
         
         <label>
-            <span>Email</span><br>
+            <span>Email</span>
             <input type="text" name="email_address" value="<?php echo $_SESSION['email_address']; ?>" readonly>
         </label><br>
 
         <label>
-            <span>Weight (kg)</span><br>
+            <span>Weight (kg)</span>
             <input type="number" name="weight">
         </label><br>
 
         <label>
-            <span>Date of Birth</span><br>
-            <input type="datetime-local" name="date_of_birth">
+            <span>Date of Appointment</span>
+            <input type="datetime-local" name="date_of_appointment">
         </label><br>
 
         <label>
-            <span>Gender</span><br>
+            <span>Gender</span>
             <input type="radio" name="gender" value="M" id="gender_male"> 
-            <label for="gender_male">Male</label>
+            <label for="gender_male">Male</label><br>
             
             <input type="radio" name="gender" value="F" id="gender_female"> 
             <label for="gender_female">Female</label>
         </label><br>
 
         <label>
-            <span>Your Concerns</span><br>
+            <span>Your Concerns</span>
             <textarea name="concerns" rows="3" cols="50"></textarea>
         </label><br>
 
         <label>
-            <span>Do you have allergies?</span><br>
+            <span>Do you have allergies?</span>
             
             <input type="radio" name="allergies" value="yes" id="allergies_yes" onclick="showTextBox()"> 
             <label for="allergies_yes">Yes</label>
@@ -144,7 +144,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                 <label for="specified_allergies">Enter your allergies:</label>
                 <input type="text" name="specified_allergies" id="specified_allergies">
             </div>
-        </label><br>
+        </label>
 
         <script>
             function showTextBox() {
@@ -157,58 +157,58 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         </script>
 
         <label>
-            <span>Do you have Hypertension?</span><br>
+            <span>Do you have Hypertension?</span>
             <input type="radio" name="hypertension" value="yes" id="hypertension_yes"> 
             <label for="hypertension_yes">Yes</label><br>
             
             <input type="radio" name="hypertension" value="no" id="hypertension_no">
             <label for="hypertension_no">No</label>
-        </label><br>
+        </label>
 
         <label>
-            <span>Do you have Diabetes?</span><br>
+            <span>Do you have Diabetes?</span>
             <input type="radio" name="diabetes" value="yes" id="diabetes_yes">
             <label for="diabetes_yes">Yes</label><br>
-            
+
             <input type="radio" name="diabetes" value="no" id="diabetes_no">
             <label for="diabetes_no">No</label>
-        </label><br>
+        </label>
 
         <label>
-            <span>Do you have High Uric Acid?</span><br>
+            <span>Do you have High Uric Acid?</span>
             <input type="radio" name="uric_acid" value="yes" id="uric_acid_yes">
             <label for="uric_acid_yes">Yes</label><br>
             
             <input type="radio" name="uric_acid" value="no" id="uric_acid_no">
             <label for="uric_acid_no">No</label>
-        </label><br>
+        </label>
 
         <label>
-            <span>Do you have High Cholesterol?</span><br>
+            <span>Do you have High Cholesterol?</span>
             <input type="radio" name="cholesterol" value="yes" id="cholesterol_yes">
             <label for="cholesterol_yes">Yes</label><br>
             
             <input type="radio" name="cholesterol" value="no" id="cholesterol_no">
             <label for="cholesterol_no">No</label>
-        </label><br>
+        </label>
 
         <label>
-            <span>Do you have Asthma?</span><br>
+            <span>Do you have Asthma?</span>
             <input type="radio" name="asthma" value="yes" id="asthma_yes">
             <label for="asthma_yes">Yes</label><br>
             
             <input type="radio" name="asthma" value="no" id="asthma_no">
             <label for="asthma_no">No</label>
-        </label><br>
+        </label>
 
         <label>
-            <span>Are you medically compromised?</span><br>
+            <span>Are you medically compromised?</span>
             <input type="radio" name="medically_compromised" value="yes" id="med_comp_yes">
             <label for="med_comp_yes">Yes (if yes, please seek clearance or approval from your medical doctor)</label><br>
             
             <input type="radio" name="medically_compromised" value="no" id="med_comp_no">
             <label for="med_comp_no">No</label>
-        </label><br>
+        </label>
 
         <button type="submit" name="submit">Submit</button>
     </form>

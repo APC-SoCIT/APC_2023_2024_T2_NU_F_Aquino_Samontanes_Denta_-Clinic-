@@ -22,10 +22,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         }
     }
 
-    $sql = "SELECT id, patient_id, first_name, middle_name, last_name, date_of_birth, gender, appointment_condition
+    $sql = "SELECT id, patient_id, first_name, middle_name, last_name, date_of_appointment, gender, appointment_condition
     FROM tbl_request 
-    WHERE appointment_condition='disapproved'
-    ORDER BY date_of_birth ASC";
+    WHERE appointment_condition='pending'
+    ORDER BY date_of_appointment ASC";
 
     $result = mysqli_query($conn, $sql);
     if (!$result) {
@@ -83,7 +83,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                         echo "<td>{$row['first_name']}</td>";
                         echo "<td>{$row['middle_name']}</td>";
                         echo "<td>{$row['last_name']}</td>";
-                        echo "<td>{$row['date_of_birth']}</td>";
+                        echo "<td>{$row['date_of_appointment']}</td>";
                         echo "<td>{$row['gender']}</td>";
                         echo "<td>{$row['appointment_condition']}</td>";
                         echo "<td>";

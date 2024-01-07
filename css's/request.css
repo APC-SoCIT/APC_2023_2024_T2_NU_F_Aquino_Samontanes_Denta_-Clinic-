@@ -47,9 +47,24 @@ textarea {
     box-sizing: border-box;
 }
 
-input[type="radio"] {
+label span {
+    display: block;
+    margin-bottom: 10px;
+}
+
+label input[type="radio"] {
     margin-right: 5px;
 }
+
+label input[type="radio"],
+label label {
+    display: inline-block;
+}
+
+label div {
+    margin-bottom: 10px;
+}
+
 
 textarea {
     resize: vertical;

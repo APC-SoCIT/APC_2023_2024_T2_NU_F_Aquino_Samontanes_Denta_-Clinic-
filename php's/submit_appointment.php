@@ -10,9 +10,9 @@ if (isset($_POST['submit'])) {
     $ContactNumber = $_POST['Contact_Number'];
     $EmailAddress = $_POST['email_address'];
     $Weight = $_POST['weight'];
-    $DateOfBirth = $_POST['date_of_birth'];
-    $timestamp = strtotime($DateOfBirth);
-    $DateOfBirthFormatted = date('m/d/y H:i', $timestamp);
+    $DateOfAppointment = $_POST['date_of_appointment'];
+    $timestamp = strtotime($DateOfAppointment);
+    $DateOfAppointmentFormatted = date('m/d/y H:i', $timestamp);
     $Gender = $_POST['gender'];
     $Concerns = $_POST['concerns'];
     $Allergies = $_POST['allergies'];
@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
     $Cholesterol = $_POST['cholesterol'];
     $Asthma = $_POST['asthma'];
     $MedicallyCompromised = $_POST['medically_compromised'];
-    $AppointmentCondition = 'disapproved';
+    $AppointmentCondition = 'pending';
 
     if (empty($FirstName)) {
         header("Location: request.php?error=First Name is required");
@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
         header("Location: request.php?error=Weight is required");
         exit();
 
-    }else if(empty($DateOfBirth)){
+    }else if(empty($DateOfAppointment)){
         header("Location: request.php?error=Date of Birth is required");
         exit();
 
@@ -84,8 +84,8 @@ if (isset($_POST['submit'])) {
         exit();
 
     }else{
-        $sql = "INSERT INTO `tbl_request`(`patient_id`, `first_name`, `middle_name`, `last_name`, `Contact_Number`, `email_address`, `weight`, `date_of_birth`, `gender`, `concerns`, `allergies`, `hypertension`, `diabetes`, `uric_acid`, `cholesterol`, `asthma`, `medically_compromised`, `appointment_condition`) 
-            VALUES ('$PatientID', '$FirstName','$MiddleName', '$LastName','$ContactNumber', '$EmailAddress','$Weight', '$DateOfBirthFormatted','$Gender', '$Concerns','$Allergies', '$Hypertension','$Diabetes','$UricAcid','$Cholesterol','$Asthma','$MedicallyCompromised','$AppointmentCondition')";
+        $sql = "INSERT INTO `tbl_request`(`patient_id`, `first_name`, `middle_name`, `last_name`, `Contact_Number`, `email_address`, `weight`, `date_of_appointment`, `gender`, `concerns`, `allergies`, `hypertension`, `diabetes`, `uric_acid`, `cholesterol`, `asthma`, `medically_compromised`, `appointment_condition`) 
+            VALUES ('$PatientID', '$FirstName','$MiddleName', '$LastName','$ContactNumber', '$EmailAddress','$Weight', '$DateOfAppointmentFormatted','$Gender', '$Concerns','$Allergies', '$Hypertension','$Diabetes','$UricAcid','$Cholesterol','$Asthma','$MedicallyCompromised','$AppointmentCondition')";
 
         $result = mysqli_query($conn, $sql);
 
