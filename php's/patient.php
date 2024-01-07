@@ -18,7 +18,7 @@
                 <li><a href="">Call a Clinic</a></li>
                 <li><a href="">Dentist & Reviews</a></li>
                 <li><a href="">Our Services</a></li>
-                <li><a href="">Blog</a></li>
+                <li><a href="">Your Appointments</a></li>
                 <li><a href="">Contact Us</a></li>
                 <li><a href="request.php" class="btn-nav">Request an Appointment</a></li>
             </ul>
