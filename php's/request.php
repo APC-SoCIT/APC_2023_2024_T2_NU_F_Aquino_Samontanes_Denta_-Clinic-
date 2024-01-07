@@ -108,7 +108,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         </label><br>
 
         <label>
-            <span>Weight (kg)</span>
+            <span>Weight(kg)</span>
             <input type="number" name="weight">
         </label><br>
 
