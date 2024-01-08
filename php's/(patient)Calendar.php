@@ -4,16 +4,6 @@ include '../db_conn.php';
 
 if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (isset($_POST['accept'])) {
-            $appointmentId = $_POST['accept'];
-            updateAppointmentStatus($conn, $appointmentId, 'approved');
-        } elseif (isset($_POST['disapprove'])) {
-            $appointmentId = $_POST['disapprove'];
-            updateAppointmentStatus($conn, $appointmentId, 'disapproved');
-        }
-    }
-
     $PatientID = $_SESSION['id'];
     $sql = "SELECT *
             FROM tbl_request 

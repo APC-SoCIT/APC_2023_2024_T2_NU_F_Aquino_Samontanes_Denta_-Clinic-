@@ -99,7 +99,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 
         <label>
             <span>Contact Number</span>
-            <input type="text" name="Contact_Number">
+            <input type="number" name="Contact_Number">
         </label><br>
         
         <label>
@@ -204,7 +204,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         <label>
             <span>Are you medically compromised?</span>
             <input type="radio" name="medically_compromised" value="yes" id="med_comp_yes">
-            <label for="med_comp_yes">Yes (if yes, please seek clearance or approval from your medical doctor)</label><br>
+            <label for="med_comp_yes">Yes (if yes, please seek clearance <br>or approval from your medical doctor)</label><br>
             
             <input type="radio" name="medically_compromised" value="no" id="med_comp_no">
             <label for="med_comp_no">No</label>

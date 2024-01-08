@@ -1,9 +1,24 @@
+<?php
+session_start();
+include '../db_conn.php';
+
+if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
+
+    $sql = "SELECT *
+    FROM tbl_users";
+
+    $result = mysqli_query($conn, $sql);
+    if (!$result) {
+        die("Error: " . mysqli_error($conn));
+    }
+    ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dental Homepage</title>
+    <title>Aquino Samontanes Dental Clinic</title>
     <link rel="stylesheet" href="../css's/index.css">
 </head>
 <body>
@@ -15,11 +30,13 @@
                 </a>
             </div>
             <ul>
+                <li class="welcomeName">Welcome, <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?></li>
                 <li><a href="">Call a Clinic</a></li>
                 <li><a href="">Dentist & Reviews</a></li>
                 <li><a href="">Our Services</a></li>
                 <li><a href="(patient)Calendar.php">Your Appointments</a></li>
                 <li><a href="">Contact Us</a></li>
+                <li><a href="logout.php">Logout</a></li>
                 <li><a href="request.php" class="btn-nav">Request an Appointment</a></li>
             </ul>
             <div class="hamburger">
@@ -41,7 +58,7 @@
             <h3>Request an Appointment</h3>
             <p>A visit to one of our starts here.</p>
             <div class="main-bottom-button">
-                <a href="" class="btn-main-bottom">Start Here</a>                
+                <a href="request.php" class="btn-main-bottom">Start Here</a>                
             </div>
            </div>
         </div>
@@ -52,3 +69,10 @@
     
 </body>
 </html>
+
+<?php
+} else {
+    header("Location: ../index.php");
+    exit();
+}
+?>

@@ -43,6 +43,10 @@ ul li a {
     -webkit-text-stroke: 1px rgba(0, 0, 0, 0.250);
 }
 
+.welcomeName {
+    color: white;
+}
+
 
 ul li:not(:last-child) a:hover {
     text-decoration: underline 2px;
