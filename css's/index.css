@@ -7,8 +7,8 @@
 
 body {
     font-family:sans-serif;
+    background-color: #809CBF;
 }
-
 
 header nav {
     display: flex;
@@ -95,8 +95,9 @@ ul li:not(:last-child) a:hover {
         top: 60px;
         left: 0;
         width: 100%;
-        height: 320px;
+        height: auto;
         gap: 24px;
+        padding-bottom: 2rem;
         background-color:#027880; /*background color when clicked the hamburgir*/
 
     }
@@ -116,7 +117,6 @@ ul li:not(:last-child) a:hover {
     justify-content: center;
     align-items: center;
     height: auto;
-    background-color: #809CBF;
 }
 
 .container-submain {
@@ -172,14 +172,17 @@ h2 {
 }
 
 .main-bottom {
-    margin: 350px auto auto auto;
-    padding: 15px 0 0 0;  
-    height: 100px;
-    width: auto;
+    position: absolute;  /* Use fixed to position relative to viewport */
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);  /* Center horizontally */
+    margin: 0 auto;  /* Remove unnecessary margin */
+    padding: 15px 0;
+    width: 60%;
     background-color: white;
     text-align: center;
-    justify-content: center;
-}
+  }
+  
 
 .main-bottom-button {
 /*    background-color: tomato;     */

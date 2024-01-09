@@ -39,14 +39,15 @@
            <div class="container-main-content-button">
             <a href="" class="btn-main">Service we Offer</a>
            </div>
-           <div class="main-bottom">
-            <h3>Request an Appointment</h3>
-            <p>A visit to one of our starts here.</p>
-            <div class="main-bottom-button">
-                <a href="" class="btn-main-bottom">Start Here</a>                
-            </div>
-           </div>
         </div>
+    </div>
+    
+    <div class="main-bottom">
+        <h3>Request an Appointment</h3>
+        <p>A visit to one of our starts here.</p>
+        <div class="main-bottom-button">
+            <a href="" class="btn-main-bottom">Start Here</a>  
+        </div>              
     </div>
 
     <script src="js's/scriptindex.js"></script>

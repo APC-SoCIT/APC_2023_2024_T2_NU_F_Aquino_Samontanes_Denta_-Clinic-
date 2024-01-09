@@ -15,62 +15,77 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
     }
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aquino Samontanes Dental Clinic</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-    <!-- Bootstrap CSS v5.2.1 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <!-- Load Bootstrap CSS first -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="../css's/pCalendar.css">
 </head>
 
+
 <body>
     <header>
-        <!-- place navbar here -->
+        <nav>
+            <div class="logo">
+                <a href="patient.php" aria-label="Homepage">
+                    <img src="../pics/Logo.png" alt="" class="src">
+                </a>
+            </div>
+            <ul>
+                <li class="welcomeName">Welcome, <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?></li>
+                <li><a href="">Call a Clinic</a></li>
+                <li><a href="">Dentist & Reviews</a></li>
+                <li><a href="">Our Services</a></li>
+                <li><a href="(patient)Calendar.php">Your Appointments</a></li>
+                <li><a href="">Contact Us</a></li>
+                <li><a href="logout.php">Logout</a></li>
+                <li><a href="request.php" class="btn-nav">Request an Appointment</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
     </header>
-    <main>
-
-        <div class="table-container">
-            <h2>Appointments</h2>
-            <a href="request.php"><button>Schedule Appointments</button></a>
-            <table>
-                <?php
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<tr>";
-                    echo "<td>";
-                    echo "<h5>{$row['date_of_appointment']}</h5>";
-                    echo "<p>{$row['appointment_condition']}</p>";
-                    echo "</td>";
-                    echo "<td>";
-                    echo "<div class='column-item'>";
-                    echo "<button value='details'>Details</button>";
-                    echo "<select name='action' id='action_dpdown'>";
-                    echo "<option value='' selected disabled>Action</option>";
-                    echo "<option value='edit_app'>Edit Appointment</option>";
-                    echo "<option value='cancel_app'>Cancel Appointment</option>";
-                    echo "</select><br>";
-                    echo "</div>";
-                    echo "</td>";
-                    echo "</tr>";
-                }
-                ?>
-            </table>
-        </div>
-
-    </main>
+    
+    <div class="table-container">
+        <h2>Appointments</h2>
+        <a href="request.php"><button class="btn-nav">Schedule an appointment</button></a>
+        <table>
+            <?php
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>";
+                echo "<td>";
+                echo "<h5>{$row['date_of_appointment']}</h5>";
+                echo "<p>{$row['appointment_condition']}</p>";
+                echo "</td>";
+                /*
+                echo "<td>";
+                echo "<div class='column-item'>";
+                echo "<button value='details'>Details</button>";
+                echo "<select name='action' id='action_dpdown'>";
+                echo "<option value='' selected disabled>Action</option>";
+                echo "<option value='edit_app'>Edit Appointment</option>";
+                echo "<option value='cancel_app'>Cancel Appointment</option>";
+                echo "</select><br>";
+                echo "</div>";
+                echo "</td>";
+                */
+                echo "</tr>";
+            }
+            ?>
+        </table>
+    </div>
     <footer>
         <!-- place footer here -->
     </footer>
-    <!-- Bootstrap JavaScript Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-</body>
 
+    <script src="../js's/scriptindex.js"></script>
+    <script src="https://kit.fontawesome.com/595a890311.js" crossorigin="anonymous"></script>
+</body>
 </html>
 
 <?php

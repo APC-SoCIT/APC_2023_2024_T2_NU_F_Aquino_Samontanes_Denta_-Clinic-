@@ -18,7 +18,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Aquino Samontanes Dental Clinic</title>
-        <link rel="stylesheet" type="text/css" href="../css's/index.css">
+        <link rel="stylesheet" type="text/css" href="../css's/admin.css">
     </head>
     <body>
         <header>
@@ -29,7 +29,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                     </a>
                 </div>
                 <ul>
-                    <li><a href="">Check Appointments</a></li>
+                    <li><a href="admin.php">Check Appointments</a></li>
                     <li><a href="">Appointment Calendar</a></li>
                     <li><a href="">Patient Records Table</a></li>
                     <li><a href="logout.php">Logout</a></li>
@@ -45,6 +45,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
     <?php
     if (mysqli_num_rows($result) > 0) {
     ?>
+    
+    <div class="table_appointments">
+    <h2 class="title">Patient Records</h2>
         <table border="1">
             <thead>
                 <tr>
@@ -69,8 +72,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                     echo "<td>{$row['contact_number']}</td>";
                     echo "<td>";
                     echo "<form method='post'>";
-                    echo "<button type='submit' name='accept' value='{$row['patient_id']}'>Accept</button>";
-                    echo "<button type='submit' name='disapprove' value='{$row['patient_id']}'>Disapprove</button>";
+                    echo "<button type='submit' name='accept' value='{$row['patient_id']}'>View</button>";
+                    echo "<button type='submit' name='disapprove' value='{$row['patient_id']}'>Edit</button>";
                     echo "</form>";
                     echo "</td>";
                     echo "</tr>";
@@ -78,6 +81,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                 ?>
             </tbody>
         </table>
+    </div>
     <?php
     } else {
         echo "<p style='text-align: center; font-size: 18px; color: #555; background-color: #f7f7f7; padding: 10px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);'>There are no patients in the table.</p>";

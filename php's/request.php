@@ -22,7 +22,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         margin-bottom: 0px; /* Adjust the negative margin to compensate for default spacing */
          }
     </style>
+    
     <script>
+        /*
         document.addEventListener('DOMContentLoaded', function () {
             // Get the date input element
             var dateInput = document.querySelector('input[name="date_of_appointment"]');
@@ -69,11 +71,36 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
             }
             });
         });
+        */
     </script>
+    
 
 
 </head>
 <body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="patient.php" aria-label="Homepage">
+                    <img src="../pics/Logo.png" alt="" class="src">
+                </a>
+            </div>
+            <ul>
+                <li class="welcomeName">Welcome, <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?></li>
+                <li><a href="">Call a Clinic</a></li>
+                <li><a href="">Dentist & Reviews</a></li>
+                <li><a href="">Our Services</a></li>
+                <li><a href="(patient)Calendar.php">Your Appointments</a></li>
+                <li><a href="">Contact Us</a></li>
+                <li><a href="logout.php">Logout</a></li>
+                <li><a href="request.php" class="btn-nav">Request an Appointment</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
     <form action="submit_appointment.php" method="post">
     <?php if (isset($_GET['error'])) { ?>
             <p class="error"><?php echo $_GET['error']; ?></p>

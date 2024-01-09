@@ -54,13 +54,14 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         die("Error: " . mysqli_error($conn));
     }
     ?>
+    
     <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Aquino Samontanes Dental Clinic</title>
-        <link rel="stylesheet" type="text/css" href="../css's/index.css">
+        <link rel="stylesheet" type="text/css" href="../css's/admin.css">
     </head>
     <body>
         <header>
@@ -87,8 +88,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
     <?php
     if (mysqli_num_rows($result) > 0) {
     ?>
-        <h2>Disapproved Appointments</h2>
-        <table border="1">
+    
+    <div class="table_appointments">
+    <h2 class="title">Appointments</h2>
+        <table>
             <thead>
                 <tr>
                     <th>Patient ID</th>
@@ -123,6 +126,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                 ?>
             </tbody>
         </table>
+    </div>    
     <?php
     } else {
         echo "<p style='text-align: center; font-size: 18px; color: #555; background-color: #f7f7f7; padding: 10px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);'>There are no pending appointments.</p>";
