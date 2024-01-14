@@ -18,6 +18,10 @@ header nav {
     background-color: #027880;
 }
 
+logo {
+    display: flex;
+}
+
 .logo img {
     /* width: 40px; */
     height: 40px;
@@ -45,6 +49,8 @@ ul li a {
 
 .welcomeName {
     color: white;
+    text-decoration: none;
+
 }
 
 

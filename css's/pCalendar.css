@@ -105,11 +105,8 @@ ul li:not(:last-child) a:hover {
 }
 
 .table-container{
-    position:absolute;
-    left:50%;
-    transform: translate(-50%, -50%);
-    width:85%;
-    margin-top: 17rem;
+    margin: 2rem 5rem;
+
 }
 
 table{

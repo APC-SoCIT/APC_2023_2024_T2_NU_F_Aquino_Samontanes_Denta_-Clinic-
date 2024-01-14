@@ -21,8 +21,8 @@
                 <li><a href="">Our Services</a></li>
                 <li><a href="">Blog</a></li>
                 <li><a href="">Contact Us</a></li>
-                <li><a href="php's/login.php">Log-in</a></li>
-                <li><a href="php's/login.php" class="btn-nav">Request an Appointment</a></li>
+                <li><a href="php's/auth/login.php">Log-in</a></li>
+                <li><a href="php's/auth/login.php" class="btn-nav">Request an Appointment</a></li>
             </ul>
             <div class="hamburger">
                 <i class="fa-solid fa-bars"></i>
