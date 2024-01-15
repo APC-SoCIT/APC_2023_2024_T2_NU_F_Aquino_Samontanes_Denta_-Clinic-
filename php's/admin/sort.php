@@ -1,15 +1,16 @@
-// sort.php
-
 <?php
 include '../../db_conn.php';
 
 $column = $_GET['column'];
 $orderBy = htmlspecialchars($column);
 
+// Determine the sorting order
+$order = isset($_GET['order']) && ($_GET['order'] === 'desc') ? 'DESC' : 'ASC';
+
 $sql = "SELECT DISTINCT patient_id, first_name, middle_name, last_name, gender, contact_number
         FROM patients 
         WHERE is_archived != 'yes'
-        ORDER BY $orderBy";
+        ORDER BY $orderBy $order";
 
 $result = mysqli_query($conn, $sql);
 

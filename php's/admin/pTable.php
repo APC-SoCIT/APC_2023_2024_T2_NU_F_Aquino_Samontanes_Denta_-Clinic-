@@ -20,6 +20,32 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Aquino Samontanes Dental Clinic</title>
         <link rel="stylesheet" type="text/css" href="../../css's/admin.css">
+
+        <!-- Add the following script inside the <head> section of your HTML -->
+        <script>
+            let sortOrders = {};
+
+            function sortTable(column) {
+                if (!sortOrders[column]) {
+                    sortOrders[column] = 'asc';
+                } else {
+                    sortOrders[column] = (sortOrders[column] === 'asc') ? 'desc' : 'asc';
+                }
+
+                console.log(`Sorting by column ${column} in ${sortOrders[column]} order`);
+
+                const xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("table-body").innerHTML = this.responseText;
+                    }
+                };
+
+                xhttp.open("GET", `sort.php?column=${column}&order=${sortOrders[column]}`, true);
+                xhttp.send();
+            }
+        </script>
+
     </head>
     <body>
         <header>
@@ -74,18 +100,21 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         </a>
     </div>
         <table border="1">
+            <!-- Update the <thead> section of your HTML -->
             <thead>
                 <tr>
-                    <th>Patient ID</th>
-                    <th>First Name</th>
-                    <th>Middle Name</th>
-                    <th>Last Name</th>
-                    <th>Gender</th>
-                    <th>Contact Number</th>
+                    <th onclick="sortTable('patient_id')" class="sort_th">Patient ID</th>
+                    <th onclick="sortTable('first_name')" class="sort_th">First Name</th>
+                    <th onclick="sortTable('middle_name')" class="sort_th">Middle Name</th>
+                    <th onclick="sortTable('last_name')" class="sort_th">Last Name</th>
+                    <th onclick="sortTable('gender')" class="sort_th">Gender</th>
+                    <th onclick="sortTable('contact_number')" class="sort_th">Contact Number</th>
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
+
+
+            <tbody id="table-body">
                 <?php
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo '<div id="myModal" class="modal">';

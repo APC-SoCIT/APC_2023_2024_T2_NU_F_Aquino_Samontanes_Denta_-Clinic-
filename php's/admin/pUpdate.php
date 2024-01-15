@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
     $result = $conn->query($sql); 
     if ($result == TRUE) {
         $update_success = true;
-        header("Location: pTable.php?success=New record created succesfully");
+        header("Location: pTable.php?success=Patient Record Updated");
                 exit();
     }else{
         echo "Error:" . $sql . "<br>" . $conn->error;
