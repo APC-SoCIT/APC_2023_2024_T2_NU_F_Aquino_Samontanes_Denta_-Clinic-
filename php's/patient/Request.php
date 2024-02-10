@@ -9,7 +9,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 <html>
 <head>
     <title>Aquino Samontanes Dental Clinic</title>
-    <link rel="stylesheet" type="text/css" href="../../css's/request.css">
+    <link rel="stylesheet" type="text/css" href="../../css's/patient/request.css">
     <style>
         /* Add this style to prevent resizing of the textarea */
         textarea {

@@ -49,7 +49,7 @@ if (isset($_GET['patient_id'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Aquino Samontanes Dental Clinic</title>
-        <link rel="stylesheet" type="text/css" href="../../css's/p_Create.css">
+        <link rel="stylesheet" type="text/css" href="../../css's/admin/Create.css">
     </head>
 <html>
 <body>

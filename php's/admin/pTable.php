@@ -19,7 +19,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Aquino Samontanes Dental Clinic</title>
-        <link rel="stylesheet" type="text/css" href="../../css's/admin.css">
+        <link rel="stylesheet" type="text/css" href="../../css's/admin/admin.css">
 
         <!-- Add the following script inside the <head> section of your HTML -->
         <script>

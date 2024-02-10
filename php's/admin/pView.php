@@ -18,7 +18,14 @@ if (isset($_GET['patient_id'])) {
             $EmailAddress = $row['email_address'];
             $TreatmentPlan = $row['treatment_plan'];
             $Progress = $row['progress'];
-        } 
+        }
+    }
+        
+    $plansql = "SELECT * FROM `treatment_plan` WHERE `patient_id`='$PID'";
+    $planresult = $conn->query($plansql); 
+
+    
+
 ?>
 <!DOCTYPE html>
     <html lang="en">
@@ -26,7 +33,7 @@ if (isset($_GET['patient_id'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Aquino Samontanes Dental Clinic</title>
-        <link rel="stylesheet" type="text/css" href="../../css's/p_Create.css">
+        <link rel="stylesheet" type="text/css" href="../../css's/admin/View.css">
     </head>
 <html>
 <body>
@@ -51,64 +58,85 @@ if (isset($_GET['patient_id'])) {
             </nav>
         </header>
 
-    <form action="" method="post">
-    <?php if (isset($_GET['error'])) { ?>
-            <p class="error"><?php echo $_GET['error']; ?></p>
-        <?php } ?>
-        <?php if (isset($_GET['success'])) { ?>
-            <p class="success"><?php echo $_GET['success']; ?></p>
-        <?php } ?> 
 
-        <header>NEW PATIENT PROFILE</header>
+    <div class="container">
+        <div class="left-div">
+            <form action="" method="post">
+                <?php if (isset($_GET['error'])) { ?>
+                        <p class="error"><?php echo $_GET['error']; ?></p>
+                    <?php } ?>
+                    <?php if (isset($_GET['success'])) { ?>
+                        <p class="success"><?php echo $_GET['success']; ?></p>
+                    <?php } ?> 
 
-        <label>
-        <span>First Name:</span>
-            <input type="text" name="first_name" value="<?php echo $FirstName; ?>" readonly>
-            <input type="hidden" name="patient_id" value="<?php echo $PID; ?>">
-        </label><br>
+            <header><?php echo $FirstName; ?> <?php echo $MiddleName; ?> <?php echo $LastName; ?></header>
 
-        <label>
-            <span>Middle Name:</span>
-            <input type="text" name="middle_name" value="<?php echo $MiddleName; ?>" readonly>
-        </label><br>
+            <div class="info-item">
+                <span class="info-label">Gender:</span>
+                <span>
+                    <?php 
+                        $Gender = 'M'; // Example value for demonstration
+                        echo ($Gender == 'M') ? 'Male' : '';
+                        echo ($Gender == 'F') ? 'Female' : ''; 
+                    ?>
+                </span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Email Address:</span>
+                <span><?php echo $EmailAddress; ?></span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Contact Number:</span>
+                <span><?php echo $ContactNumber; ?></span>
+            </div>
 
-        <label>
-            <span>Last Name:</span>
-            <input type="text" name="last_name" value="<?php echo $LastName; ?>" readonly>
-        </label><br>
+        </form>
 
-        <label>
-            <span>Gender:</span>
-            <input type="radio" name="gender" value="M" id="gender_male" <?php echo ($Gender == 'M') ? 'checked' : ''; ?> disabled>
-            <label for="gender_male">Male</label><br>
+        </div>
+        <div class="right-div">
+            <!-- Content for the right div -->
+            <header>Treatment Plans</header>
+            <div class="card-container">
+                <!-- Check if there are treatment plans -->
+                <?php
+                $num_rows = $planresult->num_rows;
+                if ($num_rows > 0) {
+                    $count = 0;
+                    while ($row = $planresult->fetch_assoc()) {
+                        $count++;
+                        $PID = $row['patient_id'];
+                        $TreatmentPlan = $row['treatment_plan'];
+                        $Progress = $row['progress'];
+                        $Date = $row['date'];
+                        // Generate a clickable card for each treatment plan
+                        ?>
+                        <a href="details.php?pid=<?php echo $PID; ?>" class="card">
+                            <p><strong>Treatment Plan:</strong> <?php echo $TreatmentPlan; ?></p>
+                            <p><strong>Progress:</strong> <?php echo $Progress; ?></p>
+                            <p><strong>Date:</strong> <?php echo $Date; ?></p>
+                        </a>
+                        <?php
+                        // Check if it's the last iteration
+                        if ($count == $num_rows) {
+                            // Generate a card for creating a new treatment plan
+                            ?>
+                            <a href="create_treatment_plan.php" class="card">
+                                <h3>Create New Treatment Plan</h3>
+                                <p>Click here to create a new treatment plan</p>
+                            </a>
+                            <?php
+                        }
+                    }
+                } else {
+                    // If no treatment plans found
+                    echo "<p>No treatment plans available.</p>";
+                }
+                ?>
+            </div>
+        </div>
+    </div>
 
-            <input type="radio" name="gender" value="F" id="gender_female" <?php echo ($Gender == 'F') ? 'checked' : ''; ?> disabled>
-            <label for="gender_female">Female</label>
-        </label><br>
-
-
-        <label>
-            <span>Contact Number:</span>
-            <input type="number" name="contact_number" value="<?php echo $ContactNumber; ?>" readonly>
-        </label><br>
-        
-        <label>
-            <span>Email Address:</span>
-            <input type="text" name="email_address" value="<?php echo $EmailAddress; ?>" readonly>
-        </label><br>
-
-        <label>
-            <span>Treatment Plan:</span>
-            <input type="text" name="treatment_plan" value="<?php echo $TreatmentPlan; ?>" readonly>
-        </label><br>
-
-        <label>
-            <span>Progress Tracking:</span>
-            <input type="text" name="progress" value="<?php echo $Progress; ?>" readonly>
-        </label><br>
-
-    </form>
-
+    
 </body>
 </html>
 
@@ -116,5 +144,4 @@ if (isset($_GET['patient_id'])) {
     } else{ 
         header('Location: pTable.php');
     } 
-}
 ?> 
