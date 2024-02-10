@@ -10,10 +10,8 @@ if (isset($_POST['submit'])) {
     $Gender = $_POST['gender'];
     $ContactNumber = $_POST['contact_number'];
     $EmailAddress = $_POST['email_address'];
-    $TreatmentPlan = $_POST['treatment_plan'];
-    $Progress = $_POST['progress'];
 
-    $sql = "UPDATE `patients` SET `first_name`='$FirstName',`middle_name`='$MiddleName',`last_name`='$LastName',`gender`='$Gender',`contact_number`='$ContactNumber',`email_address`='$EmailAddress',`treatment_plan`='$TreatmentPlan',`progress`='$Progress' WHERE `patient_id`='$PID'";
+    $sql = "UPDATE `patients` SET `first_name`='$FirstName',`middle_name`='$MiddleName',`last_name`='$LastName',`gender`='$Gender',`contact_number`='$ContactNumber',`email_address`='$EmailAddress' WHERE `patient_id`='$PID'";
 
     $result = $conn->query($sql); 
     if ($result == TRUE) {
@@ -39,8 +37,6 @@ if (isset($_GET['patient_id'])) {
             $Gender = $row['gender'];
             $ContactNumber = $row['contact_number'];
             $EmailAddress = $row['email_address'];
-            $TreatmentPlan = $row['treatment_plan'];
-            $Progress = $row['progress'];
         } 
 ?>
 <!DOCTYPE html>
@@ -82,7 +78,7 @@ if (isset($_GET['patient_id'])) {
             <p class="success"><?php echo $_GET['success']; ?></p>
         <?php } ?> 
 
-        <header>NEW PATIENT PROFILE</header>
+        <header>UPDATE PATIENT PROFILE</header>
 
         <label>
         <span>First Name:</span>
@@ -117,16 +113,6 @@ if (isset($_GET['patient_id'])) {
         <label>
             <span>Email Address:</span>
             <input type="text" name="email_address" value="<?php echo $EmailAddress; ?>">
-        </label><br>
-
-        <label>
-            <span>Treatment Plan:</span>
-            <input type="text" name="treatment_plan" value="<?php echo $TreatmentPlan; ?>">
-        </label><br>
-
-        <label>
-            <span>Progress Tracking:</span>
-            <input type="text" name="progress" value="<?php echo $Progress; ?>">
         </label><br>
 
         <button type="submit" name="submit">SAVE RECORD</button>

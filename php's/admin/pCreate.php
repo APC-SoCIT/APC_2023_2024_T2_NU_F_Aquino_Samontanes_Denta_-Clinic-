@@ -9,8 +9,6 @@
         $Gender = $_POST['gender'];
         $ContactNumber = $_POST['contact_number'];
         $EmailAddress = $_POST['email_address'];
-        $TreatmentPlan = $_POST['treatment_plan'];
-        $Progress = $_POST['progress'];
 
         if (empty($FirstName)) {
             header("Location: pCreate.php?error=First Name is required");
@@ -41,7 +39,7 @@
                 // Add one to the newest patient ID to generate the next patient ID
                 $newPatientID = $newestPatientID + 1;
         
-                $sql = "INSERT INTO `patients`(`patient_id`, `first_name`, `middle_name`, `last_name`, `gender`, `contact_number`, `email_address`, `treatment_plan`, `progress`, `created_at`) VALUES ('$newPatientID', '$FirstName','$MiddleName','$LastName','$Gender','$ContactNumber','$EmailAddress','$TreatmentPlan','$Progress', '$currentDateTime')";
+                $sql = "INSERT INTO `patients`(`patient_id`, `first_name`, `middle_name`, `last_name`, `gender`, `contact_number`, `email_address`, `created_at`) VALUES ('$newPatientID', '$FirstName','$MiddleName','$LastName','$Gender','$ContactNumber','$EmailAddress', '$currentDateTime')";
         
                 $insertResult = $conn->query($sql);
         
@@ -134,16 +132,6 @@
         <label>
             <span>Email Address:</span>
             <input type="text" name="email_address">
-        </label><br>
-
-        <label>
-            <span>Treatment Plan:</span>
-            <input type="text" name="treatment_plan">
-        </label><br>
-
-        <label>
-            <span>Progress Tracking:</span>
-            <input type="text" name="progress">
         </label><br>
 
         <button type="submit" name="submit">SAVE RECORD</button>

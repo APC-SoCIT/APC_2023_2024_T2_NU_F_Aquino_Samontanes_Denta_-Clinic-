@@ -16,8 +16,23 @@ if (isset($_GET['patient_id'])) {
             $Gender = $row['gender'];
             $ContactNumber = $row['contact_number'];
             $EmailAddress = $row['email_address'];
-            $TreatmentPlan = $row['treatment_plan'];
-            $Progress = $row['progress'];
+        }
+    }
+
+    $mediaclsql = "SELECT * FROM `medical_history` WHERE `patient_id`='$PID'";
+    $medicalresult = $conn->query($mediaclsql); 
+
+    if ($medicalresult->num_rows > 0) {        
+        while ($row = $medicalresult->fetch_assoc()) {
+            $Concerns = $row['concerns'];
+            $Allergies = $row['allergies'];
+            $SpecifiedAllergies = $row['specified_allergies'];
+            $Hypertension = $row['hypertension'];
+            $Diabetes = $row['diabetes'];
+            $UricAcid = $row['uric_acid'];
+            $Cholesterol = $row['cholesterol'];
+            $Asthma = $row['asthma'];
+            $MedicallyCompromised = $row['medically_compromised'];
         }
     }
         
@@ -62,12 +77,6 @@ if (isset($_GET['patient_id'])) {
     <div class="container">
         <div class="left-div">
             <form action="" method="post">
-                <?php if (isset($_GET['error'])) { ?>
-                        <p class="error"><?php echo $_GET['error']; ?></p>
-                    <?php } ?>
-                    <?php if (isset($_GET['success'])) { ?>
-                        <p class="success"><?php echo $_GET['success']; ?></p>
-                    <?php } ?> 
 
             <header><?php echo $FirstName; ?> <?php echo $MiddleName; ?> <?php echo $LastName; ?></header>
 
@@ -90,6 +99,50 @@ if (isset($_GET['patient_id'])) {
                 <span><?php echo $ContactNumber; ?></span>
             </div>
 
+            <div class="contact-details">
+                <div class="contact-item"> <!-- First column -->
+                    <div class="info-item2">
+                        <span class="info-label">Hypertension:</span>
+                        <span><?php echo $Hypertension; ?></span>
+                    </div>
+
+                    <div class="info-item2">
+                        <span class="info-label">Diabetes:</span>
+                        <span><?php echo $Diabetes; ?></span>
+                    </div>
+
+                    <div class="info-item2">
+                        <span class="info-label">High Uric Acid:</span>
+                        <span><?php echo $UricAcid; ?></span>
+                    </div>
+
+
+                </div>
+                <div class="contact-item"> <!-- Second column -->
+                    <div class="info-item2">
+                        <span class="info-label">High Cholesterol:</span>
+                        <span><?php echo $Cholesterol; ?></span>
+                    </div>
+
+                    <div class="info-item2">
+                        <span class="info-label">Asthma:</span>
+                        <span><?php echo $Asthma; ?></span>
+                    </div>
+
+                    <div class="info-item2">
+                        <span class="info-label">Medically Compromised:</span>
+                        <span><?php echo $MedicallyCompromised; ?></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <span class="info-label">Concerns:</span></br>
+                <div class="comments-box">
+                    <textarea name="comments" rows="3" cols="50" readonly style="resize: none; width: 100%; max-width:100%; font-size:20px; margin-top:.4em"><?php echo $Concerns; ?></textarea>
+                </div>
+            </div>
+
         </form>
 
         </div>
@@ -104,13 +157,13 @@ if (isset($_GET['patient_id'])) {
                     $count = 0;
                     while ($row = $planresult->fetch_assoc()) {
                         $count++;
-                        $PID = $row['patient_id'];
+                        $ID = $row['id'];
                         $TreatmentPlan = $row['treatment_plan'];
                         $Progress = $row['progress'];
                         $Date = $row['date'];
                         // Generate a clickable card for each treatment plan
                         ?>
-                        <a href="details.php?pid=<?php echo $PID; ?>" class="card">
+                        <a href="view_treatment_plan.php?id=<?php echo $ID; ?>" class="card1">
                             <p><strong>Treatment Plan:</strong> <?php echo $TreatmentPlan; ?></p>
                             <p><strong>Progress:</strong> <?php echo $Progress; ?></p>
                             <p><strong>Date:</strong> <?php echo $Date; ?></p>
@@ -120,7 +173,7 @@ if (isset($_GET['patient_id'])) {
                         if ($count == $num_rows) {
                             // Generate a card for creating a new treatment plan
                             ?>
-                            <a href="create_treatment_plan.php" class="card">
+                            <a href="create_treatment_plan.php" class="card2">
                                 <h3>Create New Treatment Plan</h3>
                                 <p>Click here to create a new treatment plan</p>
                             </a>
@@ -129,7 +182,11 @@ if (isset($_GET['patient_id'])) {
                     }
                 } else {
                     // If no treatment plans found
-                    echo "<p>No treatment plans available.</p>";
+                    echo "<a href='create_treatment_plan.php' class='card2'>";
+                    echo "<h3>Create New Treatment Plan</h3>";
+                    echo "<p>Click here to create a new treatment plan</p>";       
+                    echo "</a>";      
+                    
                 }
                 ?>
             </div>

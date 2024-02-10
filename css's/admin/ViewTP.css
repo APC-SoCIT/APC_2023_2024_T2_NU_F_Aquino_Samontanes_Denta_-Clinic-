@@ -117,15 +117,6 @@ form {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.contact-details {
-    display: flex;
-}
-
-.contact-item {
-    flex: 1;
-}
-
-
 form header {
     font-size: 2rem;
     font-weight: 700;
@@ -133,104 +124,130 @@ form header {
     margin-bottom: 1.5rem;
 }
 
-/* For Cards */
-
-.container {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
+p.error,
+p.success {
+    color: #ff0000;
+    margin-bottom: 10px;
 }
 
-.left-div, .right-div {
-    width: 50%;
-    padding: 20px;
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="datetime-local"], 
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
     box-sizing: border-box;
 }
 
-.left-div {
-    max-width: 100%;
+label input[type="radio"] {
+    margin-right: 5px;
 }
 
-/* Card styling */
-.right-div {
-    margin-top: 4rem;
-}
-.right-div header {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
+label span {
+    display: block;
+    margin-bottom: 10px;
 }
 
-.patient-info {
+label input[type="radio"],
+label label {
+    display: inline-block;
+}
+
+input[name="residential_address"]{
     padding: 20px;
 }
-
-.info-item {
-    margin-bottom: 10px;
-    font-size: 20px;
-    max-width: 100%;
+button {
+    display: block;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    background-color: #027880;
+    color: #fff;
+    padding: 10px 60px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 17px;
 }
 
-.info-item2 {
-    margin-bottom: 10px;
-    font-size: 18px;
+
+button:hover {
+    background-color: #00474d;
 }
 
-.info-label {
-    font-weight: bold;
+/* For Cards */
+
+.container {
+    position: relative; /* Ensure relative positioning for absolute positioning of buttons */
+    width: 80%; /* Set container width */
+    margin: 0 auto; /* Center the container horizontally */
+    background-color: #f9f9f9;
 }
 
-.card1, .card2 {
-    background: #F5F5DC;
-    border: 2px solid #000000;
+.card {
+    border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-    text-decoration: none; 
-    color: inherit; 
+    overflow: hidden;
+    margin-top: 70px; /* Add some space between buttons and card */
 }
 
-.card1 {
-    position: relative; 
-    transition: opacity 0.3s;
+.card-content {
+    display: flex;
+    flex-direction: row; /* Default: Columns side by side */
 }
-    
-.card1::after {
-    content: 'View';
+
+.column1, .column2 {
+    padding: 20px;
+    width:100%;
+}
+
+.column1 {
+    flex: 40%;
+}
+.column2 {
+    flex:60%;
+    justify-content: center;
+}
+
+.edit-button,
+.back-button {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0; /* Initially hidden */
-    transition: opacity 0.3s, font-size 0.3s; /* Smooth transition for opacity and font size */
-    color: white; /* Text color */
-    font-size: 2em; /* Larger font size for "View" text */
+    top: -50px; /* Position the buttons above the card */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
 }
 
-.card1:hover::after {
-    opacity: 1; /* Show text on hover */
+.edit-button {
+    right: 10px; /* Align the edit button to the right */
+    background-color: #007bff;
+    color: #fff;
 }
 
-.card1:hover {
-    background-color: rgba(0, 0, 0, 0.5); /* Darker background color on hover */
+.back-button {
+    left: 10px; /* Align the back button to the left */
+    background-color: #6c757d;
+    color: #fff;
 }
 
-/* For 2x2 layout */
-.card-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
-}
-
-/* Media query for responsive layout */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
+/* Media query to adjust top margin for responsiveness */
+@media (max-width: 700px) {
+    .card-content {
+        flex-direction: column; /* Change to column layout when max width is 700px */
     }
-    .left-div, .right-div {
-        width: 100%;
-    }
-    .right-div {
-        margin-top: 0rem;
-    }
+}
+
+.image {
+    max-width: 100%;
+    height: auto;
+    max-height: 100%; /* Set maximum height for the image */
 }

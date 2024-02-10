@@ -88,12 +88,31 @@ if (isset($_POST['submit'])) {
         exit();
 
     }else{
-        $sql = "INSERT INTO `appointments`(`patient_id`, `first_name`, `middle_name`, `last_name`, `Contact_Number`, `email_address`, `weight`, `date_of_appointment`, `gender`, `concerns`, `allergies`, `specified_allergies`, `hypertension`, `diabetes`, `uric_acid`, `cholesterol`, `asthma`, `medically_compromised`, `appointment_condition`, `created_at`) 
-            VALUES ('$PatientID', '$FirstName','$MiddleName', '$LastName','$ContactNumber', '$EmailAddress','$Weight', '$DateOfAppointmentFormatted','$Gender', '$Concerns','$Allergies','$SpecifiedAllergies', '$Hypertension','$Diabetes','$UricAcid','$Cholesterol','$Asthma','$MedicallyCompromised','$AppointmentCondition','$currentDateTime')";
+        $Psql = "INSERT INTO `patients`(`patient_id`, `first_name`, `middle_name`, `last_name`, `gender`, `weight`, `email_address`, `contact_number`, `created_at`) 
+            VALUES ('$PatientID', '$FirstName', '$MiddleName','$LastName','$Gender','$Weight','$EmailAddress','$ContactNumber','$currentDateTime')
+            ON DUPLICATE KEY UPDATE
+            first_name = VALUES(first_name),
+            middle_name = VALUES(middle_name),
+            last_name = VALUES(last_name),
+            gender = VALUES(gender),
+            weight = VALUES(weight),
+            email_address = VALUES(email_address),
+            contact_number = VALUES(contact_number),
+            created_at = VALUES(created_at)";
 
-        $result = mysqli_query($conn, $sql);
+        $Presult = mysqli_query($conn, $Psql);
 
-        if ($result == TRUE) {
+        $Asql = "INSERT INTO `appointments`(`patient_id`, `date_of_appointment`, `appointment_condition`, `created_at`) 
+            VALUES ('$PatientID', '$DateOfAppointmentFormatted','$AppointmentCondition','$currentDateTime')";
+
+        $result = mysqli_query($conn, $Asql);
+        
+        $Msql = "INSERT INTO `medical_history`(`patient_id`, `concerns`, `allergies`, `specified_allergies`, `hypertension`, `diabetes`, `uric_acid`, `cholesterol`, `asthma`, `medically_compromised`, `created_at`) 
+            VALUES ('$PatientID', '$Concerns','$Allergies','$SpecifiedAllergies', '$Hypertension','$Diabetes','$UricAcid','$Cholesterol','$Asthma','$MedicallyCompromised','$currentDateTime')";
+
+        $Mresult = mysqli_query($conn, $Msql);
+
+        if ($Mresult && $Presult == TRUE) {
             header("Location: Request.php?success=New record created succesfully");
                 exit();
                 if (isset($_GET['error']) || isset($_GET['error'])) {
@@ -101,9 +120,9 @@ if (isset($_POST['submit'])) {
                     unset($_GET['success']);
                 }
         } else {
-            echo "Error:". $sql . "<br>". $conn->error;
-        } 
-
+            echo "Error:". $Psql . "<br>". $conn->error;
+        }
+    
         $conn->close();  
     }
         

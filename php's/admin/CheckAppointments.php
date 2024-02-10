@@ -16,53 +16,21 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         // Assuming 'approve' button is clicked
         if (isset($_POST['approve'])) {
             $appointmentId = $_POST['approve'];
-
-            // Retrieve appointment details from appointments
-            $sqlSelect = "SELECT * FROM appointments WHERE id = $appointmentId";
-            $resultSelect = mysqli_query($conn, $sqlSelect);
-
-            if ($row = mysqli_fetch_assoc($resultSelect)) {
-                // Insert the appointment details into patients
-                $patientId = $row['patient_id'];
-                $firstName = $row['first_name'];
-                $middleName = $row['middle_name'];
-                $lastName = $row['last_name'];
-                $gender = $row['gender'];
-                $email = $row['email_address'];
-                $cn = $row['Contact_Number'];
-                
-                date_default_timezone_set('Asia/Manila');
-                $currentDateTime = date('Y-m-d H:i:s');
-                $archived = 'no';
-
-                $sqlCheckPatient = "SELECT * FROM patients WHERE patient_id = '$patientId'";
-                $resultCheckPatient = mysqli_query($conn, $sqlCheckPatient);
-
-                if (mysqli_num_rows($resultCheckPatient) == 0) {
-                    // Patient does not exist, so we can insert
-                    $sqlInsert = "INSERT INTO patients (patient_id, first_name, middle_name, last_name, gender, email_address, contact_number, created_at, is_archived) 
-                                VALUES ('$patientId', '$firstName', '$middleName', '$lastName', '$gender', '$email', '$cn', '$currentDateTime', '$archived')";
-
-                    $resultInsert = mysqli_query($conn, $sqlInsert);
-
-                    if (!$resultInsert) {
-                        die("Error inserting patient record: " . mysqli_error($conn));
-                    }
-                }
-
-                // Update appointment status to 'approved'
-                updateAppointmentStatus($conn, $appointmentId, 'approved');
-            }
+            // Update appointment status to 'approved'
+            updateAppointmentStatus($conn, $appointmentId, 'approved');
+            
         } elseif (isset($_POST['disapprove'])) {
             $appointmentId = $_POST['disapprove'];
             updateAppointmentStatus($conn, $appointmentId, 'disapproved');
         }
     }
 
-    $sql = "SELECT id, patient_id, first_name, middle_name, last_name, date_of_appointment, gender, appointment_condition
-    FROM appointments 
-    WHERE appointment_condition='pending'
-    ORDER BY date_of_appointment ASC";
+    $sql = "SELECT appointments.*, patients.first_name, patients.middle_name, patients.last_name, patients.gender
+        FROM appointments 
+        INNER JOIN patients ON appointments.patient_id = patients.patient_id
+        WHERE appointments.appointment_condition='pending'
+        ORDER BY appointments.date_of_appointment ASC";
+
 
     $result = mysqli_query($conn, $sql);
     if (!$result) {
