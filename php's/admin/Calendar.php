@@ -18,7 +18,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
             $appointmentId = $_POST['Done'];
 
             // Retrieve appointment details from appointments
-            $sqlSelect = "SELECT * FROM appointments WHERE id = $appointmentId";
+            $sqlSelect = "SELECT DISTINCT appointments.*, patients.*
+            FROM appointments 
+            INNER JOIN patients ON appointments.patient_id = patients.patient_id
+            WHERE appointments.id = $appointmentId";
             $resultSelect = mysqli_query($conn, $sqlSelect);
 
             if ($row = mysqli_fetch_assoc($resultSelect)) {
@@ -29,7 +32,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                 $lastName = $row['last_name'];
                 $gender = $row['gender'];
                 $email = $row['email_address'];
-                $cn = $row['Contact_Number'];
+                $cn = $row['contact_number'];
                 
                 date_default_timezone_set('Asia/Manila');
                 $currentDateTime = date('Y-m-d H:i:s');
@@ -56,20 +59,22 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         } 
     }
 
-    $sql = "SELECT id, patient_id, first_name, middle_name, last_name, date_of_appointment, gender, appointment_condition
+    $sql = "SELECT DISTINCT appointments.*, patients.first_name, patients.middle_name, patients.last_name, patients.gender
     FROM appointments 
-    WHERE appointment_condition='approved'
-    ORDER BY date_of_appointment ASC";
+    INNER JOIN patients ON appointments.patient_id = patients.patient_id
+    WHERE appointments.appointment_condition='approved'
+    ORDER BY appointments.date_of_appointment ASC";
 
     $result = mysqli_query($conn, $sql);
     if (!$result) {
         die("Error: " . mysqli_error($conn));
     }
 
-    $sql_done = "SELECT id, patient_id, first_name, middle_name, last_name, date_of_appointment, gender, appointment_condition
+    $sql_done = "SELECT DISTINCT appointments.*, patients.first_name, patients.middle_name, patients.last_name, patients.gender
     FROM appointments 
-    WHERE appointment_condition='Done'
-    ORDER BY date_of_appointment ASC";
+    INNER JOIN patients ON appointments.patient_id = patients.patient_id
+    WHERE appointments.appointment_condition='Done'
+    ORDER BY appointments.date_of_appointment ASC";
 
     $result_done = mysqli_query($conn, $sql_done);
     if (!$result_done) {

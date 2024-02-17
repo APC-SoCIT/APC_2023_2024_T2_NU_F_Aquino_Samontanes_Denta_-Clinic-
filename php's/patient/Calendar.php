@@ -46,7 +46,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
     <header>
         <nav>
             <div class="logo">
-                <a href="patient.php" aria-label="Homepage">
+                <a href="Home.php" aria-label="Homepage">
                     <img src="../../pics/Logo.png" alt="" class="src">
                 </a>
             </div>

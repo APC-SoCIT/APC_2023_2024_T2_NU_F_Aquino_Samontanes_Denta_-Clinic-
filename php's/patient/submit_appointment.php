@@ -7,6 +7,8 @@ if (isset($_POST['submit'])) {
     $FirstName = $_POST['first_name'];
     $MiddleName = $_POST['middle_name'];
     $LastName = $_POST['last_name'];
+    $LastVisit = $_POST['last_visit'];
+    $Age = $_POST['age'];
     $ContactNumber = $_POST['Contact_Number'];
     $EmailAddress = $_POST['email_address'];
     $Weight = $_POST['weight'];
@@ -34,6 +36,14 @@ if (isset($_POST['submit'])) {
 
     }else if(empty($LastName)){
         header("Location: Request.php?error=Last Name is required");
+        exit();
+
+    }else if(empty($Age)){
+        header("Location: Request.php?error=Age is required");
+        exit();
+
+    }else if(empty($LastVisit)){
+        header("Location: Request.php?error=Last Visit is required");
         exit();
         
     }else if(empty($ContactNumber)){
@@ -88,12 +98,14 @@ if (isset($_POST['submit'])) {
         exit();
 
     }else{
-        $Psql = "INSERT INTO `patients`(`patient_id`, `first_name`, `middle_name`, `last_name`, `gender`, `weight`, `email_address`, `contact_number`, `created_at`) 
-            VALUES ('$PatientID', '$FirstName', '$MiddleName','$LastName','$Gender','$Weight','$EmailAddress','$ContactNumber','$currentDateTime')
+        $Psql = "INSERT INTO `patients`(`patient_id`, `first_name`, `middle_name`, `last_name`, `last_visit`, `age`,  `gender`, `weight`, `email_address`, `contact_number`, `created_at`) 
+            VALUES ('$PatientID', '$FirstName', '$MiddleName','$LastName','$LastVisit','$Age','$Gender','$Weight','$EmailAddress','$ContactNumber','$currentDateTime')
             ON DUPLICATE KEY UPDATE
             first_name = VALUES(first_name),
             middle_name = VALUES(middle_name),
             last_name = VALUES(last_name),
+            last_visit = VALUES(last_visit),
+            age = VALUES(age),
             gender = VALUES(gender),
             weight = VALUES(weight),
             email_address = VALUES(email_address),
@@ -112,7 +124,7 @@ if (isset($_POST['submit'])) {
 
         $Mresult = mysqli_query($conn, $Msql);
 
-        if ($Mresult && $Presult == TRUE) {
+        if ($Mresult && $Presult && $result  == TRUE) {
             header("Location: Request.php?success=New record created succesfully");
                 exit();
                 if (isset($_GET['error']) || isset($_GET['error'])) {

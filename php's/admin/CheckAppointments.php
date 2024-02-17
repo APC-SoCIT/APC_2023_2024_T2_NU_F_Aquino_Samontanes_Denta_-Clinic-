@@ -25,11 +25,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         }
     }
 
-    $sql = "SELECT appointments.*, patients.first_name, patients.middle_name, patients.last_name, patients.gender
+    $sql = "SELECT DISTINCT appointments.id, appointments.*, patients.first_name, patients.middle_name, patients.last_name, patients.gender
         FROM appointments 
         INNER JOIN patients ON appointments.patient_id = patients.patient_id
         WHERE appointments.appointment_condition='pending'
         ORDER BY appointments.date_of_appointment ASC";
+
 
 
     $result = mysqli_query($conn, $sql);
