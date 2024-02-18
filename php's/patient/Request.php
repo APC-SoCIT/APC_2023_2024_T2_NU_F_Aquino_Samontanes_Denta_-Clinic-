@@ -40,6 +40,18 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         }
     }
 
+    $appointmentsql = "SELECT * FROM `appointments`";
+    $appointmentresult = $conn->query($appointmentsql); 
+
+    $dates = []; // Initialize an array to store appointment dates
+
+    if ($appointmentresult->num_rows > 0) {        
+        while ($row = $appointmentresult->fetch_assoc()) {
+            $dates[] = $row['date_of_appointment']; // Add each date to the array
+        }
+    }
+
+
     ?>
 <!DOCTYPE html>
 <html>
@@ -112,28 +124,53 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 
         // Function to restrict selection of Sundays and times outside 11am-6pm
         document.addEventListener('DOMContentLoaded', function() {
-            var dateTimePicker = document.getElementById('dateTimePicker');
-            
-            // Disable Sundays
-            dateTimePicker.addEventListener('input', function() {
-                var selectedDate = new Date(dateTimePicker.value);
-                var dayOfWeek = selectedDate.getDay();
-                if (dayOfWeek === 0) {
-                    alert('Sundays are not allowed!');
-                    dateTimePicker.value = ''; // Reset date-time picker value
-                }
-            });
+        var dateTimePicker = document.getElementById('dateTimePicker');
+        
+        // Attach a single change event listener to handle both restrictions
+        dateTimePicker.addEventListener('change', function() {
+            console.log('DateTimePicker value changed');
 
-            // Restrict time to 11am-6pm
-            dateTimePicker.addEventListener('change', function() {
-                var selectedTime = dateTimePicker.value.split('T')[1];
-                var selectedHour = parseInt(selectedTime.split(':')[0]);
-                if (selectedHour < 11 || selectedHour >= 18) {
-                    alert('Please select a time between 11am and 6pm.');
+            var selectedDateTime = new Date(dateTimePicker.value);
+            var selectedTime = selectedDateTime.getTime(); // Get time in milliseconds
+
+            // Check if the selected time is within 30 minutes of any existing appointments
+            var appointments = <?php echo json_encode($dates); ?>; // Assuming $appointmentDates contains the dates of existing appointments
+            for (var i = 0; i < appointments.length; i++) {
+                var appointmentTime = new Date(appointments[i]).getTime();
+                if (Math.abs(selectedTime - appointmentTime) < 30 * 60 * 1000) {
+                    // Display alert for appointment clash
+                    showCustomAlert('Appointment already set by other patient. Please choose another date and time. You can choose 30 minutes ahead or before it.');
                     dateTimePicker.value = ''; // Reset date-time picker value
+                    return; // Exit the loop once an appointment clash is found
                 }
-            });
+            }
+
+            // Check if it's Sunday or time is outside 11am-6pm
+            var dayOfWeek = selectedDateTime.getDay();
+            var selectedHour = selectedDateTime.getHours();
+            if (dayOfWeek === 0) {
+                showCustomAlert('Sundays are not allowed!');
+                dateTimePicker.value = ''; // Reset date-time picker value
+            } else if (selectedHour < 11 || selectedHour >= 18) {
+                showCustomAlert('Please select a time between 11am and 6pm.');
+                dateTimePicker.value = ''; // Reset date-time picker value
+            }
         });
+
+        // Function to display custom alert
+        function showCustomAlert(message) {
+            console.log('Showing custom alert:', message); // Add this line for debugging
+
+            var alertBox = document.createElement('div');
+            alertBox.className = 'custom-alert';
+            alertBox.textContent = message;
+            document.body.appendChild(alertBox);
+            // Automatically remove the alert after 3 seconds
+            setTimeout(function() {
+                alertBox.parentNode.removeChild(alertBox);
+            }, 3000);
+        }
+    });
     </script>
     
 
@@ -183,9 +220,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 
     
     <form action="submit_appointment.php" method="post">
+        <p style="font-size: 13px; color: red;"><i>* are required</i></p><br>
 
         <label>
-            <span>First Name</span>
+            <span>First Name <b class="star">*</b></span>
             <input type="text" name="first_name" value="<?php echo $FirstName ?>">
         </label><br>
 
@@ -195,12 +233,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         </label><br>
 
         <label>
-            <span>Last Name</span>
+            <span>Last Name <b class="star">*</b></span>
             <input type="text" name="last_name" value="<?php echo $LastName ?>">
         </label><br>
 
         <label>
-            <span>When was your last visit at a dental clinic?</span>
+            <span>When was your last visit at a dental clinic? <b class="star">*</b></span>
             <input type="radio" name="last_visit" value="recently" id="recently">
             <label for="recently">Recently (less than a month ago)</label><br>
 
@@ -216,17 +254,17 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 
 
         <label>
-            <span>Age</span>
+            <span>Age <b class="star">*</b></span>
             <input type="number" name="age" value="<?php echo $Age ?>">
         </label><br>
 
         <label>
-            <span>Contact Number</span>
+            <span>Contact Number <b class="star">*</b></span>
             <input type="number" name="Contact_Number" value="<?php echo $ContactNumber ?>">
         </label><br>
         
         <label>
-            <span>Email</span>
+            <span>Email <b class="star">*</b></span>
             <input type="text" name="email_address" value="<?php echo $EmailAddress ?>">
         </label><br>
 
@@ -236,7 +274,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         </label><br>
 
         <label>
-            <span>Date of Appointment</span>
+            <span>Date of Appointment <b class="star">*</b></span>
             <div class="center">
                 <button type="button" onclick="openPopup()" class="choose_date_bttn">Choose Date and Time</button><br><br>
             </div>
@@ -245,7 +283,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         </label><br>
 
         <label>
-            <span>Gender</span>
+            <span>Gender <b class="star">*</b></span>
             <input type="radio" name="gender" value="M" id="gender_male" <?php if ($Gender === "M") echo "checked"; ?>>
             <label for="gender_male">Male</label><br>
             
@@ -255,12 +293,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 
 
         <label>
-            <span>Your Concerns</span>
+            <span>Your Concerns <b class="star">*</b></span>
             <textarea name="concerns" rows="3" cols="50"></textarea>
         </label><br>
 
         <label>
-            <span>Do you have allergies?</span>
+            <span>Do you have allergies? <b class="star">*</b></span>
             
             <input type="radio" name="allergies" value="yes" id="allergies_yes" onclick="showTextBox()" <?php if ($Allergies === "yes") echo "checked"; ?>> 
             <label for="allergies_yes">Yes</label>
@@ -285,7 +323,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         </script>
 
         <label>
-            <span>Do you have Hypertension?</span>
+            <span>Do you have Hypertension? <b class="star">*</b></span>
             <input type="radio" name="hypertension" value="yes" id="hypertension_yes" <?php if ($Hypertension === "yes") echo "checked"; ?>> 
             <label for="hypertension_yes">Yes</label><br>
             
@@ -294,7 +332,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         </label>
 
         <label>
-            <span>Do you have Diabetes?</span>
+            <span>Do you have Diabetes? <b class="star">*</b></span>
             <input type="radio" name="diabetes" value="yes" id="diabetes_yes" <?php if ($Diabetes === "yes") echo "checked"; ?>>
             <label for="diabetes_yes">Yes</label><br>
 
@@ -303,7 +341,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         </label>
 
         <label>
-            <span>Do you have High Uric Acid?</span>
+            <span>Do you have High Uric Acid? <b class="star">*</b></span>
             <input type="radio" name="uric_acid" value="yes" id="uric_acid_yes" <?php if ($UricAcid === "yes") echo "checked"; ?>>
             <label for="uric_acid_yes">Yes</label><br>
             
@@ -312,7 +350,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         </label>
 
         <label>
-            <span>Do you have High Cholesterol?</span>
+            <span>Do you have High Cholesterol? <b class="star">*</b></span>
             <input type="radio" name="cholesterol" value="yes" id="cholesterol_yes" <?php if ($Cholesterol === "yes") echo "checked"; ?>>
             <label for="cholesterol_yes">Yes</label><br>
             
@@ -321,7 +359,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         </label>
 
         <label>
-            <span>Do you have Asthma?</span>
+            <span>Do you have Asthma? <b class="star">*</b></span>
             <input type="radio" name="asthma" value="yes" id="asthma_yes" <?php if ($Asthma === "yes") echo "checked"; ?>>
             <label for="asthma_yes">Yes</label><br>
             
@@ -330,7 +368,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         </label>
 
         <label>
-            <span>Are you medically compromised?</span>
+            <span>Are you medically compromised? <b class="star">*</b></span>
             <input type="radio" name="medically_compromised" value="yes" id="med_comp_yes" <?php if ($MedicallyCompromised === "yes") echo "checked"; ?>>
             <label for="med_comp_yes">Yes (if yes, please seek clearance <br>or approval from your medical doctor)</label><br>
             
