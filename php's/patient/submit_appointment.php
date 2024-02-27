@@ -26,6 +26,8 @@ if (isset($_POST['submit'])) {
     $Asthma = $_POST['asthma'];
     $MedicallyCompromised = $_POST['medically_compromised'];
     $AppointmentCondition = 'pending';
+
+    
     
     date_default_timezone_set('Asia/Manila');
     $currentDateTime = date('Y-m-d H:i:s');
@@ -58,7 +60,7 @@ if (isset($_POST['submit'])) {
         exit();
 
     }else if(empty($DateOfAppointment)){
-        header("Location: Request.php?error=Date of Birth is required");
+        header("Location: Request.php?error=Date of Appointment is required");
         exit();
 
     }else if(empty($Gender)){
@@ -98,19 +100,37 @@ if (isset($_POST['submit'])) {
         exit();
 
     }else{
-        $Psql = "INSERT INTO `patients`(`patient_id`, `first_name`, `middle_name`, `last_name`, `last_visit`, `age`,  `gender`, `weight`, `email_address`, `contact_number`, `created_at`) 
-            VALUES ('$PatientID', '$FirstName', '$MiddleName','$LastName','$LastVisit','$Age','$Gender','$Weight','$EmailAddress','$ContactNumber','$currentDateTime')
-            ON DUPLICATE KEY UPDATE
-            first_name = VALUES(first_name),
-            middle_name = VALUES(middle_name),
-            last_name = VALUES(last_name),
-            last_visit = VALUES(last_visit),
-            age = VALUES(age),
-            gender = VALUES(gender),
-            weight = VALUES(weight),
-            email_address = VALUES(email_address),
-            contact_number = VALUES(contact_number),
-            created_at = VALUES(created_at)";
+        // Check if patient_id already exists
+            $checkQuery = "SELECT COUNT(*) as count FROM patients WHERE patient_id = '$PatientID'";
+            $checkResult = $conn->query($checkQuery);
+
+            if ($checkResult->num_rows > 0) {
+                $row = $checkResult->fetch_assoc();
+                $patientExists = $row['count'] > 0;
+            } else {
+                $patientExists = false;
+            }
+
+            // Construct SQL query
+            if ($patientExists) {
+                // Perform an update
+                $Psql = "UPDATE patients SET
+                            first_name = '$FirstName',
+                            middle_name = '$MiddleName',
+                            last_name = '$LastName',
+                            last_visit = '$LastVisit',
+                            age = '$Age',
+                            gender = '$Gender',
+                            weight = '$Weight',
+                            email_address = '$EmailAddress',
+                            contact_number = '$ContactNumber',
+                            created_at = '$currentDateTime'
+                        WHERE patient_id = '$PatientID'";
+            } else {
+                // Perform an insert
+                $Psql = "INSERT INTO `patients`(`patient_id`, `first_name`, `middle_name`, `last_name`, `last_visit`, `age`, `gender`, `weight`, `email_address`, `contact_number`, `created_at`) 
+                        VALUES ('$PatientID', '$FirstName', '$MiddleName', '$LastName', '$LastVisit', '$Age', '$Gender', '$Weight', '$EmailAddress', '$ContactNumber', '$currentDateTime')";
+            }
 
         $Presult = mysqli_query($conn, $Psql);
 

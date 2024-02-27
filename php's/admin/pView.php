@@ -13,6 +13,7 @@ if (isset($_GET['patient_id'])) {
             $FirstName = $row['first_name'];
             $MiddleName = $row['middle_name'];
             $LastName = $row['last_name'];
+            $Age = $row['age'];
             $Gender = $row['gender'];
             $ContactNumber = $row['contact_number'];
             $EmailAddress = $row['email_address'];
@@ -75,6 +76,9 @@ if (isset($_GET['patient_id'])) {
 
 
     <div class="container">
+        <!-- Back button outside the card, aligned with the left side of the container -->
+        <a href="pTable.php"><button class="back-button">Back</button></a>
+
         <div class="left-div">
             <form action="" method="post">
 
@@ -89,6 +93,10 @@ if (isset($_GET['patient_id'])) {
                         echo ($Gender == 'F') ? 'Female' : ''; 
                     ?>
                 </span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Age:</span>
+                <span><?php echo $Age; ?></span>
             </div>
             <div class="info-item">
                 <span class="info-label">Email Address:</span>
@@ -173,7 +181,7 @@ if (isset($_GET['patient_id'])) {
                         if ($count == $num_rows) {
                             // Generate a card for creating a new treatment plan
                             ?>
-                            <a href="create_treatment_plan.php" class="card2">
+                            <a href="create_treatment_plan.php?id=<?php echo $ID; ?>" class="card2">
                                 <h3>Create New Treatment Plan</h3>
                                 <p>Click here to create a new treatment plan</p>
                             </a>
@@ -182,7 +190,9 @@ if (isset($_GET['patient_id'])) {
                     }
                 } else {
                     // If no treatment plans found
-                    echo "<a href='create_treatment_plan.php' class='card2'>";
+                    $ID = 1;
+                    $PID = $_GET['patient_id'];
+                    echo "<a href='createTP.php?patient_id=$PID' class='card2'>";
                     echo "<h3>Create New Treatment Plan</h3>";
                     echo "<p>Click here to create a new treatment plan</p>";       
                     echo "</a>";      

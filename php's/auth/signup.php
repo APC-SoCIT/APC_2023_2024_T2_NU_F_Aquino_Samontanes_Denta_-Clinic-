@@ -78,16 +78,28 @@ if (isset($_POST['submit'])) {
         </nav>
     </header>
 
+    <?php if (isset($_GET['success'])) { ?>
+        <p class="success" id="successMessage"><?php echo $_GET['success']; ?></p>
+        <script>
+            setTimeout(function() {
+                document.getElementById('successMessage').classList.add('hide');
+            }, 1000);
+        </script>
+    <?php } ?>
+
+    <?php if (isset($_GET['error'])) { ?>
+        <p class="error" id="errorMessage"><?php echo $_GET['error']; ?></p>
+        <script>
+            setTimeout(function() {
+                document.getElementById('errorMessage').classList.add('hide');
+            }, 1000);
+        </script>
+    <?php } ?>
+
     <form action="" method="post">
         <div class="container">
             <div class="login form">
                 <header>Create your Account</header>
-                <?php if (isset($_GET['error'])) { ?>
-                    <p class="error"><?php echo $_GET['error']; ?></p>
-                <?php } ?>
-                <?php if (isset($_GET['success'])) { ?>
-                    <p class="success"><?php echo $_GET['success']; ?></p>
-                <?php } ?>
                 
                 <input type="text" id="first_name" name="first_name" placeholder="First Name">
                 <input type="text" id="last_name" name="last_name" placeholder="Last Name">

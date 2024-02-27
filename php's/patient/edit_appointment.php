@@ -2,11 +2,34 @@
 session_start();
 include '../../db_conn.php';
 
-if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
+if (isset($_GET['id'])) {
 
-    $PID = $_SESSION['id']; 
+    $PID = $_GET['id']; 
     $sql = "SELECT * FROM `patients` WHERE `patient_id`='$PID'";
     $result = $conn->query($sql); 
+
+    if (isset($_POST['submit'])) {
+        $DateOfAppointment = $_POST['date_of_appointment'];
+        $timestamp = strtotime($DateOfAppointment);
+        $DateOfAppointmentFormatted = date('m/d/y H:i', $timestamp);
+
+        if(empty($DateOfAppointment)){
+            header("Location: edit_appointment.php?error=Date of Appointment is required");
+            exit();
+
+        }else{
+            $csql = "UPDATE appointments SET date_of_appointment = '$DateOfAppointmentFormatted' WHERE id = '$PID'";
+            // Execute the SQL query
+            $cresult = mysqli_query($conn, $csql);
+            // Check if the query was successful
+            if ($cresult) {
+                header("Location: Calendar.php?success=Appointment updated");
+                exit();
+            } else {
+                // Handle the error
+            }
+        }
+    }
 
     if ($result->num_rows > 0) {        
         while ($row = $result->fetch_assoc()) {
@@ -172,19 +195,21 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         }
     });
     </script>
+    
+
 
 </head>
 <body>
     <header>
         <nav>
             <div class="logo">
-                <a href="Home.php" aria-label="Homepage">
+                <a href="patient.php" aria-label="Homepage">
                     <img src="../../pics/Logo.png" alt="" class="src">
                 </a>
             </div>
             <ul>
                 <li class="welcomeName">Welcome, <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?></li>
-                <li><a href="Location.php">Our Location</a></li>
+                <li><a href="">Call a Clinic</a></li>
                 <li><a href="">Dentist & Reviews</a></li>
                 <li><a href="">Our Services</a></li>
                 <li><a href="Calendar.php">Your Appointments</a></li>
@@ -217,162 +242,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
     <?php } ?>
 
     
-    <form action="submit_appointment.php" method="post">
-        <p style="font-size: 13px; color: red;"><i>* are required</i></p><br>
-
+    <form action="" method="post">
         <label>
-            <span>First Name <b class="star">*</b></span>
-            <input type="text" name="first_name" value="<?php echo $FirstName ?>">
-        </label><br>
-
-        <label>
-            <span>Middle Name</span>
-            <input type="text" name="middle_name" value="<?php echo $MiddleName ?>">
-        </label><br>
-
-        <label>
-            <span>Last Name <b class="star">*</b></span>
-            <input type="text" name="last_name" value="<?php echo $LastName ?>">
-        </label><br>
-
-        <label>
-            <span>When was your last visit at a dental clinic? <b class="star">*</b></span>
-            <input type="radio" name="last_visit" value="recently" id="recently">
-            <label for="recently">Recently (less than a month ago)</label><br>
-
-            <input type="radio" name="last_visit" value="one_to_six_months_ago" id="one_to_six_months_ago">
-            <label for="one_to_six_months_ago">1 to 6 months ago</label><br>
-
-            <input type="radio" name="last_visit" value="seven_to_twelve_months_ago" id="seven_to_twelve_months_ago">
-            <label for="seven_to_twelve_months_ago">7 to 12 months ago</label><br>
-
-            <input type="radio" name="last_visit" value="over_a_year_ago" id="over_a_year_ago">
-            <label for="over_a_year_ago">Over a year ago</label><br>
-        </label><br>
-
-
-        <label>
-            <span>Age <b class="star">*</b></span>
-            <input type="number" name="age" value="<?php echo $Age ?>">
-        </label><br>
-
-        <label>
-            <span>Contact Number <b class="star">*</b></span>
-            <input type="number" name="Contact_Number" value="<?php echo $ContactNumber ?>">
-        </label><br>
-        
-        <label>
-            <span>Email <b class="star">*</b></span>
-            <input type="text" name="email_address" value="<?php echo $EmailAddress ?>">
-        </label><br>
-
-        <label>
-            <span>Weight(kg)</span>
-            <input type="number" name="weight" value="<?php echo $Weight ?>">
-        </label><br>
-
-        <label>
-            <span>Date of Appointment <b class="star">*</b></span>
+            <span>Date of Appointment</span>
             <div class="center">
                 <button type="button" onclick="openPopup()" class="choose_date_bttn">Choose Date and Time</button><br><br>
             </div>
             <input type="hidden" name="date_of_appointment" id="selectedDateTime">
             Selected Date and Time: <br><br><div id="selectedDateTimeDisplay"></div>
         </label><br>
-
-        <label>
-            <span>Gender <b class="star">*</b></span>
-            <input type="radio" name="gender" value="M" id="gender_male" <?php if ($Gender === "M") echo "checked"; ?>>
-            <label for="gender_male">Male</label><br>
-            
-            <input type="radio" name="gender" value="F" id="gender_female" <?php if ($Gender === "F") echo "checked"; ?>>
-            <label for="gender_female">Female</label>
-        </label><br>
-
-
-        <label>
-            <span>Your Concerns <b class="star">*</b></span>
-            <textarea name="concerns" rows="3" cols="50"></textarea>
-        </label><br>
-
-        <label>
-            <span>Do you have allergies? <b class="star">*</b></span>
-            
-            <input type="radio" name="allergies" value="yes" id="allergies_yes" onclick="showTextBox()" <?php if ($Allergies === "yes") echo "checked"; ?>> 
-            <label for="allergies_yes">Yes</label>
-
-            <input type="radio" name="allergies" value="no" id="allergies_no" onclick="hideTextBox()" <?php if ($Allergies === "no") echo "checked"; ?>> 
-            <label for="allergies_no">No</label>
-
-            <div id="allergiesTextBox" class="hidden">
-                <label for="specified_allergies">Enter your allergies:</label>
-                <input type="text" name="specified_allergies" id="specified_allergies" <?php echo $SpecifiedAllergies?>> 
-            </div>
-        </label>
-
-        <script>
-            function showTextBox() {
-            document.getElementById('allergiesTextBox').style.display = 'block';
-            }
-
-            function hideTextBox() {
-            document.getElementById('allergiesTextBox').style.display = 'none';
-            }
-        </script>
-
-        <label>
-            <span>Do you have Hypertension? <b class="star">*</b></span>
-            <input type="radio" name="hypertension" value="yes" id="hypertension_yes" <?php if ($Hypertension === "yes") echo "checked"; ?>> 
-            <label for="hypertension_yes">Yes</label><br>
-            
-            <input type="radio" name="hypertension" value="no" id="hypertension_no" <?php if ($Hypertension === "no") echo "checked"; ?>>
-            <label for="hypertension_no">No</label>
-        </label>
-
-        <label>
-            <span>Do you have Diabetes? <b class="star">*</b></span>
-            <input type="radio" name="diabetes" value="yes" id="diabetes_yes" <?php if ($Diabetes === "yes") echo "checked"; ?>>
-            <label for="diabetes_yes">Yes</label><br>
-
-            <input type="radio" name="diabetes" value="no" id="diabetes_no" <?php if ($Diabetes === "no") echo "checked"; ?>>
-            <label for="diabetes_no">No</label>
-        </label>
-
-        <label>
-            <span>Do you have High Uric Acid? <b class="star">*</b></span>
-            <input type="radio" name="uric_acid" value="yes" id="uric_acid_yes" <?php if ($UricAcid === "yes") echo "checked"; ?>>
-            <label for="uric_acid_yes">Yes</label><br>
-            
-            <input type="radio" name="uric_acid" value="no" id="uric_acid_no" <?php if ($UricAcid === "no") echo "checked"; ?>>
-            <label for="uric_acid_no">No</label>
-        </label>
-
-        <label>
-            <span>Do you have High Cholesterol? <b class="star">*</b></span>
-            <input type="radio" name="cholesterol" value="yes" id="cholesterol_yes" <?php if ($Cholesterol === "yes") echo "checked"; ?>>
-            <label for="cholesterol_yes">Yes</label><br>
-            
-            <input type="radio" name="cholesterol" value="no" id="cholesterol_no" <?php if ($Cholesterol === "no") echo "checked"; ?>>
-            <label for="cholesterol_no">No</label>
-        </label>
-
-        <label>
-            <span>Do you have Asthma? <b class="star">*</b></span>
-            <input type="radio" name="asthma" value="yes" id="asthma_yes" <?php if ($Asthma === "yes") echo "checked"; ?>>
-            <label for="asthma_yes">Yes</label><br>
-            
-            <input type="radio" name="asthma" value="no" id="asthma_no" <?php if ($Asthma === "no") echo "checked"; ?>>
-            <label for="asthma_no">No</label>
-        </label>
-
-        <label>
-            <span>Are you medically compromised? <b class="star">*</b></span>
-            <input type="radio" name="medically_compromised" value="yes" id="med_comp_yes" <?php if ($MedicallyCompromised === "yes") echo "checked"; ?>>
-            <label for="med_comp_yes">Yes (if yes, please seek clearance <br>or approval from your medical doctor)</label><br>
-            
-            <input type="radio" name="medically_compromised" value="no" id="med_comp_no" <?php if ($MedicallyCompromised === "no") echo "checked"; ?>>
-            <label for="med_comp_no">No</label>
-        </label>
 
         <button type="submit" name="submit" class="submit_button">Submit</button>
     </form>
@@ -386,9 +264,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         <button onclick="closePopup()" class="close_bttn">Close</button>
     </div>
 
-
-    <script src="../../js's/scriptindex.js"></script>
-    <script src="https://kit.fontawesome.com/595a890311.js" crossorigin="anonymous"></script>
 </body>
 </html>
 

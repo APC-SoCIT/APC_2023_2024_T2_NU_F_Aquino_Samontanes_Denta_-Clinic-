@@ -31,7 +31,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
             </div>
             <ul>
                 <li class="welcomeName">Welcome, <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?></li>
-                <li><a href="">Call a Clinic</a></li>
+                <li><a href="Location.php">Our Location</a></li>
                 <li><a href="">Dentist & Reviews</a></li>
                 <li><a href="">Our Services</a></li>
                 <li><a href="Calendar.php">Your Appointments</a></li>

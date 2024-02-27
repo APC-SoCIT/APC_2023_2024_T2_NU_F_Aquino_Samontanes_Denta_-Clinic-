@@ -1,3 +1,5 @@
+@import "../navbar.css";
+
 * {
     margin: 0;
     padding: 0;
@@ -8,78 +10,6 @@
 body {
     font-family:sans-serif;
     background-color: #809CBF;
-}
-
-header nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 20px;
-    background-color: #027880;
-}
-
-logo {
-    display: flex;
-}
-
-.logo img {
-    /* width: 40px; */
-    height: 40px;
-    /* border-radius: 50%;*/
-    /*filter: invert(100%)*/
-}
-
-ul {
-    display: flex;
-    justify-content: space-between;
-     /* gap ng text sa navbar */
-}
-
-ul li {
-    list-style-type: none;
-    margin: 0 10px;
-}
-
-ul li a {
-    font-weight: 400;
-    text-decoration: none;
-    color: white;
-    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.250);
-}
-
-.welcomeName {
-    color: white;
-    text-decoration: none;
-
-}
-
-
-ul li:not(:last-child) a:hover {
-    text-decoration: underline 2px;
-    text-underline-offset: 4px;
-    color: #00eeff;
-    text-decoration-color: white;
-}
-
-.btn-nav {
-    font-weight: 700;
-    padding: 8px 20px;
-    border: none;
-    background: #33AA63;
-    border-radius: 6px;
-    cursor: pointer;
-    color: white;
-    text-transform:uppercase;
-}
-
-.btn-nav:hover, .btn-main:hover {
-    background-color:  #1B9172;
-}
-
-.hamburger {
-    font-size: 30px;
-    display: none;
-    color: white;
 }
 
 @media screen and (max-width:1024px) {
@@ -105,7 +35,18 @@ ul li:not(:last-child) a:hover {
         gap: 24px;
         padding-bottom: 2rem;
         background-color:#027880; /*background color when clicked the hamburgir*/
+    }
 
+    .directions {
+        flex-direction: column;
+        text-align: center; /* Center text when in column layout */
+    }
+
+    .text_container,
+    .img_container {
+        flex: none; /* Reset flex values */
+        width: 100%; /* Set width to 100% */
+        margin-bottom: 20px; /* Add margin between text and image */
     }
 }
 
@@ -217,4 +158,53 @@ p {
     color: white;
     text-decoration: none;
     text-transform:uppercase;
+}
+
+.location_container {
+    background-color: rgba(245, 245, 220, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.directions {
+    border-top: white 3px solid;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    width: 80%; /* Specify the desired width */
+}
+
+.directions p {
+    flex: 1;
+    font-family: 'Poppins';
+    font-size: 20px;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+    padding: 0em 2em;
+    margin-right: 2em;
+    color: white;
+    text-shadow: -1px 1px 0 #000,
+        1px 1px 0 #000,
+        1px -1px 0 #000,
+        -1px -1px 0 #000;
+}
+
+.directions img {
+    max-width: 100%;
+    max-height: 100%;
+    flex: 1;
+}
+
+.text_container {
+    flex: 1.2;
+    padding-right: 20px; /* Adjust padding as needed */
+}
+
+.img_container {
+    flex: .8;
+    display: flex; /* Add this */
+    justify-content: center; /* Add this */
 }

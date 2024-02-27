@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $UserType = $_POST['user_type'];
 
         if (empty($email)) {
-            header("Location: login.php?error=User Name is required");
+            header("Location: login.php?error=Email Address is required");
             exit();
         } else if (empty($pass)) {
             header("Location: login.php?error=Password is required");
@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </a>
             </div>
             <ul>
-                <li><a href="">Call a Clinic</a></li>
+                <li><a href="../patient/Location.php">Our Location</a></li>
                 <li><a href="">Dentist & Reviews</a></li>
                 <li><a href="">Our Services</a></li>
                 <li><a href="">Blog</a></li>
@@ -82,15 +82,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
         </nav>
     </header>
+                
+    <?php if (isset($_GET['error'])) { ?>
+        <p class="error" id="errorMessage"><?php echo $_GET['error']; ?></p>
+        <script>
+            setTimeout(function() {
+                document.getElementById('errorMessage').classList.add('hide');
+            }, 1000);
+        </script>
+    <?php } ?>
     
     <form action="" method="post">
         <div class="container">
             <div class="login form">
                 <header>Login</header>
-                
-                <?php if (isset($_GET['error'])) { ?>
-                    <p class="error"><?php echo $_GET['error']; ?></p>
-                <?php } ?>
                     <input type="text" id="email" name="email" placeholder="Email Address">
                     <input type="password" id="password" name="password" placeholder="Password">
             

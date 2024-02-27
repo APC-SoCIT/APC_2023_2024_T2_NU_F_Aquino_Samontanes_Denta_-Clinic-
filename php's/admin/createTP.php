@@ -2,23 +2,8 @@
 session_start();
 include '../../db_conn.php';
 
-if (isset($_GET['id'])) {
-    $ID = $_GET['id']; 
-    
-    $plansql = "SELECT * FROM `treatment_plan` WHERE `id`='$ID'";
-    $planresult = $conn->query($plansql); 
-
-    if ($planresult->num_rows > 0) {        
-        while ($row = $planresult->fetch_assoc()) {
-            $ID = $row['id'];
-            $PID = $row['patient_id'];
-            $TreatmentPlan = $row['treatment_plan'];
-            $Progress = $row['progress'];
-            $Prophylaxis = $row['Prophylaxis'];
-            $Date = $row['date'];
-            $Comment = $row['comments'];
-        }
-    }
+if (isset($_GET['patient_id'])) {
+    $PID = $_GET['patient_id']; 
 
     $sql = "SELECT * FROM `patients` WHERE `patient_id`='$PID'";
     $result = $conn->query($sql); 

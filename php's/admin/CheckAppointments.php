@@ -86,7 +86,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                     <th>Date of Appointment</th>
                     <th>Gender</th>
                     <th>Appointment Condition</th>
-                    <th>Action</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>

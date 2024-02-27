@@ -65,7 +65,6 @@ if (isset($_GET['id'])) {
     }
 
     if(isset($_POST["submit"])) {
-        $PatientID = $PID;
         $TreatmentPlan = $_POST['dropdown'];
         $Progress = $_POST['Progress'];
         $Prophylaxis = $_POST['Prophylaxis'];
@@ -76,23 +75,23 @@ if (isset($_GET['id'])) {
         
 
         if (empty($TreatmentPlan)) {
-            header("Location: create_treatment_plan.php?id=$ID&error=Treatment Plan is required");
+            header("Location: edit_treatment_plan.php?id=$ID&error=Treatment Plan is required");
             exit();
         } elseif (empty($Progress)) {
-            header("Location: create_treatment_plan.php?id=$ID&error=Progress is required");
+            header("Location: edit_treatment_plan.php?id=$ID&error=Progress is required");
             exit();
         } elseif (empty($Prophylaxis)) {
-            header("Location: create_treatment_plan.php?id=$ID&error=Prophylaxis is required");
+            header("Location: edit_treatment_plan.php?id=$ID&error=Prophylaxis is required");
             exit();
         } elseif (empty($Date)) {
-            header("Location: create_treatment_plan.php?id=$ID&error=Date of Treatments is required");
+            header("Location: edit_treatment_plan.php?id=$ID&error=Date of Treatment is required");
             exit();
         } else {
             // Prepare SQL statement for updating data
-            $updatesql = "INSERT INTO `treatment_plan` (`patient_id`, `treatment_plan`, `progress`, `date`, `Prophylaxis`, `comments`) VALUES ('$PatientID', '$TreatmentPlan', '$Progress', '$DateFormatted', '$Prophylaxis', '$Comment')";
+            $updatesql = "UPDATE treatment_plan SET treatment_plan='$TreatmentPlan', progress='$Progress', Prophylaxis='$Prophylaxis', date='$DateFormatted', comments='$Comment' WHERE `id`='$ID'";
 
             if ($conn->query($updatesql) === TRUE) {
-                header("Location: pView.php?patient_id=$PID&success=Treatment Plan Created");
+                header("Location: view_treatment_plan.php?id=$ID&success=Treatment Plan Updated");
                 exit();
             } else {
                 echo "Error updating record: " . $conn->error;
@@ -108,7 +107,7 @@ if (isset($_GET['id'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Aquino Samontanes Dental Clinic</title>
-        <link rel="stylesheet" type="text/css" href="../../css's/admin/CreateTP.css">
+        <link rel="stylesheet" type="text/css" href="../../css's/admin/EditTP.css">
         <script>
             // JavaScript functions to open and close the modal
             function openModal() {
@@ -163,11 +162,12 @@ if (isset($_GET['id'])) {
             }, 1000);
         </script>
     <?php } ?>
+    
 
     <!-- Center the container horizontally -->
     <div class="container">
         <!-- Back button outside the card, aligned with the left side of the container -->
-        <a href="pView.php?patient_id=<?php echo $PID; ?>"><button class="back-button">Back</button></a>
+        <a href="view_treatment_plan.php?id=<?php echo $ID; ?>"><button class="back-button">Back</button></a>
         <div class="card">
             <div class="card-content">
                 <div class="column1">
@@ -187,33 +187,33 @@ if (isset($_GET['id'])) {
 
                     <label>
                         <span>Progress:</span>
-                        <input type="radio" name="Progress" value="Ongoing" id="Progress_Ongoing"> 
+                        <input type="radio" name="Progress" value="Ongoing" id="Progress_Ongoing" <?php if ($Progress === "Ongoing") echo "checked"; ?>> 
                         <label for="Progress_Ongoing">Ongoing</label><br>
                         
-                        <input type="radio" name="Progress" value="Done" id="Progress_Done">
+                        <input type="radio" name="Progress" value="Done" id="Progress_Done" <?php if ($Progress === "Done") echo "checked"; ?>>
                         <label for="Progress_Done">Done</label><br>
 
-                        <input type="radio" name="Progress" value="Cancelled" id="Progress_Cancelled">
+                        <input type="radio" name="Progress" value="Cancelled" id="Progress_Cancelled" <?php if ($Progress === "Cancelled") echo "checked"; ?>>
                         <label for="Progress_Cancelled">Cancelled</label>
                     </label>
 
                     <label>
                         <span>Oral Prophylaxis:</span>
-                        <input type="radio" name="Prophylaxis" value="yes" id="Prophylaxis_yes"> 
+                        <input type="radio" name="Prophylaxis" value="yes" id="Prophylaxis_yes" <?php if ($Prophylaxis === "yes") echo "checked"; ?>> 
                         <label for="Prophylaxis_yes">Yes</label><br>
 
-                        <input type="radio" name="Prophylaxis" value="no" id="Prophylaxis_no"> 
+                        <input type="radio" name="Prophylaxis" value="no" id="Prophylaxis_no" <?php if ($Prophylaxis === "no") echo "checked"; ?>> 
                         <label for="Prophylaxis_no">No</label>
                     </label>
 
                     <label>
                         <span>Date of Treatment:</span>
-                        <input type="datetime-local" id="dateTimePicker" name="date">
+                        <input type="datetime-local" id="dateTimePicker" name="date" value="<?php echo $Date ?>">
                     </label>
-
+                    
                     <label>
                         <span>Comments: </span>
-                        <textarea name="comments" rows="3" cols="50"style="resize: none;"></textarea>
+                        <textarea name="comments" rows="3" cols="50"style="resize: none;"><?php echo $Comment; ?> </textarea>
                     </label><br>
 
                     <button type="submit" name="submit" class="edit-button">Save</button>
@@ -237,7 +237,7 @@ if (isset($_GET['id'])) {
         <h2>Upload Photos</h2>
         <form action="" method="post" enctype="multipart/form-data">
             <input type="file" name="photos[]" id="photos" accept="image/*" class="upload_bttn" multiple>
-            <input type="xray_submit" value="Upload" name="xray_submit" class="upload_bttn">
+            <input type="submit" value="Upload" name="xray_submit" class="upload_bttn">
         </form>
     </div>
 
