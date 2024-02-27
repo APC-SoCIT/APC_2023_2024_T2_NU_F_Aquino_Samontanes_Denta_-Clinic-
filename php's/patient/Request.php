@@ -212,7 +212,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         <script>
             setTimeout(function() {
                 document.getElementById('errorMessage').classList.add('hide');
-            }, 1000);
+            }, 2000);
         </script>
     <?php } ?>
 
