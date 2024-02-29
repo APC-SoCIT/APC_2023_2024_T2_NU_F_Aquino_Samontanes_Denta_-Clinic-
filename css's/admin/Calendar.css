@@ -195,3 +195,7 @@ button:hover {
     cursor: pointer;
     border-radius: 8px;
 }
+
+button[class='btn-nav cancel'], a[class='btn-nav cancel']  {
+    background: #ff0000;
+}

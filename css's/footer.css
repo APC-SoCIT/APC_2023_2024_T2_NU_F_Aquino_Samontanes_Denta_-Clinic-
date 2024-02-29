@@ -1,0 +1,121 @@
+footer {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 50px 150px 50px 150px ;
+    background: #01494E;
+}
+
+footer .container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    grid-gap: 20px;
+    justify-content: center;
+}
+
+footer .container .sec h2 {
+    position: relative;
+    color: white;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+footer .container .sec p {
+    color: white;
+}
+
+
+footer .container .sci {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(3,50px);
+}
+
+footer .container .sci li {
+    list-style: none;
+}
+
+footer .container .sci li a {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    align-content: center;
+    text-decoration: none;
+
+}
+
+footer .container .sci li a i {
+    color: white;
+    font-size: 40px;
+}
+
+footer .container .quicklinks {
+    position: relative;
+}
+
+footer .container .quicklinks ul li {
+    list-style: none;
+}
+
+footer .container .quicklinks ul li a {
+    color: white;
+    text-decoration: none;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+footer .container .contact .info {
+    position: relative;
+}
+
+footer .container .contact .info li {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    margin-bottom: 16px;
+}
+
+footer .container .contact .info li span {
+    color: white;
+    font-size: 20px;
+}
+
+footer .container .contact .info li a {
+    color: white;
+    text-decoration: none;
+}
+
+.copyrightText {
+    width: 100%;
+    background-color: #013135;
+    padding: 15px;
+    text-align: center;
+    color: white;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 991px) {
+    footer {
+        padding: 40px;
+    }
+
+    footer .container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+    }
+
+    .copyrightText {
+        padding: 20px 40px 30px;
+    }
+}    
+
+@media (max-width: 768px) {
+    footer .container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 20px;
+    }
+}

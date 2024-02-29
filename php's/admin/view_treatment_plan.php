@@ -16,6 +16,7 @@ if (isset($_GET['id'])) {
             $Date = $row['date'];
             $Prophylaxis = $row['Prophylaxis'];
             $Comment = $row['comments'];
+            $selectedTeeth = unserialize($row['teeth_extraction']);
         }
     }
 
@@ -105,6 +106,17 @@ if (isset($_GET['id'])) {
                     <p><strong>Progress:</strong> <?php echo $Progress; ?></p>
                     <p><strong>Date:</strong> <?php echo $Date; ?></p>
                     <p><strong>Prophylaxis:</strong> <?php echo $Prophylaxis; ?></p>
+                    <p><strong>Tooth Extraction:</strong> 
+                    <?php 
+                    if (!empty($selectedTeeth)) {
+                        echo implode(", ", $selectedTeeth);
+                    } else {
+                        echo "No teeth selected"; // or any other appropriate message
+                    }
+                    ?>
+                    </p>
+
+
                 </div>
                 <div class="column2">
                     <button class="collapse-button" onclick="toggleComments()">View X-ray Films</button>

@@ -153,3 +153,16 @@ margin-bottom: 0px; /* Adjust the negative margin to compensate for default spac
 .success.hide, .error.hide {
     opacity: 0;
 }
+
+
+.back-button {
+    margin: 20px 4%;
+    position: absolute;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    left: 0px; /* Align the back button to the left */
+    background-color: #6c757d;
+    color: #fff;
+}

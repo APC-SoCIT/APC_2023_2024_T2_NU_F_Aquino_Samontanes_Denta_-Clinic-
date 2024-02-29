@@ -147,3 +147,7 @@ button:hover {
     color: white;
     text-decoration: none;
 }
+
+button[class='btn-nav cancel'] {
+    background: #ff0000;
+}

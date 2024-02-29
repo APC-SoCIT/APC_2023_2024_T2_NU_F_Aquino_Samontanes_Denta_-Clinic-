@@ -222,7 +222,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                     echo "<form method='post'>";
                     echo "<button class=\"btn-nav\" type='submit' name='Done' value='{$row['id']}'>Done</button>";
                     echo "</form>";
-                    echo "<button class=\"btn-nav\" style=\"\" onclick=\"openModal('{$row['id']}')\">Cancel</button>";
+                    echo "<button class=\"btn-nav cancel\" style=\"\" onclick=\"openModal('{$row['id']}')\">Cancel</button>";
                     echo "</div>";
                     echo "</td>";
                     echo "</tr>";

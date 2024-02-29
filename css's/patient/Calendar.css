@@ -1,4 +1,5 @@
 @import "../navbar.css";
+@import "../footer.css";
 
 
 * {
@@ -12,7 +13,7 @@ ul {
 }
 
 body {
-    background-color: #809CBF;
+    background-image: url(../../pics/toothbg.png);
 }
 
 @media screen and (max-width:1024px) {
@@ -80,6 +81,10 @@ h5, p{
 button{
     color: white;
     background-color: #027880;
+}
+
+header nav {
+    height: 68px;
 }
 
 

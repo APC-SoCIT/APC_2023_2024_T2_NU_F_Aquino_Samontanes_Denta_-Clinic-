@@ -139,7 +139,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                 var appointmentTime = new Date(appointments[i]).getTime();
                 if (Math.abs(selectedTime - appointmentTime) < 30 * 60 * 1000) {
                     // Display alert for appointment clash
-                    showCustomAlert('Appointment already set by other patient. Please choose another date and time. You can choose 30 minutes ahead or before it.');
+                    showCustomAlert2('Appointment already set by other patient. Please choose another date and time. You can choose 30 minutes ahead or before it.');
                     dateTimePicker.value = ''; // Reset date-time picker value
                     return; // Exit the loop once an appointment clash is found
                 }
@@ -169,6 +169,20 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
             setTimeout(function() {
                 alertBox.parentNode.removeChild(alertBox);
             }, 3000);
+        }
+
+        // Function to display custom alert
+        function showCustomAlert2(message) {
+            console.log('Showing custom alert:', message); // Add this line for debugging
+
+            var alertBox = document.createElement('div');
+            alertBox.className = 'custom-alert';
+            alertBox.textContent = message;
+            document.body.appendChild(alertBox);
+            // Automatically remove the alert after 3 seconds
+            setTimeout(function() {
+                alertBox.parentNode.removeChild(alertBox);
+            }, 8000);
         }
     });
     </script>
@@ -212,7 +226,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         <script>
             setTimeout(function() {
                 document.getElementById('errorMessage').classList.add('hide');
-            }, 2000);
+            }, 10000);
         </script>
     <?php } ?>
 

@@ -34,7 +34,7 @@
     <header>
         <nav>
             <div class="logo">
-                <a href="#" aria-label="Homepage">
+                <a href="Home.php" aria-label="Homepage">
                     <img src="../../pics/Logo.png" alt="" class="src">
                 </a>
             </div>
@@ -96,6 +96,46 @@
                 <img src="../../pics/specific_location.jpg" alt="Placeholder Image" style="max-width: 50%;">
             </div>
         </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="sec about">
+                <h2>About</h2>
+                <p>Welcome to Aquino-Samontanes Dental Clinic, <br>your premier dental care provider 
+                in Caloocan, Philippines. <br>At Aquino-Samontanes Dental Clinic, we are dedicated to
+                <br>delivering exceptional dental services to our community.
+                </p>
+                <ul class="sci">
+                    <li><a href="#"><i class="fa-brands fa-square-facebook" style="color: #ffffff;"></i></a></li>
+                </ul>
+            </div>
+
+            <div class="sec quicklinks">
+                <h2>Navigations</h2>
+                <ul>
+                    <li><a href="Home.php">Home</a></li>
+                    <li><a href="Location.php">Location</a></li>
+                    <li><a href="#">Our Services</a></li>
+                    <li><a href="Request.php">Request an Appointment</a></li>
+                </ul>
+            </div>
+
+            <div class="sec contact">
+                <h2>Contact Us</h2>
+                <ul class="info">
+                    <li>
+                        <span><i class="fa-solid fa-location-dot"></i></i></span><p><a href="tel:+630987654321">Block 11 Lot 14 Sunriser Avenue, Sunriser Village, Llano Brgy 167 Caloocan City</a></p>
+                        <span><i class="fa-solid fa-phone"></i></span><p><a href="tel:+630987654321">+63 098 765 4321</a></p>
+                        <span><i class="fa-solid fa-envelope"></i></span><p><a href="mailto:ASamontanesDentalClinic@gmail.com">ASamontanesDentalClinic@gmail.com</a></p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </footer>
+    <div class="copyrightText">
+        <p>Aquino-Samontanes Dental Clinic 2024</p>
     </div>
 
     <script src="../../js's/scriptindex.js"></script>

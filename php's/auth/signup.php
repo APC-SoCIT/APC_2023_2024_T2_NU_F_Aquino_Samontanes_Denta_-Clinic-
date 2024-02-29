@@ -64,7 +64,7 @@ if (isset($_POST['submit'])) {
                 </a>
             </div>
             <ul>
-                <li><a href="">Call a Clinic</a></li>
+                <li><a href="../patient/Location.php">Our Location</a></li>
                 <li><a href="">Dentist & Reviews</a></li>
                 <li><a href="">Our Services</a></li>
                 <li><a href="">Blog</a></li>

@@ -70,6 +70,9 @@ if (isset($_GET['patient_id'])) {
             </nav>
         </header>
 
+<!-- Back button outside the card, aligned with the left side of the container -->
+<a href="pTable.php"><button class="back-button">Back</button></a>
+
     <form action="" method="post">
     <?php if (isset($_GET['error'])) { ?>
             <p class="error"><?php echo $_GET['error']; ?></p>

@@ -150,6 +150,9 @@
         </script>
     <?php } ?>
 
+    <!-- Back button outside the card, aligned with the left side of the container -->
+    <a href="pTable.php"><button class="back-button">Back</button></a>
+    
     <form action="" method="post">
 
         <header>NEW PATIENT PROFILE</header>

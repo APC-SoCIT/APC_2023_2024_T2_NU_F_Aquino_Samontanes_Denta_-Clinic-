@@ -244,3 +244,19 @@ button:hover {
 .success.hide, .error.hide {
     opacity: 0;
 }
+
+
+
+#tooth-container {
+    opacity: .4;
+    background-color: rgba(240, 240, 240, 0.7); /* Set slightly darker background color */
+    padding: 20px; /* Add padding for spacing */
+    overflow: hidden; /* Add clearfix */
+    border: 1px solid black;
+    pointer-events: none; /* Make the container unclickable */
+}
+
+.tooth-column {
+    float: left;
+    width: 50%;
+}

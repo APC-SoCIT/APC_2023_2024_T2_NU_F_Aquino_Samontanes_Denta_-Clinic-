@@ -22,6 +22,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
     <link rel="stylesheet" href="../../css's/patient/index.css">
 </head>
 <body>
+
     <header>
         <nav>
             <div class="logo">
@@ -47,20 +48,21 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 
     <div class="container-main">
         <div class="container-submain">
-           <div class="container-main-content">
-            <h1>We Offer Every <br> Dental Specialty <br> Your Family Needs</h1>
-            <h2>From family dentistry to braces and oral surgery, Aquino Samontanes Dental <br> Clinic offers your entire family comprehensive dental care that’s second to none.</h2>
-           </div>
-           <div class="container-main-content-button">
-            <a href="" class="btn-main">Service we Offer</a>
-           </div>
-           <div class="main-bottom">
-            <h3>Request an Appointment</h3>
-            <p>A visit to one of our starts here.</p>
-            <div class="main-bottom-button">
-                <a href="request.php" class="btn-main-bottom">Start Here</a>                
+            <div class="container-main-content">
+                <h1>We Offer Every <br> Dental Specialty <br> Your Family Needs</h1>
+                <h2>From family dentistry to braces and oral surgery, Aquino Samontanes Dental <br> Clinic offers your entire family comprehensive dental care that’s second to none.</h2>
             </div>
-           </div>
+            <div class="container-main-content-button">
+                <a href="" class="btn-main">Service we Offer</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-bottom">
+        <h3>Request an Appointment</h3>
+        <p>A visit to one of our starts here.</p>
+        <div class="main-bottom-button">
+            <a href="request.php" class="btn-main-bottom">Start Here</a>                
         </div>
     </div>
 

@@ -102,8 +102,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                     echo "<td>{$row['appointment_condition']}</td>";
                     echo "<td>";
                     echo "<form method='post'>";
-                    echo "<button type='submit' name='approve' value='{$row['id']}'>Approve</button>";
-                    echo "<button type='submit' name='disapprove' value='{$row['id']}'>Disapprove</button>";
+                    echo "<button class=\"btn-nav\" type='submit' name='approve' value='{$row['id']}'>Approve</button>";
+                    echo "<button class=\"btn-nav cancel\" type='submit' name='disapprove' value='{$row['id']}'>Disapprove</button>";
                     echo "</form>";
                     echo "</td>";
                     echo "</tr>";

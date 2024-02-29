@@ -19,6 +19,7 @@ ul {
     font-family: 'Poppins';
     display: flex;
     justify-content: space-between;
+    font-size: 13.5px;
      /* gap ng text sa navbar */
 }
 
