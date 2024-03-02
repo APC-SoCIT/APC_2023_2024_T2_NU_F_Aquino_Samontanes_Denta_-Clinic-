@@ -8,7 +8,7 @@
     
 </head>
 <body>
-    <header>
+<header>
         <nav>
             <div class="logo">
                 <a href="#" aria-label="Homepage">
@@ -16,13 +16,36 @@
                 </a>
             </div>
             <ul>
-                <li><a href="php's/patient/Location.php">Our Location</a></li>
-                <li><a href="">Dentist & Reviews</a></li>
-                <li><a href="">Our Services</a></li>
-                <li><a href="">Blog</a></li>
-                <li><a href="">Contact Us</a></li>
-                <li><a href="php's/auth/login.php">Log-in</a></li>
-                <li><a href="php's/auth/login.php" class="btn-nav">Request an Appointment</a></li>
+            <?php
+
+            if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
+
+                $sql = "SELECT *
+                FROM users";
+
+                $result = mysqli_query($conn, $sql);
+                if (!$result) {
+                    die("Error: " . mysqli_error($conn));
+                }
+                ?>
+                <li class="welcomeName">Welcome, <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?></li>
+                <li><a href="php's/patient/Location.php">Location</a></li>
+                <li><a href="php's/patient/staff.php">Staffs</a></li>
+                <li><a href="">Services</a></li>
+                <li><a href="php's/patient/Calendar.php">Your Appointments</a></li>
+                <li><a href="php's/auth/logout.php">Logout</a></li>
+                <li><a href="php's/patient/Request.php" class="btn-nav">Request an Appointment</a></li>
+                <?php
+                } else {
+                ?>
+                <li><a href="php's/patient/Location.php">Location</a></li>
+                <li><a href="php's/patient/staff.php">Staffs</a></li>
+                <li><a href="">Services</a></li>
+                <li><a href="php's/auth/login.php">Login</a></li>
+                <li><a href="php's/patient/Request.php" class="btn-nav">Request an Appointment</a></li>
+                <?php
+                }
+                ?>
             </ul>
             <div class="hamburger">
                 <i class="fa-solid fa-bars"></i>

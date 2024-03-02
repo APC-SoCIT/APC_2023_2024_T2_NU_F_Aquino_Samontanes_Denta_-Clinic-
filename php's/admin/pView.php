@@ -41,8 +41,6 @@ if (isset($_GET['patient_id'])) {
     $plansql = "SELECT * FROM `treatment_plan` WHERE `patient_id`='$PID'";
     $planresult = $conn->query($plansql); 
 
-    
-
 ?>
 <!DOCTYPE html>
     <html lang="en">
@@ -90,6 +88,9 @@ if (isset($_GET['patient_id'])) {
             <form action="" method="post">
 
             <header><?php echo $FirstName; ?> <?php echo $MiddleName; ?> <?php echo $LastName; ?></header>
+
+            <button class="create-appt"><a href="create_appointment.php?patient_id=<?php echo $PID ?>" style="text-decoration: none; color:white;">+ Create an appointment</a></button>
+
 
             <div class="info-item">
                 <span class="info-label">Gender:</span>

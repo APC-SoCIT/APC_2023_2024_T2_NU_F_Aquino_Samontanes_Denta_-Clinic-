@@ -121,11 +121,17 @@ input[name="residential_address"]{
 
 .column1 {
     flex: 40%;
+    line-height: 2rem;
+}
+
+.column1 strong {
+    font-family: 'Poppins';
 }
 .column2 {
     flex:60%;
     justify-content: center;
     align-items: center;
+    font-family: 'Poppins';
 }
 
 .edit-button,

@@ -56,7 +56,7 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-    <header>
+<header>
         <nav>
             <div class="logo">
                 <a href="../../index.php" aria-label="Homepage">
@@ -64,13 +64,36 @@ if (isset($_POST['submit'])) {
                 </a>
             </div>
             <ul>
-                <li><a href="../patient/Location.php">Our Location</a></li>
-                <li><a href="">Dentist & Reviews</a></li>
-                <li><a href="">Our Services</a></li>
-                <li><a href="">Blog</a></li>
-                <li><a href="">Contact Us</a></li>
-                <li><a href="login.php">Log-in</a></li>
-                <li><a href="login.php" class="btn-nav">Request an Appointment</a></li>
+            <?php
+
+            if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
+
+                $sql = "SELECT *
+                FROM users";
+
+                $result = mysqli_query($conn, $sql);
+                if (!$result) {
+                    die("Error: " . mysqli_error($conn));
+                }
+                ?>
+                <li class="welcomeName">Welcome, <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?></li>
+                <li><a href="../patient/Location.php">Location</a></li>
+                <li><a href="../patient/staff.php">Staffs</a></li>
+                <li><a href="">Services</a></li>
+                <li><a href="../patient/Calendar.php">Your Appointments</a></li>
+                <li><a href="../auth/logout.php" class="sel_page">Logout</a></li>
+                <li><a href="../patient/Request.php" class="btn-nav">Request an Appointment</a></li>
+                <?php
+                } else {
+                ?>
+                <li><a href="../patient/Location.php">Location</a></li>
+                <li><a href="../patient/staff.php">Staffs</a></li>
+                <li><a href="">Services</a></li>
+                <li><a href="../auth/login.php" class="sel_page">Login</a></li>
+                <li><a href="../patient/Request.php" class="btn-nav">Request an Appointment</a></li>
+                <?php
+                }
+                ?>
             </ul>
             <div class="hamburger">
                 <i class="fa-solid fa-bars"></i>

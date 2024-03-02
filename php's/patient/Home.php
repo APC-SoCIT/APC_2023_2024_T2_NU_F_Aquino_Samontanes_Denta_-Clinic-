@@ -26,19 +26,41 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
     <header>
         <nav>
             <div class="logo">
-                <a href="#" aria-label="Homepage">
+                <a href="Home.php" aria-label="Homepage">
                     <img src="../../pics/Logo.png" alt="" class="src">
                 </a>
             </div>
             <ul>
+            <?php
+
+            if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
+
+                $sql = "SELECT *
+                FROM users";
+
+                $result = mysqli_query($conn, $sql);
+                if (!$result) {
+                    die("Error: " . mysqli_error($conn));
+                }
+                ?>
                 <li class="welcomeName">Welcome, <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?></li>
-                <li><a href="Location.php">Our Location</a></li>
-                <li><a href="">Dentist & Reviews</a></li>
-                <li><a href="">Our Services</a></li>
+                <li><a href="Location.php">Location</a></li>
+                <li><a href="staff.php">Staffs</a></li>
+                <li><a href="">Services</a></li>
                 <li><a href="Calendar.php">Your Appointments</a></li>
-                <li><a href="">Contact Us</a></li>
                 <li><a href="../auth/logout.php">Logout</a></li>
                 <li><a href="Request.php" class="btn-nav">Request an Appointment</a></li>
+                <?php
+                } else {
+                ?>
+                <li><a href="Location.php">Location</a></li>
+                <li><a href="staff.php">Staffs</a></li>
+                <li><a href="">Services</a></li>
+                <li><a href="../auth/login.php">Login</a></li>
+                <li><a href="Request.php" class="btn-nav">Request an Appointment</a></li>
+                <?php
+                }
+                ?>
             </ul>
             <div class="hamburger">
                 <i class="fa-solid fa-bars"></i>

@@ -112,7 +112,7 @@ if (isset($_GET['id'])) {
                     <p><strong>Progress:</strong> <?php echo $Progress; ?></p>
                     <p><strong>Date:</strong> <?php echo $Date; ?></p>
                     <p><strong>Prophylaxis:</strong> <?php echo $Prophylaxis; ?></p>
-                    <p><strong>Tooth Extraction:</strong> 
+                    <p style="line-height:1.5em; margin-top: 5px;"><strong>Tooth Extraction:</strong> 
                     <?php 
                     if (!empty($selectedTeeth)) {
                         echo implode(", ", $selectedTeeth);
