@@ -20,8 +20,9 @@ if (isset($_GET['patient_id'])) {
         }
     }
 
-    $mediaclsql = "SELECT * FROM `medical_history` WHERE `patient_id`='$PID'";
+    $mediaclsql = "SELECT * FROM `medical_history` WHERE `patient_id`='$PID' ORDER BY created_at DESC LIMIT 1";
     $medicalresult = $conn->query($mediaclsql); 
+
 
     if ($medicalresult->num_rows > 0) {        
         while ($row = $medicalresult->fetch_assoc()) {
@@ -54,25 +55,31 @@ if (isset($_GET['patient_id'])) {
 <html>
 <body>
     <header>
-            <nav>
-                <div class="logo">
-                    <a href="#" aria-label="Homepage">
-                        <img src="../../pics/Logo.png" alt="" class="src">
-                    </a>
-                </div>
-                <ul>
-                    <li><a href="CheckAppointments.php">Check Appointments</a></li>
-                    <li><a href="Calendar.php">Appointment Calendar</a></li>
-                    <li><a href="pTable.php">Patient Records Table</a></li>
-                    <li><a href="ArchivedRecords.php">Archived Records</a></li>
-                    <li><a href="../auth/logout.php">Logout</a></li>
-                    <!--<li><a href="request.php" class="btn-nav">Schedule Appointment</a></li>-->
-                </ul>
-                <div class="hamburger">
-                    <i class="fa-solid fa-bars"></i>
-                </div>
-            </nav>
-        </header>
+        <nav>
+            <div class="logo">
+                <a href="#" aria-label="Homepage">
+                    <img src="../../pics/Logo.png" alt="" class="src">
+                </a>
+            </div>
+            <ul>
+                <li class="dropdown">
+                    <a href="CheckAppointments.php" class="dropbtn">Appointments</a>
+                    <div class="dropdown-content">
+                        <a href="CheckAppointments.php">Check Appointments</a>
+                        <a href="Calendar.php">Appointment Calendar</a>
+                        <a href="FinishedAppts.php">Finished Appointments</a>
+                        <a href="CancelledAppts.php">Cancelled Appointments</a>
+                    </div>
+                </li>
+                <li><a href="pTable.php" class="sel_page">Patient Records Table</a></li>
+                <li><a href="ArchivedRecords.php">Archived Records</a></li>
+                <li><a href="../auth/logout.php">Logout</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
 
 
     <div class="container">
@@ -111,17 +118,35 @@ if (isset($_GET['patient_id'])) {
                 <div class="contact-item"> <!-- First column -->
                     <div class="info-item2">
                         <span class="info-label">Hypertension:</span>
-                        <span><?php echo $Hypertension; ?></span>
+                        <?php
+                            if ($Hypertension == "yes") {
+                                echo "Yes";
+                            } else {
+                                echo "No";
+                            }
+                        ?>
                     </div>
 
                     <div class="info-item2">
                         <span class="info-label">Diabetes:</span>
-                        <span><?php echo $Diabetes; ?></span>
+                        <?php
+                            if ($Diabetes == "yes") {
+                                echo "Yes";
+                            } else {
+                                echo "No";
+                            }
+                        ?>
                     </div>
 
                     <div class="info-item2">
                         <span class="info-label">High Uric Acid:</span>
-                        <span><?php echo $UricAcid; ?></span>
+                        <?php
+                            if ($UricAcid == "yes") {
+                                echo "Yes";
+                            } else {
+                                echo "No";
+                            }
+                        ?>
                     </div>
 
 
@@ -129,20 +154,50 @@ if (isset($_GET['patient_id'])) {
                 <div class="contact-item"> <!-- Second column -->
                     <div class="info-item2">
                         <span class="info-label">High Cholesterol:</span>
-                        <span><?php echo $Cholesterol; ?></span>
+                        <?php
+                            if ($Cholesterol == "yes") {
+                                echo "Yes";
+                            } else {
+                                echo "No";
+                            }
+                        ?>
                     </div>
 
                     <div class="info-item2">
                         <span class="info-label">Asthma:</span>
-                        <span><?php echo $Asthma; ?></span>
+                        <?php
+                            if ($Asthma == "yes") {
+                                echo "Yes";
+                            } else {
+                                echo "No";
+                            }
+                        ?>
                     </div>
 
                     <div class="info-item2">
                         <span class="info-label">Medically Compromised:</span>
-                        <span><?php echo $MedicallyCompromised; ?></span>
+                        <?php
+                            if ($MedicallyCompromised == "yes") {
+                                echo "Yes";
+                            } else {
+                                echo "No";
+                            }
+                        ?>
                     </div>
                 </div>
             </div>
+
+            <div class="info-item">
+                <span class="info-label">Allergies:</span>
+                <?php
+                    if ($Allergies == "yes") {
+                        echo "Yes, " . $SpecifiedAllergies;
+                    } else {
+                        echo "None";
+                    }
+                ?>
+            </div>
+
 
             <div class="info-item">
                 <span class="info-label">Concerns:</span></br>

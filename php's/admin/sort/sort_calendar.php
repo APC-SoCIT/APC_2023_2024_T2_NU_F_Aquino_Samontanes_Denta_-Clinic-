@@ -1,5 +1,5 @@
 <?php
-include '../../db_conn.php';
+include '../../../db_conn.php';
 
 $column = $_GET['column'];
 $orderBy = htmlspecialchars($column);
@@ -30,7 +30,7 @@ if (mysqli_num_rows($result) > 0) {
         echo "<form method='post'>";
         echo "<button class=\"btn-nav\" type='submit' name='Done' value='{$row['id']}'>Done</button>";
         echo "</form>";
-        echo "<button class=\"btn-nav\" style=\"\" onclick=\"openModal('{$row['id']}')\">Cancel</button>";
+        echo "<button class=\"btn-nav cancel\" style=\"\" onclick=\"openModal('{$row['id']}')\">Cancel</button>";
         echo "</div>";
         echo "</td>";
         echo "</tr>";

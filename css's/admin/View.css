@@ -128,6 +128,8 @@ form header {
 .card1 {
     position: relative; 
     transition: opacity 0.3s;
+    line-height: 25px;
+    font-size: 17px;
 }
     
 .card1::after {

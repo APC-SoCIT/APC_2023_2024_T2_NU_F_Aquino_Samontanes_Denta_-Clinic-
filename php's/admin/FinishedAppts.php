@@ -2,43 +2,21 @@
 session_start();
 include '../../db_conn.php';
 
-function updateAppointmentStatus($conn, $appointmentId, $status) {
-    $updateSql = "UPDATE appointments SET appointment_condition = '$status' WHERE id = $appointmentId";
-    $updateResult = mysqli_query($conn, $updateSql);
-    if (!$updateResult) {
-        die("Error updating appointment status: " . mysqli_error($conn));
-    }
-}
-
 if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Assuming 'approve' button is clicked
-        if (isset($_POST['approve'])) {
-            $appointmentId = $_POST['approve'];
-            // Update appointment status to 'approved'
-            updateAppointmentStatus($conn, $appointmentId, 'approved');
-            
-        } elseif (isset($_POST['disapprove'])) {
-            $appointmentId = $_POST['disapprove'];
-            updateAppointmentStatus($conn, $appointmentId, 'disapproved');
-        }
-    }
 
-    $sql = "SELECT DISTINCT appointments.id, appointments.*, patients.first_name, patients.middle_name, patients.last_name, patients.gender
-        FROM appointments 
-        INNER JOIN patients ON appointments.patient_id = patients.patient_id
-        WHERE appointments.appointment_condition='pending'
-        ORDER BY appointments.date_of_appointment ASC";
+    $sql_done = "SELECT DISTINCT appointments.*, patients.first_name, patients.middle_name, patients.last_name, patients.gender
+    FROM appointments 
+    INNER JOIN patients ON appointments.patient_id = patients.patient_id
+    WHERE appointments.appointment_condition='Done'
+    ORDER BY appointments.date_of_appointment ASC";
 
-
-
-    $result = mysqli_query($conn, $sql);
-    if (!$result) {
+    $result_done = mysqli_query($conn, $sql_done);
+    if (!$result_done) {
         die("Error: " . mysqli_error($conn));
     }
     ?>
-    
+
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -80,10 +58,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                     }
                 };
 
-                xhttp.open("GET", `sort/sort_appt.php?column=${column}&order=${sortOrders[column]}`, true);
+                xhttp.open("GET", `sort_appt.php?column=${column}&order=${sortOrders[column]}`, true);
                 xhttp.send();
             }
         </script>
+
     </head>
     <body>
         <header>
@@ -97,8 +76,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                     <li class="dropdown">
                         <a href="CheckAppointments.php" class="dropbtn sel_page">Appointments</a>
                         <div class="dropdown-content">
-                            <a href="CheckAppointments.php" class="sel_page">Check Appointments</a>
-                            <a href="Calendar.php">Appointment Calendar</a>
+                            <a href="CheckAppointments.php">Check Appointments</a>
+                            <a href="Calendar.php" class="sel_page">Appointment Calendar</a>
                             <a href="FinishedAppts.php">Finished Appointments</a>
                             <a href="CancelledAppts.php">Cancelled Appointments</a>
                         </div>
@@ -115,30 +94,28 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 
         <div>
     <?php
-    if (mysqli_num_rows($result) > 0) {
+    if (mysqli_num_rows($result_done) > 0) {
     ?>
     
     <div class="table_appointments">
         <div class="table_search">
-            <h2 class="title">Appointments</h2>
+            <h2 class="title">Finished Appointments</h2>
             <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search for names...">
         </div>
         <table>
             <thead>
                 <tr>
-                    <th onclick="sortTable('patient_id')" class="sort_th">Patient ID</th>
-                    <th onclick="sortTable('first_name')" class="sort_th">First Name</th>
-                    <th onclick="sortTable('middle_name')" class="sort_th">Middle Name</th>
-                    <th onclick="sortTable('last_name')" class="sort_th">Last Name</th>
-                    <th onclick="sortTable('date_of_appointment')" class="sort_th">Date of Appointment</th>
-                    <th onclick="sortTable('gender')" class="sort_th">Gender</th>
-                    <th>Appointment Condition</th>
-                    <th>Actions</th>
+                    <th>Patient ID</th>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
+                    <th>Last Name</th>
+                    <th>Date of Appointment</th>
+                    <th>Gender</th>
                 </tr>
             </thead>
             <tbody id="table-body">
                 <?php
-                while ($row = mysqli_fetch_assoc($result)) {
+                while ($row = mysqli_fetch_assoc($result_done)) {
                     echo "<tr>";
                     echo "<td>{$row['patient_id']}</td>";
                     echo "<td>{$row['first_name']}</td>";
@@ -146,13 +123,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                     echo "<td>{$row['last_name']}</td>";
                     echo "<td>{$row['date_of_appointment']}</td>";
                     echo "<td>{$row['gender']}</td>";
-                    echo "<td>{$row['appointment_condition']}</td>";
-                    echo "<td>";
-                    echo "<form method='post'>";
-                    echo "<button class=\"btn-nav\" type='submit' name='approve' value='{$row['id']}'>Approve</button>";
-                    echo "<button class=\"btn-nav cancel\" type='submit' name='disapprove' value='{$row['id']}'>Disapprove</button>";
-                    echo "</form>";
-                    echo "</td>";
                     echo "</tr>";
                 }
                 ?>
@@ -162,7 +132,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
     <?php
     } else {
         echo "<p style='text-align: center; font-size: 18px; color: #555; background-color: #f7f7f7; padding: 10px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);'>There are no pending appointments.</p>";
-
     }
     ?>
 </div>
@@ -199,7 +168,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 
     <script src="../../js's/scriptindex.js"></script>
     <script src="https://kit.fontawesome.com/595a890311.js" crossorigin="anonymous"></script>
-
+    
     </body>
     </html>
 

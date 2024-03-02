@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aquino Samontanes Dental Clinic</title>
-    <link rel="stylesheet" href="../../css's/patient/index.css">
+    <link rel="stylesheet" href="../../css's/patient/staff.css">
 
     <style>
         /*Map*/
@@ -73,29 +73,25 @@
         </nav>
     </header>
 
-    <div id="map-container">
-            <h1 id="map-title"> Location Map </h1>  
-             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d236.03861305349926!2d121.01035561892066!3d14.729989790308293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b1531cfebfff%3A0xb0e56a359e5b0cb9!2sBing-Bing&#39;s%20Condiments!5e1!3m2!1sen!2sph!4v1709168426601!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-
-    <div class="location_container">
-        <div class="directions">
-            <div class="text_container">
-                <p>When you're heading to the Aquino-Samontanes Dental Clinic, it might be a bit tricky to spot at first. Get the directions from the maps above and once you've identified the building (from the picture) you'll need to enter the building, but don't worry if you don't immediately see a dental clinic. It's tucked away inside of a (sari-sari) store.</p>
-            </div>
-            <div class="img_container">
-                <img src="../../pics/location.jpg" alt="Placeholder Image">
+    <div class="dentists">
+        <div class="staff-container">
+            <img class="staff-circle" src="levi.jpg"></img>
+            <div class="staff-text">
+                <div class="staff-name">Catherine Aquino Samontanes (Dentist) </div>
+                <div class="staff-details">Age: 55 years old&emsp;&emsp;Birthdate: Novermber 13, 1968<br>
+                Occupation: Doctor/Owner of Aquino-Samontanes Clinic<br>
+                Contact Number: </div>
             </div>
         </div>
-
-        <div class="directions">
-            <div class="text_container">
-                <p>Once you're inside that store, you will be immediately greeted by the receptionist. And from there on you are inside the clinic. Take care and keep those pearly whites shining!</p>
+        <div class="staff-container2">
+            <div class="staff-text2">
+                <div class="staff-name2">(Receptionist) Lazaro G. Samontanes  </div>
+                <div class="staff-details2">Birthdate: March 15, 1959 &emsp;&emsp;Age: 64 years old<br>
+                Occupation: Retired OFW, 26 years in Saudi Arabia and has a small business<br>
+                Contact Number: </div>
             </div>
-            <div class="img_container">
-                <img src="../../pics/specific_location.jpg" alt="Placeholder Image" style="max-width: 50%;">
-            </div>
-        </div>
+            <img class="staff-circle2" src="levi.jpg"></img>
+        </div>            
     </div>
 
     <footer>

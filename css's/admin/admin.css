@@ -151,3 +151,47 @@ button:hover {
 button[class='btn-nav cancel'] {
     background: #ff0000;
 }
+
+.success, .error{
+    position: absolute;
+    top: 6rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4CAF50;
+    color:white;
+    width: 40%;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    border: 2px solid #2E7D32;
+    margin: 10px 0;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+    z-index: 9999; /* Set a high z-index to ensure it's above other elements */
+}
+
+.error{
+    background-color: red;
+    border: 2px solid rgb(172, 0, 0);
+}
+
+.success.hide, .error.hide {
+    opacity: 0;
+}
+
+.table_search {
+    display:flex; 
+    flex-direction:row; 
+    justify-content: flex-start;
+}
+
+#searchInput {
+    margin-right: 1rem;
+    border: 1px solid black;
+    border-radius: 7px;
+    padding-left: 5px;
+}
+
+.table_search {
+    justify-content: flex-start;
+}

@@ -1,5 +1,5 @@
 <?php
-include '../../db_conn.php';
+include '../../../db_conn.php';
 
 $column = $_GET['column'];
 $orderBy = htmlspecialchars($column);
@@ -24,9 +24,9 @@ if (mysqli_num_rows($result) > 0) {
         echo "<td>{$row['last_name']}</td>";
         echo "<td>{$row['gender']}</td>";
         echo "<td>{$row['contact_number']}</td>";
-        echo "<td style='margin: auto;'><a href='pView.php?patient_id=" . $row['patient_id'] . "'><button>View</button></a>
-        <a href='pUpdate.php?patient_id=" . $row['patient_id'] . "'><button>Update</button></a>
-        <a href='#' class='custom-link' onclick='openModal();'><button>Archive</button></a>
+        echo "<td style='margin: auto;'><a href='pView.php?patient_id=" . $row['patient_id'] . "'><button class=\"btn-nav\">View</button></a>
+        <a href='pUpdate.php?patient_id=" . $row['patient_id'] . "'><button class=\"btn-nav\">Update</button></a>
+        <a href='#' class='custom-link' onclick='openModal();'><button class=\"btn-nav cancel\">Archive</button></a>
         </td>";
         echo "</tr>";
     }

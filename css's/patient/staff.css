@@ -1,0 +1,144 @@
+@import "../navbar.css";
+@import "../footer.css";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family:sans-serif;
+    background-image: url(../../pics/toothbg.png);
+}
+
+@media screen and (max-width:1250px) {
+    .hamburger {
+        display: flex;
+        cursor: pointer;
+    }
+
+    ul {
+        display: none;
+    }
+
+    ul.ham_active {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        height: auto;
+        gap: 24px;
+        padding-bottom: 2rem;
+        background-color:#027880; /*background color when clicked the hamburgir*/
+    }
+
+    .directions {
+        flex-direction: column;
+        text-align: center; /* Center text when in column layout */
+    }
+
+    .text_container,
+    .img_container {
+        flex: none; /* Reset flex values */
+        width: 100%; /* Set width to 100% */
+        margin-bottom: 20px; /* Add margin between text and image */
+    }
+
+    
+}
+
+@media screen and (max-height:600px) {
+    .main-bottom {
+        position: relative; /* Change to relative positioning */
+        margin-top: 20px; /* Example margin to prevent overlap */
+        left: 50%;
+        transform: translateX(-50%); /* Center horizontally */
+        width: 100%;
+        max-width: 40%;
+    }
+
+
+    h1 {
+        font-size: 55px;
+    }
+    
+    h2 {
+        font-size: 25px;
+    }
+
+    .container-main-content{
+        margin-top: 40px;
+    }
+}
+
+
+.dentists {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    margin: 3rem 0;
+    z-index: 0; /* Set z-index for stacking order */
+  }
+  
+.staff-container,
+.staff-container2 {
+    background-color: rgba(245, 245, 220, 0.425);
+    width: 70%; /* Width of the oblong */
+    height: 200px; /* Height of the oblong */
+    border: 1px solid #000;
+    position: relative;
+    border-radius: 20px; /* Adjust the border radius to make the corners rounded */
+    border-top-left-radius: 90px;
+    border-bottom-left-radius: 90px;
+    overflow: hidden; /* Ensure the circle stays within the oblong */
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    z-index: 0; /* Set z-index for stacking order */
+}
+
+.staff-container {
+    justify-content: flex-start;
+    margin-bottom: 3rem;
+}
+
+.staff-container2 {
+    justify-content: flex-end;
+    border-top-right-radius: 90px;
+    border-bottom-right-radius: 90px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.staff-circle,
+.staff-circle2 {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background-color: #f00;
+    margin-left: 12px;
+}
+
+.staff-circle2 {
+    margin-right: 12px;
+    
+}
+
+.staff-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align text to the start of the column */
+    margin-left: 1rem;
+}
+
+.staff-text2 {
+    text-align: right; /* Align text to the right */
+}

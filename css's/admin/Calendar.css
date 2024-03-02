@@ -199,3 +199,43 @@ button:hover {
 button[class='btn-nav cancel'], a[class='btn-nav cancel']  {
     background: #ff0000;
 }
+
+.form-group {
+    display: flex;
+    align-items: center;
+}
+
+.form-group label {
+    margin-right: 10px;
+}
+
+.input-wrapper {
+    margin-top: 3px;
+    flex: 1;
+}
+
+.input-wrapper textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: none;
+}
+
+.table_search {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Align items at the start and end */
+}
+
+#searchInput {
+    margin-left: auto; /* Pushes the input to the end of .table_search */
+    border: 1px solid black;
+    border-radius: 7px;
+    padding-left: 5px;
+}
+
+h2.title {
+    margin-right: 1rem; /* Add margin to the title if necessary */
+}

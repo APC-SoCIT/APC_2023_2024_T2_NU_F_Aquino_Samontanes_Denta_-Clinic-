@@ -133,25 +133,31 @@ if (isset($_GET['id'])) {
 <body>
     
     <header>
-            <nav>
-                <div class="logo">
-                    <a href="#" aria-label="Homepage">
-                        <img src="../../pics/Logo.png" alt="" class="src">
-                    </a>
-                </div>
-                <ul>
-                    <li><a href="CheckAppointments.php">Check Appointments</a></li>
-                    <li><a href="Calendar.php">Appointment Calendar</a></li>
-                    <li><a href="pTable.php">Patient Records Table</a></li>
-                    <li><a href="ArchivedRecords.php">Archived Records</a></li>
-                    <li><a href="../auth/logout.php">Logout</a></li>
-                    <!--<li><a href="request.php" class="btn-nav">Schedule Appointment</a></li>-->
-                </ul>
-                <div class="hamburger">
-                    <i class="fa-solid fa-bars"></i>
-                </div>
-            </nav>
-        </header>
+        <nav>
+            <div class="logo">
+                <a href="#" aria-label="Homepage">
+                    <img src="../../pics/Logo.png" alt="" class="src">
+                </a>
+            </div>
+            <ul>
+                <li class="dropdown">
+                    <a href="CheckAppointments.php" class="dropbtn">Appointments</a>
+                    <div class="dropdown-content">
+                        <a href="CheckAppointments.php">Check Appointments</a>
+                        <a href="Calendar.php">Appointment Calendar</a>
+                        <a href="FinishedAppts.php">Finished Appointments</a>
+                        <a href="CancelledAppts.php">Cancelled Appointments</a>
+                    </div>
+                </li>
+                <li><a href="pTable.php" class="sel_page">Patient Records Table</a></li>
+                <li><a href="ArchivedRecords.php">Archived Records</a></li>
+                <li><a href="../auth/logout.php">Logout</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
 
     <?php if (isset($_GET['success'])) { ?>
         <p class="success" id="successMessage"><?php echo $_GET['success']; ?></p>

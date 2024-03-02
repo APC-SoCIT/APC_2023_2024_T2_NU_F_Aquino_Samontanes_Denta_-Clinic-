@@ -91,28 +91,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
     if (!$result) {
         die("Error: " . mysqli_error($conn));
     }
-
-    $sql_done = "SELECT DISTINCT appointments.*, patients.first_name, patients.middle_name, patients.last_name, patients.gender
-    FROM appointments 
-    INNER JOIN patients ON appointments.patient_id = patients.patient_id
-    WHERE appointments.appointment_condition='Done'
-    ORDER BY appointments.date_of_appointment ASC";
-
-    $result_done = mysqli_query($conn, $sql_done);
-    if (!$result_done) {
-        die("Error: " . mysqli_error($conn));
-    }
-
-    $sql_cancel = "SELECT DISTINCT appointments.*, patients.first_name, patients.middle_name, patients.last_name, patients.gender
-    FROM appointments 
-    INNER JOIN patients ON appointments.patient_id = patients.patient_id
-    WHERE appointments.appointment_condition='cancelled'
-    ORDER BY appointments.date_of_appointment ASC";
-
-    $result_cancel = mysqli_query($conn, $sql_cancel);
-    if (!$result_cancel) {
-        die("Error: " . mysqli_error($conn));
-    }
     ?>
 
     
@@ -158,7 +136,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                     }
                 };
 
-                xhttp.open("GET", `sort_appt.php?column=${column}&order=${sortOrders[column]}`, true);
+                xhttp.open("GET", `sort/sort_calendar.php?column=${column}&order=${sortOrders[column]}`, true);
                 xhttp.send();
             }
         </script>
@@ -173,12 +151,18 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                     </a>
                 </div>
                 <ul>
-                    <li><a href="CheckAppointments.php">Check Appointments</a></li>
-                    <li><a href="Calendar.php">Appointment Calendar</a></li>
+                    <li class="dropdown">
+                        <a href="CheckAppointments.php" class="dropbtn sel_page" >Appointments</a>
+                        <div class="dropdown-content">
+                            <a href="CheckAppointments.php">Check Appointments</a>
+                            <a href="Calendar.php" class="sel_page">Appointment Calendar</a>
+                            <a href="FinishedAppts.php">Finished Appointments</a>
+                            <a href="CancelledAppts.php">Cancelled Appointments</a>
+                        </div>
+                    </li>
                     <li><a href="pTable.php">Patient Records Table</a></li>
                     <li><a href="ArchivedRecords.php">Archived Records</a></li>
                     <li><a href="../auth/logout.php">Logout</a></li>
-                    <!--<li><a href="request.php" class="btn-nav">Schedule Appointment</a></li>-->
                 </ul>
                 <div class="hamburger">
                     <i class="fa-solid fa-bars"></i>
@@ -256,87 +240,38 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         </form>
     </div>
 
-    <?php
-    if (mysqli_num_rows($result_done) > 0) {
-    ?>
-    
-    <div class="table_appointments">
-    <h2 class="title">Finished Appointments</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Patient ID</th>
-                    <th>First Name</th>
-                    <th>Middle Name</th>
-                    <th>Last Name</th>
-                    <th>Date of Appointment</th>
-                    <th>Gender</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                while ($row = mysqli_fetch_assoc($result_done)) {
-                    echo "<tr>";
-                    echo "<td>{$row['patient_id']}</td>";
-                    echo "<td>{$row['first_name']}</td>";
-                    echo "<td>{$row['middle_name']}</td>";
-                    echo "<td>{$row['last_name']}</td>";
-                    echo "<td>{$row['date_of_appointment']}</td>";
-                    echo "<td>{$row['gender']}</td>";
-                    echo "</tr>";
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>    
-    <?php
-    } else {
-        echo "<p style='text-align: center; font-size: 18px; color: #555; background-color: #f7f7f7; padding: 10px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);'>There are no pending appointments.</p>";
-    }
-    ?>
-</div>
-
-    <?php
-        if (mysqli_num_rows($result_cancel) > 0) {
-        ?>
-        
-        <div class="table_appointments">
-        <h2 class="title">Cancelled Appointments</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Patient ID</th>
-                        <th>First Name</th>
-                        <th>Middle Name</th>
-                        <th>Last Name</th>
-                        <th>Date of Appointment</th>
-                        <th>Gender</th>
-                        <th>Reason</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    while ($row = mysqli_fetch_assoc($result_cancel)) {
-                        echo "<tr>";
-                        echo "<td>{$row['patient_id']}</td>";
-                        echo "<td>{$row['first_name']}</td>";
-                        echo "<td>{$row['middle_name']}</td>";
-                        echo "<td>{$row['last_name']}</td>";
-                        echo "<td>{$row['date_of_appointment']}</td>";
-                        echo "<td>{$row['gender']}</td>";
-                        echo "<td>{$row['reason_of_cancel']}</td>";
-                        echo "</tr>";
+    <script>
+        function searchTable() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("table-body");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                tdFirstName = tr[i].getElementsByTagName("td")[1];
+                tdMiddleName = tr[i].getElementsByTagName("td")[2];
+                tdLastName = tr[i].getElementsByTagName("td")[3];
+                tdDate = tr[i].getElementsByTagName("td")[4];
+                if (tdFirstName || tdMiddleName || tdLastName || tdDate) {
+                    txtValueFirstName = tdFirstName.textContent || tdFirstName.innerText;
+                    txtValueMiddleName = tdMiddleName.textContent || tdMiddleName.innerText;
+                    txtValueLastName = tdLastName.textContent || tdLastName.innerText;
+                    txtValueDate = tdDate.textContent || tdDate.innerText;
+                    if (txtValueFirstName.toUpperCase().indexOf(filter) > -1 ||
+                        txtValueMiddleName.toUpperCase().indexOf(filter) > -1 ||
+                        txtValueLastName.toUpperCase().indexOf(filter) > -1 ||
+                        txtValueDate.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
                     }
-                    ?>
-                </tbody>
-            </table>
-        </div>    
-        <?php
-        } else {
-            echo "<p style='text-align: center; font-size: 18px; color: #555; background-color: #f7f7f7; padding: 10px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);'>There are no pending appointments.</p>";
+                }
+            }
         }
-        ?>
-    </div>
+    </script>
+
+    <script src="../../js's/scriptindex.js"></script>
+    <script src="https://kit.fontawesome.com/595a890311.js" crossorigin="anonymous"></script>
     </body>
     </html>
 

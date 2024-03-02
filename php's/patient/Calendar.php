@@ -28,7 +28,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         FROM appointments 
         WHERE patient_id = $PatientID 
         AND (appointment_condition = 'cancelled' OR appointment_condition = 'disapproved')
-        GROUP BY appointment_condition
         ORDER BY date_of_appointment";
 
 

@@ -41,10 +41,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                     }
                 };
 
-                xhttp.open("GET", `sort.php?column=${column}&order=${sortOrders[column]}`, true);
+                xhttp.open("GET", "sort/sort.php?column=" + column + "&order=" + sortOrders[column], true);
                 xhttp.send();
             }
         </script>
+
+
 
     </head>
     <body>
@@ -56,12 +58,18 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                     </a>
                 </div>
                 <ul>
-                    <li><a href="CheckAppointments.php">Check Appointments</a></li>
-                    <li><a href="Calendar.php">Appointment Calendar</a></li>
-                    <li><a href="pTable.php">Patient Records Table</a></li>
+                    <li class="dropdown">
+                        <a href="CheckAppointments.php" class="dropbtn">Appointments</a>
+                        <div class="dropdown-content">
+                            <a href="CheckAppointments.php">Check Appointments</a>
+                            <a href="Calendar.php">Appointment Calendar</a>
+                            <a href="FinishedAppts.php">Finished Appointments</a>
+                            <a href="CancelledAppts.php">Cancelled Appointments</a>
+                        </div>
+                    </li>
+                    <li><a href="pTable.php" class="sel_page">Patient Records Table</a></li>
                     <li><a href="ArchivedRecords.php">Archived Records</a></li>
                     <li><a href="../auth/logout.php">Logout</a></li>
-                    <!--<li><a href="request.php" class="btn-nav">Schedule Appointment</a></li>-->
                 </ul>
                 <div class="hamburger">
                     <i class="fa-solid fa-bars"></i>
@@ -88,19 +96,20 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         <?php } ?>
     
         <div>
-    <?php
-    if (mysqli_num_rows($result) > 0) {
-    ?>
-    
+        <?php
+if (mysqli_num_rows($result) > 0) {
+?>
     <div class="table_appointments">
-    <div class="table_add">
-        <h2 class="title">Patient Records</h2>
-        <a href="pCreate.php" class="no-underline">
-            <button id="plusbtn">&#43;</button>
-        </a>
-    </div>
+        <div class="table_add">
+            <h2 class="title">Patient Records</h2>
+            <div class="table_search">
+                <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search for names...">
+                <a href="pCreate.php" class="no-underline">
+                    <button id="plusbtn">&#43;</button>
+                </a>
+            </div>
+        </div>
         <table border="1">
-            <!-- Update the <thead> section of your HTML -->
             <thead>
                 <tr>
                     <th onclick="sortTable('patient_id')" class="sort_th">Patient ID</th>
@@ -112,39 +121,64 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                     <th>Action</th>
                 </tr>
             </thead>
-
-
             <tbody id="table-body">
                 <?php
                 while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<div id="myModal" class="modal">';
-                    echo '<h2>Confirmation</h2>';
-                    echo '<p>Are you sure you want to archive the record?</p>';
-                    echo '<button onclick="cancelAction();">Cancel</button>';
-                    echo '<a href="pArchive.php?patient_id=' . $row['patient_id'] . '">Proceed</a>';
-                    echo '</div>';
-                    echo "<tr>";
-                    echo "<td>{$row['patient_id']}</td>";
-                    echo "<td>{$row['first_name']}</td>";
-                    echo "<td>{$row['middle_name']}</td>";
-                    echo "<td>{$row['last_name']}</td>";
-                    echo "<td>{$row['gender']}</td>";
-                    echo "<td>{$row['contact_number']}</td>";
-                    echo "<td style='margin: auto;'><a href='pView.php?patient_id=" . $row['patient_id'] . "'><button class=\"btn-nav\">View</button></a>
-                    <a href='pUpdate.php?patient_id=" . $row['patient_id'] . "'><button class=\"btn-nav\">Update</button></a>
-                    <a href='#' class='custom-link' onclick='openModal();'><button class=\"btn-nav cancel\">Archive</button></a>
-                    </td>";
-                    echo "</tr>";
+                    // Your existing PHP loop code goes here
+                ?>
+                    <tr>
+                        <td><?= $row['patient_id'] ?></td>
+                        <td><?= $row['first_name'] ?></td>
+                        <td><?= $row['middle_name'] ?></td>
+                        <td><?= $row['last_name'] ?></td>
+                        <td><?= $row['gender'] ?></td>
+                        <td><?= $row['contact_number'] ?></td>
+                        <td style='margin: auto;'>
+                            <a href='pView.php?patient_id=<?= $row['patient_id'] ?>'><button class="btn-nav">View</button></a>
+                            <a href='pUpdate.php?patient_id=<?= $row['patient_id'] ?>'><button class="btn-nav">Update</button></a>
+                            <a href='#' class='custom-link' onclick='openModal();'><button class="btn-nav cancel">Archive</button></a>
+                        </td>
+                    </tr>
+                <?php
                 }
                 ?>
             </tbody>
         </table>
     </div>
-    <?php
-    } else {
-        echo "<p style='text-align: center; font-size: 18px; color: #555; background-color: #f7f7f7; padding: 10px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);'>There are no patients in the table.</p>";
-    }
-    ?>
+
+    <script>
+        function searchTable() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("table-body");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                tdFirstName = tr[i].getElementsByTagName("td")[1];
+                tdMiddleName = tr[i].getElementsByTagName("td")[2];
+                tdLastName = tr[i].getElementsByTagName("td")[3];
+                if (tdFirstName || tdMiddleName || tdLastName) {
+                    txtValueFirstName = tdFirstName.textContent || tdFirstName.innerText;
+                    txtValueMiddleName = tdMiddleName.textContent || tdMiddleName.innerText;
+                    txtValueLastName = tdLastName.textContent || tdLastName.innerText;
+                    if (txtValueFirstName.toUpperCase().indexOf(filter) > -1 ||
+                        txtValueMiddleName.toUpperCase().indexOf(filter) > -1 ||
+                        txtValueLastName.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
+<?php
+} else {
+    echo "<p style='text-align: center; font-size: 18px; color: #555; background-color: #f7f7f7; padding: 10px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);'>There are no patients in the table.</p>";
+}
+?>
+
 </div>
 
     <script>

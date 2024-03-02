@@ -20,6 +20,25 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Aquino Samontanes Dental Clinic</title>
         <link rel="stylesheet" type="text/css" href="../../css's/admin/admin.css">
+
+        <script>
+            document.addEventListener('click', function(event) {
+                var dropdowns = document.getElementsByClassName('dropdown-content');
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!event.target.matches('.dropbtn')) return;
+                var dropdownContent = event.target.nextElementSibling;
+                dropdownContent.classList.toggle('show');
+            });
+
+        </script>
     </head>
     <body>
         <header>
@@ -30,18 +49,25 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                     </a>
                 </div>
                 <ul>
-                    <li><a href="CheckAppointments.php">Check Appointments</a></li>
-                    <li><a href="Calendar.php">Appointment Calendar</a></li>
+                    <li class="dropdown">
+                        <a href="CheckAppointments.php" class="dropbtn">Appointments</a>
+                        <div class="dropdown-content">
+                            <a href="CheckAppointments.php">Check Appointments</a>
+                            <a href="Calendar.php">Appointment Calendar</a>
+                            <a href="FinishedAppts.php">Finished Appointments</a>
+                            <a href="CancelledAppts.php">Cancelled Appointments</a>
+                        </div>
+                    </li>
                     <li><a href="pTable.php">Patient Records Table</a></li>
-                    <li><a href="ArchivedRecords.php">Archived Records</a></li>
+                    <li><a href="ArchivedRecords.php" class="sel_page">Archived Records</a></li>
                     <li><a href="../auth/logout.php">Logout</a></li>
-                    <!--<li><a href="request.php" class="btn-nav">Schedule Appointment</a></li>-->
                 </ul>
                 <div class="hamburger">
                     <i class="fa-solid fa-bars"></i>
                 </div>
             </nav>
         </header>
+
 
         <?php if (isset($_GET['success'])) { ?>
             <p class="success" id="successMessage"><?php echo $_GET['success']; ?></p>
