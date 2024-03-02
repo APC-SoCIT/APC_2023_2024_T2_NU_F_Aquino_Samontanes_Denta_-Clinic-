@@ -58,7 +58,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                     }
                 };
 
-                xhttp.open("GET", `sort_appt.php?column=${column}&order=${sortOrders[column]}`, true);
+                xhttp.open("GET", `sort/sort_finish.php?column=${column}&order=${sortOrders[column]}`, true);
                 xhttp.send();
             }
         </script>
@@ -105,12 +105,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         <table>
             <thead>
                 <tr>
-                    <th>Patient ID</th>
-                    <th>First Name</th>
-                    <th>Middle Name</th>
-                    <th>Last Name</th>
-                    <th>Date of Appointment</th>
-                    <th>Gender</th>
+                    <th onclick="sortTable('patient_id')" class="sort_th">Patient ID</th>
+                    <th onclick="sortTable('first_name')" class="sort_th">First Name</th>
+                    <th onclick="sortTable('middle_name')" class="sort_th">Middle Name</th>
+                    <th onclick="sortTable('last_name')" class="sort_th">Last Name</th>
+                    <th onclick="sortTable('date_of_appointment')" class="sort_th">Date of Appointment</th>
+                    <th onclick="sortTable('gender')" class="sort_th">Gender</th>
                 </tr>
             </thead>
             <tbody id="table-body">
