@@ -222,6 +222,7 @@ if (isset($_GET['patient_id'])) {
                     while ($row = $planresult->fetch_assoc()) {
                         $count++;
                         $ID = $row['id'];
+                        $PID = $_GET['patient_id'];
                         $TreatmentPlan = $row['treatment_plan'];
                         $Progress = $row['progress'];
                         $Date = $row['date'];
@@ -237,7 +238,7 @@ if (isset($_GET['patient_id'])) {
                         if ($count == $num_rows) {
                             // Generate a card for creating a new treatment plan
                             ?>
-                            <a href="create_treatment_plan.php?id=<?php echo $ID; ?>" class="card2">
+                            <a href="create_treatment_plan.php?patient_id=<?php echo $PID; ?>" class="card2">
                                 <h3>Create New Treatment Plan</h3>
                                 <p>Click here to create a new treatment plan</p>
                             </a>
@@ -248,7 +249,7 @@ if (isset($_GET['patient_id'])) {
                     // If no treatment plans found
                     $ID = 1;
                     $PID = $_GET['patient_id'];
-                    echo "<a href='createTP.php?patient_id=$PID' class='card2'>";
+                    echo "<a href='create_treatment_plan.php?patient_id=$PID' class='card2'>";
                     echo "<h3>Create New Treatment Plan</h3>";
                     echo "<p>Click here to create a new treatment plan</p>";       
                     echo "</a>";      

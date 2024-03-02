@@ -10,10 +10,13 @@ if (isset($_POST['submit'])) {
     $UserRole = "patient";
 
     // Check if email already exists in the database
-    $check_sql = "SELECT * FROM users WHERE email_address = '$EmailAddress'";
-    $check_result = $conn->query($check_sql);
+    $check_sql = "SELECT * FROM users WHERE email_address = ?";
+    $stmt = $conn->prepare($check_sql);
+    $stmt->bind_param("s", $EmailAddress);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    if ($check_result->num_rows > 0) {
+    if ($result->num_rows > 0) {
         header("Location: signup.php?error=Email address already exists");
         exit();
     }
@@ -24,26 +27,30 @@ if (isset($_POST['submit'])) {
     } elseif ($PassWord != $Confirm) {
         header("Location: signup.php?error=Password does not match");
         exit();
+    } elseif (!preg_match("/^(?=.*[A-Z])(?=.*\d).{8,}$/", $PassWord)) {
+        header("Location: signup.php?error=Your password must be at least 8 characters long and contain at least one capital letter and one number");
+        exit();
     } else {
         date_default_timezone_set('Asia/Manila');
         $currentDateTime = date('Y-m-d H:i:s');
 
-        $sql = "INSERT INTO `users`(`first_name`, `last_name`, `email_address`, `password`, `user_role`, `created_at`) 
-            VALUES ('$FirstName', '$LastName', '$EmailAddress','$PassWord', '$UserRole', '$currentDateTime')";
+        // Hash the password
+        $hashedPassword = password_hash($PassWord, PASSWORD_DEFAULT);
 
-        $result = $conn->query($sql);
+        // Insert user data into the database
+        $insert_sql = "INSERT INTO users (first_name, last_name, email_address, password, user_role, created_at) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($insert_sql);
+        $stmt->bind_param("ssssss", $FirstName, $LastName, $EmailAddress, $hashedPassword, $UserRole, $currentDateTime);
+        $stmt->execute();
 
-        if ($result === TRUE) {
-            header("Location: login.php?success=New record created successfully");
-            exit();
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
+        header("Location: login.php?success=New record created successfully");
+        exit();
     }
-
-    $conn->close();
 }
+
+$conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -115,7 +122,7 @@ if (isset($_POST['submit'])) {
         <script>
             setTimeout(function() {
                 document.getElementById('errorMessage').classList.add('hide');
-            }, 1000);
+            }, 5000);
         </script>
     <?php } ?>
 
@@ -127,6 +134,7 @@ if (isset($_POST['submit'])) {
                 <input type="text" id="first_name" name="first_name" placeholder="First Name">
                 <input type="text" id="last_name" name="last_name" placeholder="Last Name">
                 <input type="text" id="email_address" name="email_address" placeholder="Email Address">
+                <p style="font-size: 15px; color:gray;"><i>Your password must be at least 8 characters long and contain at least one capital letter and one number</i></p>
                 <input type="password" id="password" name="password" placeholder="Password">
                 <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
 

@@ -48,6 +48,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
     if ($appointmentresult->num_rows > 0) {        
         while ($row = $appointmentresult->fetch_assoc()) {
             $dates[] = $row['date_of_appointment']; // Add each date to the array
+            $Date = $row['date_of_appointment'];
+            $formattedDate = date('Y-m-d\TH:i', strtotime($Date));
         }
     }
 
@@ -252,18 +254,20 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 
         <label>
             <span>First Name <b class="star">*</b></span>
-            <input type="text" name="first_name" value="<?php echo $FirstName ?>">
+            <input type="text" name="first_name" value="<?php echo isset($FirstName) ? $FirstName : '' ?>">
         </label><br>
+
 
         <label>
             <span>Middle Name</span>
-            <input type="text" name="middle_name" value="<?php echo $MiddleName ?>">
+            <input type="text" name="middle_name" value="<?php echo isset($MiddleName) ? $MiddleName : '' ?>">
         </label><br>
 
         <label>
             <span>Last Name <b class="star">*</b></span>
-            <input type="text" name="last_name" value="<?php echo $LastName ?>">
+            <input type="text" name="last_name" value="<?php echo isset($LastName) ? $LastName : '' ?>">
         </label><br>
+
 
         <label>
             <span>When was your last visit at a dental clinic? <b class="star">*</b></span>
@@ -283,22 +287,22 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 
         <label>
             <span>Age <b class="star">*</b></span>
-            <input type="number" name="age" value="<?php echo $Age ?>">
+            <input type="number" name="age" value="<?php echo isset($Age) ? $Age : '' ?>">
         </label><br>
 
         <label>
             <span>Contact Number <b class="star">*</b></span>
-            <input type="number" name="Contact_Number" value="<?php echo $ContactNumber ?>">
+            <input type="number" name="Contact_Number" value="<?php echo isset($ContactNumber) ? $ContactNumber : '' ?>">
         </label><br>
-        
+
         <label>
             <span>Email <b class="star">*</b></span>
-            <input type="text" name="email_address" value="<?php echo $EmailAddress ?>">
+            <input type="text" name="email_address" value="<?php echo isset($EmailAddress) ? $EmailAddress : '' ?>">
         </label><br>
 
         <label>
             <span>Weight(kg)</span>
-            <input type="number" name="weight" value="<?php echo $Weight ?>">
+            <input type="number" name="weight" value="<?php echo isset($Weight) ? $Weight : '' ?>">
         </label><br>
 
         <label>
@@ -312,10 +316,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 
         <label>
             <span>Gender <b class="star">*</b></span>
-            <input type="radio" name="gender" value="M" id="gender_male" <?php if ($Gender === "M") echo "checked"; ?>>
+            <input type="radio" name="gender" value="M" id="gender_male" <?php if (isset($Gender) && $Gender === "M") echo "checked"; ?>>
             <label for="gender_male">Male</label><br>
             
-            <input type="radio" name="gender" value="F" id="gender_female" <?php if ($Gender === "F") echo "checked"; ?>>
+            <input type="radio" name="gender" value="F" id="gender_female" <?php if (isset($Gender) && $Gender === "F") echo "checked"; ?>>
             <label for="gender_female">Female</label>
         </label><br>
 
@@ -327,82 +331,82 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 
         <label>
             <span>Do you have allergies? <b class="star">*</b></span>
-            
-            <input type="radio" name="allergies" value="yes" id="allergies_yes" onclick="showTextBox()" <?php if ($Allergies === "yes") echo "checked"; ?>> 
+            <input type="radio" name="allergies" value="yes" id="allergies_yes" onclick="showTextBox()" <?php if (isset($Allergies) && $Allergies === "yes") echo "checked"; ?>> 
             <label for="allergies_yes">Yes</label>
 
-            <input type="radio" name="allergies" value="no" id="allergies_no" onclick="hideTextBox()" <?php if ($Allergies === "no") echo "checked"; ?>> 
+            <input type="radio" name="allergies" value="no" id="allergies_no" onclick="hideTextBox()" <?php if (isset($Allergies) && $Allergies === "no") echo "checked"; ?>> 
             <label for="allergies_no">No</label>
 
-            <div id="allergiesTextBox" class="hidden">
+            <div id="allergiesTextBox" class="<?php echo isset($Allergies) && $Allergies === "yes" ? '' : 'hidden'; ?>">
                 <label for="specified_allergies">Enter your allergies:</label>
-                <input type="text" name="specified_allergies" id="specified_allergies" <?php echo $SpecifiedAllergies?>> 
+                <input type="text" name="specified_allergies" id="specified_allergies" value="<?php echo isset($SpecifiedAllergies) ? $SpecifiedAllergies : ''; ?>"> 
             </div>
         </label>
 
         <script>
             function showTextBox() {
-            document.getElementById('allergiesTextBox').style.display = 'block';
+                document.getElementById('allergiesTextBox').style.display = 'block';
             }
 
             function hideTextBox() {
-            document.getElementById('allergiesTextBox').style.display = 'none';
+                document.getElementById('allergiesTextBox').style.display = 'none';
             }
         </script>
 
         <label>
             <span>Do you have Hypertension? <b class="star">*</b></span>
-            <input type="radio" name="hypertension" value="yes" id="hypertension_yes" <?php if ($Hypertension === "yes") echo "checked"; ?>> 
+            <input type="radio" name="hypertension" value="yes" id="hypertension_yes" <?php if (isset($Hypertension) && $Hypertension === "yes") echo "checked"; ?>> 
             <label for="hypertension_yes">Yes</label><br>
             
-            <input type="radio" name="hypertension" value="no" id="hypertension_no" <?php if ($Hypertension === "no") echo "checked"; ?>>
+            <input type="radio" name="hypertension" value="no" id="hypertension_no" <?php if (isset($Hypertension) && $Hypertension === "no") echo "checked"; ?>>
             <label for="hypertension_no">No</label>
         </label>
 
         <label>
             <span>Do you have Diabetes? <b class="star">*</b></span>
-            <input type="radio" name="diabetes" value="yes" id="diabetes_yes" <?php if ($Diabetes === "yes") echo "checked"; ?>>
+            <input type="radio" name="diabetes" value="yes" id="diabetes_yes" <?php if (isset($Diabetes) && $Diabetes === "yes") echo "checked"; ?>>
             <label for="diabetes_yes">Yes</label><br>
 
-            <input type="radio" name="diabetes" value="no" id="diabetes_no" <?php if ($Diabetes === "no") echo "checked"; ?>>
+            <input type="radio" name="diabetes" value="no" id="diabetes_no" <?php if (isset($Diabetes) && $Diabetes === "no") echo "checked"; ?>>
             <label for="diabetes_no">No</label>
         </label>
 
         <label>
             <span>Do you have High Uric Acid? <b class="star">*</b></span>
-            <input type="radio" name="uric_acid" value="yes" id="uric_acid_yes" <?php if ($UricAcid === "yes") echo "checked"; ?>>
+            <input type="radio" name="uric_acid" value="yes" id="uric_acid_yes" <?php if (isset($UricAcid) && $UricAcid === "yes") echo "checked"; ?>>
             <label for="uric_acid_yes">Yes</label><br>
             
-            <input type="radio" name="uric_acid" value="no" id="uric_acid_no" <?php if ($UricAcid === "no") echo "checked"; ?>>
+            <input type="radio" name="uric_acid" value="no" id="uric_acid_no" <?php if (isset($UricAcid) && $UricAcid === "no") echo "checked"; ?>>
             <label for="uric_acid_no">No</label>
         </label>
 
         <label>
             <span>Do you have High Cholesterol? <b class="star">*</b></span>
-            <input type="radio" name="cholesterol" value="yes" id="cholesterol_yes" <?php if ($Cholesterol === "yes") echo "checked"; ?>>
+            <input type="radio" name="cholesterol" value="yes" id="cholesterol_yes" <?php if (isset($Cholesterol) && $Cholesterol === "yes") echo "checked"; ?>>
             <label for="cholesterol_yes">Yes</label><br>
             
-            <input type="radio" name="cholesterol" value="no" id="cholesterol_no" <?php if ($Cholesterol === "no") echo "checked"; ?>>
+            <input type="radio" name="cholesterol" value="no" id="cholesterol_no" <?php if (isset($Cholesterol) && $Cholesterol === "no") echo "checked"; ?>>
             <label for="cholesterol_no">No</label>
         </label>
 
         <label>
             <span>Do you have Asthma? <b class="star">*</b></span>
-            <input type="radio" name="asthma" value="yes" id="asthma_yes" <?php if ($Asthma === "yes") echo "checked"; ?>>
+            <input type="radio" name="asthma" value="yes" id="asthma_yes" <?php if (isset($Asthma) && $Asthma === "yes") echo "checked"; ?>>
             <label for="asthma_yes">Yes</label><br>
             
-            <input type="radio" name="asthma" value="no" id="asthma_no" <?php if ($Asthma === "no") echo "checked"; ?>>
+            <input type="radio" name="asthma" value="no" id="asthma_no" <?php if (isset($Asthma) && $Asthma === "no") echo "checked"; ?>>
             <label for="asthma_no">No</label>
         </label>
 
         <label>
             <span>Are you medically compromised? <b class="star">*</b></span>
-            <input type="radio" name="medically_compromised" value="yes" id="med_comp_yes" <?php if ($MedicallyCompromised === "yes") echo "checked"; ?>>
+            <input type="radio" name="medically_compromised" value="yes" id="med_comp_yes" <?php if (isset($MedicallyCompromised) && $MedicallyCompromised === "yes") echo "checked"; ?>>
             <label for="med_comp_yes">Yes (if yes, please seek clearance <br>or approval from your medical doctor)</label><br>
             
-            <input type="radio" name="medically_compromised" value="no" id="med_comp_no" <?php if ($MedicallyCompromised === "no") echo "checked"; ?>>
+            <input type="radio" name="medically_compromised" value="no" id="med_comp_no" <?php if (isset($MedicallyCompromised) && $MedicallyCompromised === "no") echo "checked"; ?>>
             <label for="med_comp_no">No</label>
         </label>
+
 
         <button type="submit" name="submit" class="submit_button">Submit</button>
     </form>
@@ -411,7 +415,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
     <div class="popup" id="dateTimePopup">
         <h2>Select Date and Time</h2>
         <p class="popup_txt">We're open from <b>11am to 6pm</b> every day except <b style="color:red;">Sundays</b>.</p><br>
-        <input type="datetime-local" id="dateTimePicker">
+        <input type="datetime-local" id="dateTimePicker" value="<?php echo $formattedDate ?>">
         <button onclick="selectDateTime()" class="select_bttn">Select</button>
         <button onclick="closePopup()" class="close_bttn">Close</button>
     </div>
@@ -428,3 +432,4 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
     exit();
 }
 ?>
+

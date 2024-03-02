@@ -291,7 +291,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                 echo "<tr>";
                 echo "<td>";
                 echo "<h5>{$row['date_of_appointment']}</h5>";
-                echo "<p>Reason:{$row['reason_of_cancel']}</p>";
+                echo "<p>Reason: {$row['reason_of_cancel']}</p>";
                 echo "</td>";
                 /*
                 echo "<td>";

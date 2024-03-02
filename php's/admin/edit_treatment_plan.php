@@ -74,7 +74,7 @@ if (isset($_GET['id'])) {
         $Prophylaxis = $_POST['Prophylaxis'];
         $Date = $_POST['date'];
         $timestamp = strtotime($Date);
-        $DateFormatted = date('m/d/y H:i', $timestamp);
+        $DateOfAppointmentFormatted = date('m/d/y H:i', $timestamp);
         $Comment = $_POST['comments'];
         $Extraction = $_POST['extraction'];
         $selectedTeeth = serialize($_POST['teeth']);
@@ -89,15 +89,12 @@ if (isset($_GET['id'])) {
         } elseif (empty($Prophylaxis)) {
             header("Location: edit_treatment_plan.php?id=$ID&error=Fill if patient needs prophylaxis");
             exit();
-        } elseif (empty($Date)) {
-            header("Location: edit_treatment_plan.php?id=$ID&error=Date of Treatment is required");
-            exit();
         } elseif (empty($Extraction)) {
             header("Location: edit_treatment_plan.php?id=$ID&error=Fill if patient needs tooth extraction");
             exit();
         } else {
             // Prepare SQL statement for updating data
-            $updatesql = "UPDATE treatment_plan SET treatment_plan='$TreatmentPlan', progress='$Progress', Prophylaxis='$Prophylaxis', date='$DateFormatted', extraction='$Extraction', teeth_extraction='$selectedTeeth', comments='$Comment' WHERE `id`='$ID'";
+            $updatesql = "UPDATE treatment_plan SET treatment_plan='$TreatmentPlan', progress='$Progress', Prophylaxis='$Prophylaxis', date='$DateOfAppointmentFormatted', extraction='$Extraction', teeth_extraction='$selectedTeeth', comments='$Comment' WHERE `id`='$ID'";
 
             if ($conn->query($updatesql) === TRUE) {
                 header("Location: view_treatment_plan.php?id=$ID&success=Treatment Plan Updated");
@@ -238,7 +235,8 @@ if (isset($_GET['id'])) {
                     </label>
 
                     <div id="tooth-container">
-                        <div class="tooth-column">        
+                        Upper Arch<hr> <br>    
+                        <div class="tooth-column">    
                             <label for="tooth1">
                                 <input type="checkbox" id="tooth1" name="teeth[]" value="Central incisor (right)" >
                                 Central incisor (right)
@@ -320,6 +318,91 @@ if (isset($_GET['id'])) {
                                 Third molar (left)
                             </label><br>
                         </div>
+
+                        Lower Arch<hr> <br>
+
+                        <div class="tooth-column">        
+                            <label for="tooth17">
+                                <input type="checkbox" id="tooth1" name="teeth[]" value="Central incisor (right)" >
+                                Central incisor (right)
+                            </label><br>
+
+                            <label for="tooth18">
+                                <input type="checkbox" id="tooth2" name="teeth[]" value="Central incisor (left)">
+                                Central incisor (left)
+                            </label><br>
+
+                            <label for="tooth19">
+                                <input type="checkbox" id="tooth3" name="teeth[]" value="Lateral incisor (right)">
+                                Lateral incisor (right)
+                            </label><br>
+
+                            <label for="tooth20">
+                                <input type="checkbox" id="tooth4" name="teeth[]" value="Lateral incisor (left)">
+                                Lateral incisor (left)
+                            </label><br>
+
+                            <label for="tooth21">
+                                <input type="checkbox" id="tooth5" name="teeth[]" value="Canine (right)">
+                                Canine (right)
+                            </label><br>
+
+                            <label for="tooth22">
+                                <input type="checkbox" id="tooth6" name="teeth[]" value="Canine (left)">
+                                Canine (left)
+                            </label><br>
+
+                            <label for="tooth23">
+                                <input type="checkbox" id="tooth7" name="teeth[]" value="First premolar (right)">
+                                First premolar (right)
+                            </label><br>
+
+                            <label for="tooth24">
+                                <input type="checkbox" id="tooth8" name="teeth[]" value="First premolar (left)">
+                                First premolar (left)
+                            </label><br>
+                        </div>
+                        <div class="tooth-column">
+                        <label for="tooth25">
+                            <input type="checkbox" id="tooth9" name="teeth[]" value="Second premolar (right)">
+                                Second premolar (right)
+                            </label><br>
+
+                            <label for="tooth26">
+                                <input type="checkbox" id="tooth10" name="teeth[]" value="Second premolar (left)">
+                                Second premolar (left)
+                            </label><br>
+
+                            <label for="tooth27">
+                                <input type="checkbox" id="tooth11" name="teeth[]" value="First molar (right)">
+                                First molar (right)
+                            </label><br>
+
+                            <label for="tooth28">
+                                <input type="checkbox" id="tooth12" name="teeth[]" value="First molar (left)">
+                                First molar (left)
+                            </label><br>
+
+                            <label for="tooth29">
+                                <input type="checkbox" id="tooth13" name="teeth[]" value="Second molar (right)">
+                                Second molar (right)
+                            </label><br>
+
+                            <label for="tooth30">
+                                <input type="checkbox" id="tooth14" name="teeth[]" value="Second molar (left)">
+                                Second molar (left)
+                            </label><br>
+
+                            <label for="tooth31">
+                                <input type="checkbox" id="tooth15" name="teeth[]" value="Third molar (right)">
+                                Third molar (right)
+                            </label><br>
+
+                            <label for="tooth32">
+                                <input type="checkbox" id="tooth16" name="teeth[]" value="Third molar (left)">
+                                Third molar (left)
+                            </label><br>
+                        </div>
                     </div>
 
 
@@ -343,8 +426,6 @@ if (isset($_GET['id'])) {
 
                 </div>
                 <div class="column2">
-                    <!-- Button to open the modal -->
-                    <button onclick="openModal()">Upload X-ray Films</button>
 
                     <label>
                         <span>Comments: </span>
@@ -354,6 +435,8 @@ if (isset($_GET['id'])) {
                     <button type="submit" name="submit" class="edit-button">Save</button>
 
                     </form>
+                    <!-- Button to open the modal -->
+                    <button onclick="openModal()">Upload X-ray Films</button>
                 </div>
             </div>
         </div>

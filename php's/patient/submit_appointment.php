@@ -55,10 +55,6 @@ if (isset($_POST['submit'])) {
     }else if(empty($EmailAddress)){
         header("Location: Request.php?error=Email Address is required");
 
-    }else if(empty($Weight)){
-        header("Location: Request.php?error=Weight is required");
-        exit();
-
     }else if(empty($DateOfAppointment)){
         header("Location: Request.php?error=Date of Appointment is required");
         exit();
@@ -139,10 +135,41 @@ if (isset($_POST['submit'])) {
 
         $result = mysqli_query($conn, $Asql);
         
-        $Msql = "INSERT INTO `medical_history`(`patient_id`, `concerns`, `allergies`, `specified_allergies`, `hypertension`, `diabetes`, `uric_acid`, `cholesterol`, `asthma`, `medically_compromised`, `created_at`) 
-            VALUES ('$PatientID', '$Concerns','$Allergies','$SpecifiedAllergies', '$Hypertension','$Diabetes','$UricAcid','$Cholesterol','$Asthma','$MedicallyCompromised','$currentDateTime')";
+        // Check if medical history exists for the patient
+        $checkMedicalHistoryQuery = "SELECT COUNT(*) as count FROM medical_history WHERE patient_id = '$PatientID'";
+        $checkMedicalHistoryResult = $conn->query($checkMedicalHistoryQuery);
 
+        if ($checkMedicalHistoryResult->num_rows > 0) {
+            $row = $checkMedicalHistoryResult->fetch_assoc();
+            $medicalHistoryExists = $row['count'] > 0;
+        } else {
+            $medicalHistoryExists = false;
+        }
+
+        // Construct SQL query for medical history
+        if ($medicalHistoryExists) {
+            // Perform an update
+            $Msql = "UPDATE `medical_history` SET 
+                        `concerns` = '$Concerns', 
+                        `allergies` = " . ($Allergies !== null ? "'$Allergies'" : "NULL") . ",
+                        `specified_allergies` = " . ($SpecifiedAllergies !== null ? "'$SpecifiedAllergies'" : "NULL") . ",
+                        `hypertension` = '$Hypertension',
+                        `diabetes` = '$Diabetes',
+                        `uric_acid` = '$UricAcid',
+                        `cholesterol` = '$Cholesterol',
+                        `asthma` = '$Asthma',
+                        `medically_compromised` = '$MedicallyCompromised',
+                        `created_at` = '$currentDateTime' 
+                    WHERE `patient_id` = '$PatientID'";
+        } else {
+            // Perform an insert
+            $Msql = "INSERT INTO `medical_history`(`patient_id`, `concerns`, `allergies`, `specified_allergies`, `hypertension`, `diabetes`, `uric_acid`, `cholesterol`, `asthma`, `medically_compromised`, `created_at`) 
+                    VALUES ('$PatientID', '$Concerns', " . ($Allergies !== null ? "'$Allergies'" : "NULL") . ", " . ($SpecifiedAllergies !== null ? "'$SpecifiedAllergies'" : "NULL") . ", '$Hypertension', '$Diabetes', '$UricAcid', '$Cholesterol', '$Asthma', '$MedicallyCompromised', '$currentDateTime')";
+        }
+
+        // Execute the SQL query for medical history
         $Mresult = mysqli_query($conn, $Msql);
+
 
         if ($Mresult && $Presult && $result  == TRUE) {
             header("Location: Request.php?success=New record created succesfully");

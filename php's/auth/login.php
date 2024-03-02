@@ -23,32 +23,48 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             header("Location: login.php?error=Password is required");
             exit();
         } else {
-            $sql = "SELECT * FROM users WHERE email_address='$email' AND password='$pass'";
-            $result = mysqli_query($conn, $sql);
+            // Fetch user from the database
+            $stmt = $conn->prepare("SELECT * FROM users WHERE email_address = ?");
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-            if (mysqli_num_rows($result) === 1) {
-                $row = mysqli_fetch_assoc($result);
+            if ($result->num_rows === 1) {
+                $row = $result->fetch_assoc();
+                $hashedPassword = $row['password'];
 
-                $_SESSION['first_name'] = $row['first_name'];
-                $_SESSION['last_name'] = $row['last_name'];
-                $_SESSION['email_address'] = $row['email_address'];
-                $_SESSION['user_role'] = $row['user_role'];
-                $_SESSION['id'] = $row['id'];
+                // Verify password
+                if (password_verify($pass, $hashedPassword)) {
+                    // Password is correct, start session
+                    session_start();
 
-                if ($_SESSION['user_role'] == 'patient') {
-                    header("Location: ../patient/Home.php");
-                    exit();
+                    $_SESSION['first_name'] = $row['first_name'];
+                    $_SESSION['last_name'] = $row['last_name'];
+                    $_SESSION['email_address'] = $row['email_address'];
+                    $_SESSION['user_role'] = $row['user_role'];
+                    $_SESSION['id'] = $row['id'];
+
+                    if ($_SESSION['user_role'] == 'patient') {
+                        header("Location: ../patient/Home.php");
+                        exit();
+                    } else {
+                        header("Location: ../admin/CheckAppointments.php");
+                        exit();
+                    }
                 } else {
-                    header("Location: ../admin/CheckAppointments.php");
+                    // Password is incorrect
+                    header("Location: login.php?error=Incorrect password");
                     exit();
                 }
             } else {
-                header("Location: login.php?error=Incorrect User name or password");
+                // User not found
+                header("Location: login.php?error=User not found");
                 exit();
             }
         }
     }
 }
+
 
 ?>
 <!DOCTYPE html>

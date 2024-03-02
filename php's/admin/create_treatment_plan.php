@@ -2,8 +2,8 @@
 session_start();
 include '../../db_conn.php';
 
-if (isset($_GET['id'])) {
-    $ID = $_GET['id']; 
+if (isset($_GET['patient_id'])) {
+    $ID = $_GET['patient_id']; 
     
     $plansql = "SELECT * FROM `treatment_plan` WHERE `id`='$ID'";
     $planresult = $conn->query($plansql); 
@@ -20,7 +20,7 @@ if (isset($_GET['id'])) {
         }
     }
 
-    $sql = "SELECT * FROM `patients` WHERE `patient_id`='$PID'";
+    $sql = "SELECT * FROM `patients` WHERE `patient_id`='$ID'";
     $result = $conn->query($sql); 
 
     if ($result->num_rows > 0) {        
