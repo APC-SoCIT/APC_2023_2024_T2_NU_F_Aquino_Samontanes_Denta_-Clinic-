@@ -97,36 +97,36 @@ if (isset($_POST['submit'])) {
 
     }else{
         // Check if patient_id already exists
-            $checkQuery = "SELECT COUNT(*) as count FROM patients WHERE patient_id = '$PatientID'";
-            $checkResult = $conn->query($checkQuery);
+        $checkQuery = "SELECT COUNT(*) as count FROM patients WHERE patient_id = '$PatientID'";
+        $checkResult = $conn->query($checkQuery);
 
-            if ($checkResult->num_rows > 0) {
-                $row = $checkResult->fetch_assoc();
-                $patientExists = $row['count'] > 0;
-            } else {
-                $patientExists = false;
-            }
+        if ($checkResult->num_rows > 0) {
+            $row = $checkResult->fetch_assoc();
+            $patientExists = $row['count'] > 0;
+        } else {
+            $patientExists = false;
+        }
 
-            // Construct SQL query
-            if ($patientExists) {
-                // Perform an update
-                $Psql = "UPDATE patients SET
-                            first_name = '$FirstName',
-                            middle_name = '$MiddleName',
-                            last_name = '$LastName',
-                            last_visit = '$LastVisit',
-                            age = '$Age',
-                            gender = '$Gender',
-                            weight = '$Weight',
-                            email_address = '$EmailAddress',
-                            contact_number = '$ContactNumber',
-                            created_at = '$currentDateTime'
-                        WHERE patient_id = '$PatientID'";
-            } else {
-                // Perform an insert
-                $Psql = "INSERT INTO `patients`(`patient_id`, `first_name`, `middle_name`, `last_name`, `last_visit`, `age`, `gender`, `weight`, `email_address`, `contact_number`, `created_at`) 
-                        VALUES ('$PatientID', \"$FirstName\", \"$MiddleName\",\"$LastName\", '$LastVisit', '$Age', '$Gender', '$Weight', '$EmailAddress', '$ContactNumber', '$currentDateTime')";
-            }
+        // Construct SQL query
+        if ($patientExists) {
+            // Perform an update
+            $Psql = "UPDATE patients SET
+                        first_name = '$FirstName',
+                        middle_name = '$MiddleName',
+                        last_name = '$LastName',
+                        last_visit = '$LastVisit',
+                        age = '$Age',
+                        gender = '$Gender',
+                        weight = '$Weight',
+                        email_address = '$EmailAddress',
+                        contact_number = '$ContactNumber',
+                        created_at = '$currentDateTime'
+                    WHERE patient_id = '$PatientID'";
+        } else {
+            // Perform an insert
+            $Psql = "INSERT INTO `patients`(`patient_id`, `first_name`, `middle_name`, `last_name`, `last_visit`, `age`, `gender`, `weight`, `email_address`, `contact_number`, `created_at`) 
+                    VALUES ('$PatientID', \"$FirstName\", \"$MiddleName\",\"$LastName\", '$LastVisit', '$Age', '$Gender', '$Weight', '$EmailAddress', '$ContactNumber', '$currentDateTime')";
+        }
 
         $Presult = mysqli_query($conn, $Psql);
 
@@ -134,6 +134,14 @@ if (isset($_POST['submit'])) {
             VALUES ('$PatientID', '$DateOfAppointmentFormatted','$AppointmentCondition','$currentDateTime')";
 
         $result = mysqli_query($conn, $Asql);
+
+        $Usql = "UPDATE users SET
+                    first_name = '$FirstName',
+                    last_name = '$LastName',
+                    email_address = '$EmailAddress'
+                WHERE id = '$PatientID'";
+
+        $Uresult = mysqli_query($conn, $Usql);
         
         // Check if medical history exists for the patient
         $checkMedicalHistoryQuery = "SELECT COUNT(*) as count FROM medical_history WHERE patient_id = '$PatientID'";
@@ -171,7 +179,7 @@ if (isset($_POST['submit'])) {
         $Mresult = mysqli_query($conn, $Msql);
 
 
-        if ($Mresult && $Presult && $result  == TRUE) {
+        if ($Mresult && $Presult && $result && $Uresult == TRUE) {
             header("Location: Request.php?success=New record created succesfully");
                 exit();
                 if (isset($_GET['error']) || isset($_GET['error'])) {

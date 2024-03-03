@@ -1,0 +1,219 @@
+@import "../navbar.css";
+@import "../footer.css";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family:sans-serif;
+    background-image: url(../../pics/toothbg.png);
+}
+
+
+
+.container {
+    position: relative;
+    width: 60%;
+    margin: auto;
+    background-color: #f9f9f9;
+    border-radius: 2px;
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 70px; /* Add some space between buttons and card */
+}
+
+.card-content {
+    display: flex;
+    flex-direction: row; /* Default: Columns side by side */
+}
+
+.column1, .column2 {
+    padding: 20px;
+    width:100%;
+}
+
+.column1 {
+    flex: 40%;
+    line-height: 2rem;
+    background-color: #01afbbbd;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+}
+
+.column2 {
+    flex:60%;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-button,
+.back-button {
+    position: absolute;
+    top: -50px; /* Position the buttons above the card */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.edit-button {
+    right: 10px; /* Align the edit button to the right */
+    background-color: #007bff;
+    color: #fff;
+}
+
+.back-button {
+    left: 10px; /* Align the back button to the left */
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.profile img {
+    height: 100px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.name {
+    font-size: larger;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.column2 {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 20px; /* Adjust this for spacing between grid items */
+  }
+  .info {
+    background-color: lightgray;
+    padding: 20px;
+    text-align: center;
+  }
+
+
+
+.success, .error{
+    position: absolute;
+    top: 6rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4CAF50;
+    color: white;
+    width: 40%;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    border: 2px solid #2E7D32;
+    margin: 10px 0;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+    z-index: 9999; /* Set a high z-index to ensure it's above other elements */
+}
+
+.error{
+    background-color: red;
+    border: 2px solid rgb(172, 0, 0);
+}
+
+.success.hide, .error.hide {
+    opacity: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-height:600px) {
+    .main-bottom {
+        position: relative; /* Change to relative positioning */
+        margin-top: 20px; /* Example margin to prevent overlap */
+        left: 50%;
+        transform: translateX(-50%); /* Center horizontally */
+        width: 100%;
+        max-width: 40%;
+    }
+
+
+    h1 {
+        font-size: 55px;
+    }
+    
+    h2 {
+        font-size: 25px;
+    }
+
+    .container-main-content{
+        margin-top: 40px;
+    }
+}
+  
+@media screen and (max-width:1250px) {
+    .hamburger {
+        display: flex;
+        cursor: pointer;
+    }
+
+    ul {
+        display: none;
+    }
+
+    ul.ham_active {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        height: auto;
+        gap: 24px;
+        padding-bottom: 2rem;
+        background-color:#027880; /*background color when clicked the hamburgir*/
+    }
+
+    .directions {
+        flex-direction: column;
+        text-align: center; /* Center text when in column layout */
+    }
+
+    .text_container,
+    .img_container {
+        flex: none; /* Reset flex values */
+        width: 100%; /* Set width to 100% */
+        margin-bottom: 20px; /* Add margin between text and image */
+    }
+}
+

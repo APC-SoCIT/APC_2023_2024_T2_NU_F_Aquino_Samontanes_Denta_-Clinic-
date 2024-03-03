@@ -222,7 +222,8 @@ if (isset($_GET['id'])) {
                     die("Error: " . mysqli_error($conn));
                 }
                 ?>
-                <li class="welcomeName">Welcome, <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?></li>
+                <li class="welcomeName"><a href="view_profile.php">Welcome, <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?></a></li>
+
                 <?php
                 } else {
                     

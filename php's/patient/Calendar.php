@@ -129,15 +129,17 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 
             if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 
-                $user_sql = "SELECT *
-                FROM users";
+                $Usql = "SELECT * FROM `users` WHERE `id`='$PID'";
+                $Uresult = $conn->query($Usql); 
 
-                $user_result = mysqli_query($conn, $user_sql);
-                if (!$user_result) {
-                    die("Error: " . mysqli_error($conn));
+                if ($Uresult->num_rows > 0) {        
+                    while ($row = $Uresult->fetch_assoc()) {
+                        $FirstName2 = $row['first_name'];
+                        $LastName2 = $row['last_name'];
+                    }
                 }
                 ?>
-                <li class="welcomeName">Welcome, <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?></li>
+                <li class="welcomeName"><a href="view_profile.php">Welcome, <?php echo $FirstName2; ?> <?php echo $LastName2; ?></a></li>
                 <li><a href="Location.php">Location</a></li>
                 <li><a href="staff.php">Staffs</a></li>
                 <li><a href="service.php">Services</a></li>

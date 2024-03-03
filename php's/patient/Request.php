@@ -22,6 +22,17 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
             $Weight = $row['weight'];
         }
     }
+
+    $Usql = "SELECT * FROM `users` WHERE `id`='$PID'";
+    $Uresult = $conn->query($Usql); 
+
+    if ($Uresult->num_rows > 0) {        
+        while ($row = $Uresult->fetch_assoc()) {
+            $FirstName2 = $row['first_name'];
+            $LastName2 = $row['last_name'];
+            $EmailAddress2 = $row['email_address'];
+        }
+    }
     
     $mediaclsql = "SELECT * FROM `medical_history` WHERE `patient_id`='$PID' ORDER BY `created_at` DESC LIMIT 1";
     $medicalresult = $conn->query($mediaclsql); 
@@ -211,7 +222,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                     die("Error: " . mysqli_error($conn));
                 }
                 ?>
-                <li class="welcomeName">Welcome, <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?></li>
+                <li class="welcomeName"><a href="view_profile.php">Welcome, <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?></a></li>
                 <?php
                 } else {
                     
@@ -254,7 +265,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 
         <label>
             <span>First Name <b class="star">*</b></span>
-            <input type="text" name="first_name" value="<?php echo isset($FirstName) ? $FirstName : '' ?>">
+            <input type="text" name="first_name" value="<?php echo isset($FirstName2) ? $FirstName2 : '' ?>">
         </label><br>
 
 
@@ -265,7 +276,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 
         <label>
             <span>Last Name <b class="star">*</b></span>
-            <input type="text" name="last_name" value="<?php echo isset($LastName) ? $LastName : '' ?>">
+            <input type="text" name="last_name" value="<?php echo isset($LastName2) ? $LastName2 : '' ?>">
         </label><br>
 
 
@@ -297,7 +308,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 
         <label>
             <span>Email <b class="star">*</b></span>
-            <input type="text" name="email_address" value="<?php echo isset($EmailAddress) ? $EmailAddress : '' ?>">
+            <input type="text" name="email_address" value="<?php echo isset($EmailAddress2) ? $EmailAddress2 : '' ?>">
         </label><br>
 
         <label>
