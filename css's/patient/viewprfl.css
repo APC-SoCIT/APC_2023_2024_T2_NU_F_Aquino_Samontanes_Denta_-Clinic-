@@ -80,7 +80,7 @@ body {
 }
 
 .profile img {
-    height: 100px;
+    height: 120px;
     margin: auto;
     display: flex;
     justify-content: center;
@@ -88,7 +88,7 @@ body {
 }
 
 .name {
-    font-size: larger;
+    font-size: x-large;
     text-align: center;
     margin-top: 1rem;
 }

@@ -2,7 +2,7 @@
 session_start();
 include '../../db_conn.php';
 
-if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
+if (isset($_SESSION['id'])) {
 
     $sql = "SELECT *
     FROM users";
@@ -43,7 +43,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                     die("Error: " . mysqli_error($conn));
                 }
                 ?>
-                <li class="welcomeName"><a href="#">Welcome, <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?></a></li>
+                <li class="welcomeName"><a href="view_profile.php">Welcome, <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?></a></li>
                 <li><a href="Location.php">Location</a></li>
                 <li><a href="staff.php">Staffs</a></li>
                 <li><a href="service.php">Services</a></li>

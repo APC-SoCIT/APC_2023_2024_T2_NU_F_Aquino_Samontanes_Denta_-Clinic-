@@ -89,11 +89,20 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         }
     </script>
 
+
+    <?php if (isset($_GET['success'])) { ?>
+        <p class="success" id="successMessage"><?php echo $_GET['success']; ?></p>
+        <script>
+            setTimeout(function() {
+                document.getElementById('successMessage').classList.add('hide');
+            }, 2000);
+        </script>
+    <?php } ?>
     <!-- Center the container horizontally -->
     <div class="container">
         <button class="back-button" onclick="goBack()">Back</button>
         <!-- Edit button outside the card, aligned with the right side of the container -->
-        <a href="edit_profile.php?id=<?php echo $ID; ?>"><button class="edit-button">Edit</button></a>
+        <a href="edit_profile.php?id=<?php echo $PID; ?>"><button class="edit-button">Edit</button></a>
         <!-- Single card with two columns inside -->
         <div class="card">
             <div class="card-content">
