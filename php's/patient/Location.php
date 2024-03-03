@@ -56,7 +56,7 @@
                 <li class="welcomeName">Welcome, <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?></li>
                 <li><a href="Location.php" class="sel_page">Location</a></li>
                 <li><a href="staff.php">Staffs</a></li>
-                <li><a href="">Services</a></li>
+                <li><a href="service.php">Services</a></li>
                 <li><a href="Calendar.php">Your Appointments</a></li>
                 <li><a href="../auth/logout.php">Logout</a></li>
                 <li><a href="Request.php" class="btn-nav">Request an Appointment</a></li>
@@ -65,7 +65,7 @@
                 ?>
                 <li><a href="Location.php" class="sel_page">Location</a></li>
                 <li><a href="staff.php">Staffs</a></li>
-                <li><a href="">Services</a></li>
+                <li><a href="service.php">Services</a></li>
                 <li><a href="../auth/login.php">Login</a></li>
                 <li><a href="Request.php" class="btn-nav">Request an Appointment</a></li>
                 <?php

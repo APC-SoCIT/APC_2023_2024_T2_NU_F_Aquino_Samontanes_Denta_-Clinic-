@@ -37,6 +37,28 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
     if (!$result) {
         die("Error: " . mysqli_error($conn));
     }
+
+    if(isset($_POST["cancel_apnmt"])) {
+        $AppointmentID = $_POST['appointment_id'];
+        $Reason = $_POST['reason_of_cancel'];
+        $Cancel = 'cancelled';
+    
+        if (empty($Reason)) {
+            header("Location: Calendar.php?error=Write a reason for cancellation");
+            exit();
+        } else {
+            $csql = "UPDATE appointments SET reason_of_cancel = '$Reason', appointment_condition = '$Cancel' WHERE id = '$AppointmentID'";
+            // Execute the SQL query
+            $cresult = mysqli_query($conn, $csql);
+            // Check if the query was successful
+            if ($cresult) {
+                header("Location: Calendar.php?success=Appointment cancelled");
+                exit();
+            } else {
+                // Handle the error
+            }
+        }
+    }
     ?>
     
     <!DOCTYPE html>
@@ -148,10 +170,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                     echo "<td>{$row['gender']}</td>";
                     echo "<td>{$row['appointment_condition']}</td>";
                     echo "<td>";
+                    echo "<div style=\"text-align: center; display: flex; flex-align: horizontal;\">";
                     echo "<form method='post'>";
                     echo "<button class=\"btn-nav\" type='submit' name='approve' value='{$row['id']}'>Approve</button>";
-                    echo "<button class=\"btn-nav cancel\" type='submit' name='disapprove' value='{$row['id']}'>Disapprove</button>";
                     echo "</form>";
+                    echo "<button class=\"btn-nav cancel\" style=\"\" onclick=\"openModal('{$row['id']}')\">Disapprove</button>";
+                    echo "</div>";
                     echo "</td>";
                     echo "</tr>";
                 }
@@ -166,6 +190,24 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
     }
     ?>
 </div>
+
+    <!-- Modal -->
+    <div class="overlay" id="overlay" onclick="closeModal()"></div> <!-- Overlay -->
+    <div class="modal" id="cancelModal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Are you sure you want to cancel the appointment?</h2>
+        <form action="" method="post">
+            <!-- Hidden input field to store the appointment ID -->
+            <input type="hidden" id="appointmentIdInput" name="appointment_id">
+            <div class="form-group">
+                <label for="reason_of_cancel">Reason for cancelling:</label>
+                <div class="input-wrapper">
+                    <textarea name="reason_of_cancel" id="reason_of_cancel" rows="1" cols="50"></textarea>
+                </div>
+            </div>
+            <input type="submit" value="Cancel appointment" name="cancel_apnmt" class="cancel_bttn">
+        </form>
+    </div>
 
     <script>
         function searchTable() {

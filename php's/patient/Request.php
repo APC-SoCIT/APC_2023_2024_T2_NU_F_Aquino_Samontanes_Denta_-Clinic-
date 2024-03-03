@@ -219,7 +219,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                 ?>
                 <li><a href="Location.php">Location</a></li>
                 <li><a href="staff.php">Staffs</a></li>
-                <li><a href="">Services</a></li>
+                <li><a href="service.php">Services</a></li>
                 <li><a href="Calendar.php">Your Appointments</a></li>
                 <li><a href="../auth/logout.php">Logout</a></li>
                 <li><a href="Request.php" class="btn-nav">Request an Appointment</a></li>
@@ -280,8 +280,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
             <input type="radio" name="last_visit" value="seven_to_twelve_months_ago" id="seven_to_twelve_months_ago">
             <label for="seven_to_twelve_months_ago">7 to 12 months ago</label><br>
 
-            <input type="radio" name="last_visit" value="over_a_year_ago" id="over_a_year_ago">
-            <label for="over_a_year_ago">Over a year ago</label><br>
+            <input type="radio" name="last_visit" value="more_than_a_year_ago" id="more_than_a_year_ago">
+            <label for="more_than_a_year_ago">More than a year ago</label><br>
         </label><br>
 
 

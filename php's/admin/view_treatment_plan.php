@@ -114,13 +114,63 @@ if (isset($_GET['id'])) {
                     <p><strong>Prophylaxis:</strong> <?php echo $Prophylaxis; ?></p>
                     <p style="line-height:1.5em; margin-top: 5px;"><strong>Tooth Extraction:</strong> 
                     <?php 
+                    // Map of tooth numbers to descriptions
+                    $toothDescriptions = [
+                        1 => "Central incisor (Upper - right)",
+                        2 => "Central incisor (Upper - left)",
+                        3 => "Lateral incisor (Upper - right)",
+                        4 => "Lateral incisor (Upper - left)",
+                        5 => "Canine (Upper - right)",
+                        6 => "Canine (Upper - left)",
+                        7 => "First premolar (Upper - right)",
+                        8 => "First premolar (Upper - left)",
+                        9 => "Second premolar (Upper - right)",
+                        10 => "Second premolar (Upper - left)",
+                        11 => "First molar (Upper - right)",
+                        12 => "First molar (Upper - left)",
+                        13 => "Second molar (Upper - right)",
+                        14 => "Second molar (Upper - left)",
+                        15 => "Third molar (Upper - right)",
+                        16 => "Third molar (Upper - left)",
+                        17 => "Central incisor (Lower - right)",
+                        18 => "Central incisor (Lower - left)",
+                        19 => "Lateral incisor (Lower - right)",
+                        20 => "Lateral incisor (Lower - left)",
+                        21 => "Canine (Lower - right)",
+                        22 => "Canine (Lower - left)",
+                        23 => "First premolar (Lower - right)",
+                        24 => "First premolar (Lower - left)",
+                        25 => "Second premolar (Lower - right)",
+                        26 => "Second premolar (Lower - left)",
+                        27 => "First molar (Lower - right)",
+                        28 => "First molar (Lower - left)",
+                        29 => "Second molar (Lower - right)",
+                        30 => "Second molar (Lower - left)",
+                        31 => "Third molar (Lower - right)",
+                        32 => "Third molar (Lower - left)"
+                    ];
+
                     if (!empty($selectedTeeth)) {
-                        echo implode(", ", $selectedTeeth);
+                        // Initialize an array to store descriptions of selected teeth
+                        $selectedTeethDescriptions = [];
+                        
+                        // Loop through each selected tooth number and get its description
+                        foreach ($selectedTeeth as $toothNumber) {
+                            // Check if the tooth number exists in the mapping
+                            if (isset($toothDescriptions[$toothNumber])) {
+                                // Add the description to the array
+                                $selectedTeethDescriptions[] = $toothDescriptions[$toothNumber];
+                            }
+                        }
+
+                        // Output the descriptions separated by commas
+                        echo implode(", ", $selectedTeethDescriptions);
                     } else {
                         echo "No teeth selected"; // or any other appropriate message
                     }
                     ?>
-                    </p>
+                </p>
+
 
 
                 </div>

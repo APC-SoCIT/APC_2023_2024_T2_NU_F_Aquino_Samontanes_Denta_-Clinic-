@@ -249,6 +249,7 @@ p {
     margin: auto; /* Negative margin to compensate for space */
   }
   .card {
+    background-color: beige;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 20px;

@@ -1,36 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aquino Samontanes Dental Clinic</title>
-    <link rel="stylesheet" href="../../css's/patient/staff.css">
-
-    <style>
-        /*Map*/
-        #map-container{
-            width: 100%;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            padding: 0;
-        }
-        h1#map-title{
-            margin-top: 1em;
-            color: white;
-            margin-bottom: .4em;
-            font-weight: bold;
-            font-size: 5em;
-            text-align: center;
-        }
-        iframe{
-            margin-bottom: 5em;
-            width: 80%;
-            height: 500px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aquino Samontanes Dental Clinic</title>
+    <link rel="stylesheet" href="../../css's/patient/index.css">
 </head>
 <body>
+
     <header>
         <nav>
             <div class="logo">
@@ -40,8 +17,6 @@
             </div>
             <ul>
             <?php
-            session_start();
-            include '../../db_conn.php';
 
             if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 
@@ -55,8 +30,8 @@
                 ?>
                 <li class="welcomeName">Welcome, <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?></li>
                 <li><a href="Location.php">Location</a></li>
-                <li><a href="staff.php" class="sel_page">Staffs</a></li>
-                <li><a href="service.php">Services</a></li>
+                <li><a href="staff.php">Staffs</a></li>
+                <li><a href="services.php" class="sel_page">Services</a></li>
                 <li><a href="Calendar.php">Your Appointments</a></li>
                 <li><a href="../auth/logout.php">Logout</a></li>
                 <li><a href="Request.php" class="btn-nav">Request an Appointment</a></li>
@@ -64,8 +39,8 @@
                 } else {
                 ?>
                 <li><a href="Location.php">Location</a></li>
-                <li><a href="staff.php" class="sel_page">Staffs</a></li>
-                <li><a href="service.php">Services</a></li>
+                <li><a href="staff.php">Staffs</a></li>
+                <li><a href="services.php" class="sel_page">Services</a></li>
                 <li><a href="../auth/login.php">Login</a></li>
                 <li><a href="Request.php" class="btn-nav">Request an Appointment</a></li>
                 <?php
@@ -78,33 +53,22 @@
         </nav>
     </header>
 
-    <div class="dentists">
-        <div class="staff-container">
-            <img class="staff-circle" src="levi.jpg"></img>
-            <div class="staff-text">
-                <div class="staff-name">Catherine Aquino Samontanes (Dentist) </div>
-                <div class="staff-details">Age: 55 years old&emsp;&emsp;Birthdate: Novermber 13, 1968<br>
-                Occupation: Doctor/Owner of Aquino-Samontanes Clinic<br>
-                Contact Number: </div>
-            </div>
-        </div>
-        <div class="staff-container2">
-            <div class="staff-text2">
-                <div class="staff-name2">(Receptionist) Lazaro G. Samontanes  </div>
-                <div class="staff-details2">Birthdate: March 15, 1959 &emsp;&emsp;Age: 64 years old<br>
-                Occupation: Retired OFW, 26 years in Saudi Arabia and has a small business<br>
-                Contact Number: </div>
-            </div>
-            <img class="staff-circle2" src="levi.jpg"></img>
-        </div>            
-    </div>
+  <div class="card-container">
+    <div class="card">Card 1</div>
+    <div class="card">Card 2</div>
+    <div class="card">Card 3</div>
+    <div class="card">Card 4</div>
+    <div class="card">Card 5</div>
+    <div class="card">Card 6</div>
+  </div>
 
-    <footer>
+  <footer>
         <div class="container">
             <div class="sec about">
                 <h2>About</h2>
-                <p>Welcome to Aquino-Samontanes Dental Clinic, your premier dental care provider 
-                in Caloocan, Philippines. At Aquino-Samontanes Dental Clinic, we are dedicated to delivering exceptional dental services to our community.
+                <p>Welcome to Aquino-Samontanes Dental Clinic, <br>your premier dental care provider 
+                in Caloocan, Philippines. <br>At Aquino-Samontanes Dental Clinic, we are dedicated to
+                <br>delivering exceptional dental services to our community.
                 </p>
                 <ul class="sci">
                     <li><a href="#"><i class="fa-brands fa-square-facebook" style="color: #ffffff;"></i></a></li>
@@ -137,9 +101,5 @@
     <div class="copyrightText">
         <p>Aquino-Samontanes Dental Clinic 2024</p>
     </div>
-
-    <script src="../../js's/scriptindex.js"></script>
-    <script src="https://kit.fontawesome.com/595a890311.js" crossorigin="anonymous"></script>
-    
 </body>
 </html>

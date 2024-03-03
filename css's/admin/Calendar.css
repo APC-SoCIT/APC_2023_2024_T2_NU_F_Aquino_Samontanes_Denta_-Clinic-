@@ -140,7 +140,7 @@ button:hover {
 .modal {
     display: none;
     position: fixed;
-    width: auto;
+    width: 38%;
     height: auto; /* Set to auto or remove to let the height adjust based on content */
     max-height: 80%; /* Set a maximum height to avoid taking up the entire screen */
     overflow-y: auto; /* Add scrollbar if content exceeds max-height */
@@ -216,6 +216,7 @@ button[class='btn-nav cancel'], a[class='btn-nav cancel']  {
 
 .input-wrapper textarea {
     width: 100%;
+    padding: 6px;
     box-sizing: border-box;
 }
 

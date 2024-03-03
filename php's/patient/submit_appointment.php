@@ -125,7 +125,7 @@ if (isset($_POST['submit'])) {
             } else {
                 // Perform an insert
                 $Psql = "INSERT INTO `patients`(`patient_id`, `first_name`, `middle_name`, `last_name`, `last_visit`, `age`, `gender`, `weight`, `email_address`, `contact_number`, `created_at`) 
-                        VALUES ('$PatientID', '$FirstName', '$MiddleName', '$LastName', '$LastVisit', '$Age', '$Gender', '$Weight', '$EmailAddress', '$ContactNumber', '$currentDateTime')";
+                        VALUES ('$PatientID', \"$FirstName\", \"$MiddleName\",\"$LastName\", '$LastVisit', '$Age', '$Gender', '$Weight', '$EmailAddress', '$ContactNumber', '$currentDateTime')";
             }
 
         $Presult = mysqli_query($conn, $Psql);
