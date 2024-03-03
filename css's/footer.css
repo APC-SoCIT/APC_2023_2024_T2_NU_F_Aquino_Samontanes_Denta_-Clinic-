@@ -9,7 +9,7 @@ footer {
 footer .container {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1.2fr 1fr;
+    grid-template-columns: 1.2fr .7fr 1.2fr;
     grid-gap: 20px;
     justify-content: center;
 }

@@ -316,10 +316,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
     }
     ?>
 
-    <footer>
-        <!-- place footer here -->
-    </footer>
-
     <!-- Modal -->
     <div class="overlay" id="overlay" onclick="closeModal()"></div> <!-- Overlay -->
     <div class="modal" id="cancelModal">

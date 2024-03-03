@@ -146,36 +146,99 @@ p {
 
 .directions p {
     flex: 1;
-    font-family: 'Poppins';
+    font-family: 'Monsteratt', sans-serif;
     font-size: 20px;
     line-height: 1.6;
     letter-spacing: 0.5px;
     padding: 0em 2em;
     margin-right: 2em;
-    color: white;
-    text-shadow: -1px 1px 0 #000,
-        1px 1px 0 #000,
-        1px -1px 0 #000,
-        -1px -1px 0 #000;
 }
 
 .directions img {
-    max-width: 100%;
-    max-height: 100%;
     flex: 1;
 }
 
 .text_container {
-    flex: 1.2;
+    flex: 1;
     padding-right: 20px; /* Adjust padding as needed */
 }
 
-.img_container {
+.img_container1, .img_container2 {
     flex: .8;
     display: flex; /* Add this */
     justify-content: center; /* Add this */
 }
 
+.img_container1 {
+    flex: .5;
+}
+
+.img_container2 {
+    margin-left: 1rem;
+    flex: .5;
+}
+
+@media screen and (max-height:600px) {
+    .main-bottom {
+        position: relative; /* Change to relative positioning */
+        margin-top: 20px; /* Example margin to prevent overlap */
+        left: 50%;
+        transform: translateX(-50%); /* Center horizontally */
+        width: 100%;
+        max-width: 40%;
+    }
+
+
+    h1 {
+        font-size: 55px;
+    }
+    
+    h2 {
+        font-size: 25px;
+    }
+
+    .container-main-content{
+        margin-top: 40px;
+    }
+}
+
+.card-container {
+    width:80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 3rem auto ; /* Negative margin to compensate for space */
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: beige;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    width: calc(33.33% - 20px); /* Adjusted width for each card */
+    height: auto;
+    margin: 15px 10px; /* Margin between cards */
+    box-sizing: border-box; /* Include padding and border in the width/height */
+    padding: 2rem;
+}
+
+.service-title {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 1rem;
+    height: 60px;
+}
+
+.service-content {
+    font-size: 20px;
+    text-indent: 30px; /* Adjust the value as per your requirement */
+    text-align: justify;
+    line-height: 2rem;
+    font-family: "Montserrat", sans-serif;
+}
+  
 @media screen and (max-width:1250px) {
     .hamburger {
         display: flex;
@@ -214,46 +277,25 @@ p {
     }
 
     
-}
-
-@media screen and (max-height:600px) {
-    .main-bottom {
-        position: relative; /* Change to relative positioning */
-        margin-top: 20px; /* Example margin to prevent overlap */
-        left: 50%;
-        transform: translateX(-50%); /* Center horizontally */
-        width: 100%;
-        max-width: 40%;
-    }
-
-
-    h1 {
-        font-size: 55px;
-    }
-    
-    h2 {
-        font-size: 25px;
-    }
-
-    .container-main-content{
-        margin-top: 40px;
+    .card {
+        width: calc(50% - 20px); /* Adjusted width for each card */
     }
 }
 
-.card-container {
-    
-    width:80%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin: auto; /* Negative margin to compensate for space */
-  }
-  .card {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    width: calc(33.33% - 20px); /* Adjusted width for each card */
-    height: 200px;
-    margin: 10px; /* Margin between cards */
-    box-sizing: border-box; /* Include padding and border in the width/height */
-  }
+/* Media query for 1025px and below */
+@media (max-width: 832px) {
+    .card {
+        width: calc(100% - 20px); /* Adjusted width for each card */
+    }
+
+    .service-title {
+        height: 40px;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .service-title {
+        height: auto;
+    }
+}

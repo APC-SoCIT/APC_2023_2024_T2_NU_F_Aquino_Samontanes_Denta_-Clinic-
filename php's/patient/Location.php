@@ -88,17 +88,14 @@
             <div class="text_container">
                 <p>When you're heading to the Aquino-Samontanes Dental Clinic, it might be a bit tricky to spot at first. Get the directions from the maps above and once you've identified the building (from the picture) you'll need to enter the building, but don't worry if you don't immediately see a dental clinic. It's tucked away inside of a (sari-sari) store.</p>
             </div>
-            <div class="img_container">
-                <img src="../../pics/location.jpg" alt="Placeholder Image">
+            <div class="img_container1">
+                <img src="../../pics/Clinic.jpg" alt="Placeholder Image" style="width: 60%;">
             </div>
         </div>
 
         <div class="directions">
             <div class="text_container">
-                <p>Once you're inside that store, you will be immediately greeted by the receptionist. And from there on you are inside the clinic. Take care and keep those pearly whites shining!</p>
-            </div>
-            <div class="img_container">
-                <img src="../../pics/specific_location.jpg" alt="Placeholder Image" style="max-width: 50%;">
+                <p style ="text-align: center; margin:2rem auto;">Once you're inside that store, you will be immediately greeted by the receptionist. And from there on you are inside the clinic. Take care and keep those pearly whites shining!</p>
             </div>
         </div>
     </div>
@@ -112,7 +109,7 @@
                 <br>delivering exceptional dental services to our community.
                 </p>
                 <ul class="sci">
-                    <li><a href="#"><i class="fa-brands fa-square-facebook" style="color: #ffffff;"></i></a></li>
+                    <li><a href="https://www.facebook.com/catherine.samontanes.37?mibextid=LQQJ4d"><i class="fa-brands fa-square-facebook" style="color: #ffffff;"></i></a></li>
                 </ul>
             </div>
 
@@ -121,8 +118,8 @@
                 <ul>
                     <li><a href="Home.php">Home</a></li>
                     <li><a href="Location.php">Location</a></li>
-                    <li><a href="#">Our Services</a></li>
-                    <li><a href="Request.php">Request an Appointment</a></li>
+                    <li><a href="staff.php">Staffs</a></li>
+                    <li><a href="service.php">Services</a></li>
                 </ul>
             </div>
 
@@ -131,8 +128,8 @@
                 <ul class="info">
                     <li>
                         <span><i class="fa-solid fa-location-dot"></i></i></span><p><a href="tel:+630987654321">Block 11 Lot 14 Sunriser Avenue, Sunriser Village, Llano Brgy 167 Caloocan City</a></p>
-                        <span><i class="fa-solid fa-phone"></i></span><p><a href="tel:+630987654321">+63 098 765 4321</a></p>
-                        <span><i class="fa-solid fa-envelope"></i></span><p><a href="mailto:ASamontanesDentalClinic@gmail.com">ASamontanesDentalClinic@gmail.com</a></p>
+                        <span><i class="fa-solid fa-phone"></i></span><p><a href="tel:+639271520198">+639271520198</a></p>
+                        <span><i class="fa-solid fa-envelope"></i></span><p><a href="samontanescatherine@yahoo.com">samontanescatherine@yahoo.com</a></p>
                     </li>
                 </ul>
             </div>

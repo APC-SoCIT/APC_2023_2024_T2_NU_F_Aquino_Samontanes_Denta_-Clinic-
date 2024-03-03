@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aquino Samontanes Dental Clinic</title>
     <link rel="stylesheet" href="../../css's/patient/index.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -54,12 +58,30 @@
     </header>
 
   <div class="card-container">
-    <div class="card">Card 1</div>
-    <div class="card">Card 2</div>
-    <div class="card">Card 3</div>
-    <div class="card">Card 4</div>
-    <div class="card">Card 5</div>
-    <div class="card">Card 6</div>
+    <div class="card">
+        <h1 class="service-title">Jacket Crown Preparation</h1>
+        <p class="service-content">Excellent for rebuilding and fortifying badly damaged teeth, improving beauty as well as function.</p>
+    </div>
+    <div class="card">
+        <h1 class="service-title">Root Canal Treatment</h1>
+        <p class="service-content">Preserve the natural structure of the tooth and relieve extreme tooth pain brought on by an infection or inflammation in the tooth pulp.</p>
+    </div>
+    <div class="card">
+        <h1 class="service-title">Teeth Restoration</h1>
+        <p class="service-content">Required to treat decay, cracks, or discolouration in order to guarantee better oral health and a self-assured grin.</p>
+    </div>
+    <div class="card">
+        <h1 class="service-title">Teeth Extraction</h1>
+        <p class="service-content">Relieves excruciating tooth pain or crowding problems, stops further problems, and returns comfort to the mouth.</p>
+    </div>
+    <div class="card">
+        <h1 class="service-title">Surgery</h1>
+        <p class="service-content">Offers long-term oral health and comfort by treating a variety of dental conditions, such as severely diseased gums or impacted wisdom teeth.</p>
+    </div>
+    <div class="card">
+        <h1 class="service-title">Removal Denture Extraction</h1>
+        <p class="service-content">This procedure gives patients who have lost a lot of teeth their entire dental functionality and beauty back, enabling them to chew more easily and smile more confidently.</p>
+    </div>
   </div>
 
   <footer>
@@ -71,7 +93,7 @@
                 <br>delivering exceptional dental services to our community.
                 </p>
                 <ul class="sci">
-                    <li><a href="#"><i class="fa-brands fa-square-facebook" style="color: #ffffff;"></i></a></li>
+                    <li><a href="https://www.facebook.com/catherine.samontanes.37?mibextid=LQQJ4d"><i class="fa-brands fa-square-facebook" style="color: #ffffff;"></i></a></li>
                 </ul>
             </div>
 
@@ -80,8 +102,8 @@
                 <ul>
                     <li><a href="Home.php">Home</a></li>
                     <li><a href="Location.php">Location</a></li>
-                    <li><a href="#">Our Services</a></li>
-                    <li><a href="Request.php">Request an Appointment</a></li>
+                    <li><a href="staff.php">Staffs</a></li>
+                    <li><a href="service.php">Services</a></li>
                 </ul>
             </div>
 
@@ -90,8 +112,8 @@
                 <ul class="info">
                     <li>
                         <span><i class="fa-solid fa-location-dot"></i></i></span><p><a href="tel:+630987654321">Block 11 Lot 14 Sunriser Avenue, Sunriser Village, Llano Brgy 167 Caloocan City</a></p>
-                        <span><i class="fa-solid fa-phone"></i></span><p><a href="tel:+630987654321">+63 098 765 4321</a></p>
-                        <span><i class="fa-solid fa-envelope"></i></span><p><a href="mailto:ASamontanesDentalClinic@gmail.com">ASamontanesDentalClinic@gmail.com</a></p>
+                        <span><i class="fa-solid fa-phone"></i></span><p><a href="tel:+639271520198">+639271520198</a></p>
+                        <span><i class="fa-solid fa-envelope"></i></span><p><a href="samontanescatherine@yahoo.com">samontanescatherine@yahoo.com</a></p>
                     </li>
                 </ul>
             </div>

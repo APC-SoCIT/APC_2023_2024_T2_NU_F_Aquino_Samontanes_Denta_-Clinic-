@@ -85,15 +85,14 @@
                 <div class="staff-name">Catherine Aquino Samontanes (Dentist) </div>
                 <div class="staff-details">Age: 55 years old&emsp;&emsp;Birthdate: Novermber 13, 1968<br>
                 Occupation: Doctor/Owner of Aquino-Samontanes Clinic<br>
-                Contact Number: </div>
+                Contact Number: 09271520198</div>
             </div>
         </div>
         <div class="staff-container2">
             <div class="staff-text2">
                 <div class="staff-name2">(Receptionist) Lazaro G. Samontanes  </div>
                 <div class="staff-details2">Birthdate: March 15, 1959 &emsp;&emsp;Age: 64 years old<br>
-                Occupation: Retired OFW, 26 years in Saudi Arabia and has a small business<br>
-                Contact Number: </div>
+                Occupation: Retired OFW, 26 years in Saudi Arabia and has a small business</div>
             </div>
             <img class="staff-circle2" src="levi.jpg"></img>
         </div>            
@@ -103,11 +102,12 @@
         <div class="container">
             <div class="sec about">
                 <h2>About</h2>
-                <p>Welcome to Aquino-Samontanes Dental Clinic, your premier dental care provider 
-                in Caloocan, Philippines. At Aquino-Samontanes Dental Clinic, we are dedicated to delivering exceptional dental services to our community.
+                <p>Welcome to Aquino-Samontanes Dental Clinic, <br>your premier dental care provider 
+                in Caloocan, Philippines. <br>At Aquino-Samontanes Dental Clinic, we are dedicated to
+                <br>delivering exceptional dental services to our community.
                 </p>
                 <ul class="sci">
-                    <li><a href="#"><i class="fa-brands fa-square-facebook" style="color: #ffffff;"></i></a></li>
+                    <li><a href="https://www.facebook.com/catherine.samontanes.37?mibextid=LQQJ4d"><i class="fa-brands fa-square-facebook" style="color: #ffffff;"></i></a></li>
                 </ul>
             </div>
 
@@ -116,8 +116,8 @@
                 <ul>
                     <li><a href="Home.php">Home</a></li>
                     <li><a href="Location.php">Location</a></li>
-                    <li><a href="#">Our Services</a></li>
-                    <li><a href="Request.php">Request an Appointment</a></li>
+                    <li><a href="staff.php">Staffs</a></li>
+                    <li><a href="service.php">Services</a></li>
                 </ul>
             </div>
 
@@ -126,8 +126,8 @@
                 <ul class="info">
                     <li>
                         <span><i class="fa-solid fa-location-dot"></i></i></span><p><a href="tel:+630987654321">Block 11 Lot 14 Sunriser Avenue, Sunriser Village, Llano Brgy 167 Caloocan City</a></p>
-                        <span><i class="fa-solid fa-phone"></i></span><p><a href="tel:+630987654321">+63 098 765 4321</a></p>
-                        <span><i class="fa-solid fa-envelope"></i></span><p><a href="mailto:ASamontanesDentalClinic@gmail.com">ASamontanesDentalClinic@gmail.com</a></p>
+                        <span><i class="fa-solid fa-phone"></i></span><p><a href="tel:+639271520198">+639271520198</a></p>
+                        <span><i class="fa-solid fa-envelope"></i></span><p><a href="samontanescatherine@yahoo.com">samontanescatherine@yahoo.com</a></p>
                     </li>
                 </ul>
             </div>
