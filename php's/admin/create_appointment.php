@@ -263,6 +263,8 @@ if (isset($_GET['patient_id'])) {
         </script>
     <?php } ?>
 
+        <a href="pView.php?patient_id=<?php echo $PID; ?>"><button class="back-button">Back</button></a>
+
     
     <form action="" method="post">
         <label>

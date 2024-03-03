@@ -85,11 +85,11 @@ if (isset($_GET['patient_id'])) {
         <a href="pTable.php"><button class="back-button">Back</button></a>
 
         <div class="left-div">
-            <form action="" method="post">
+            <div class="pInfo">
 
             <header><?php echo $FirstName; ?> <?php echo $MiddleName; ?> <?php echo $LastName; ?></header>
 
-            <button class="create-appt"><a href="create_appointment.php?patient_id=<?php echo $PID ?>" style="text-decoration: none; color:white;">+ Create an appointment</a></button>
+            <button class="create-appt"><a href="create_appointment.php?patient_id=<?php echo $PID ?>" style="text-decoration: none; color:white;">Create an appointment</a></button>
 
 
             <div class="info-item">
@@ -207,7 +207,7 @@ if (isset($_GET['patient_id'])) {
                 </div>
             </div>
 
-        </form>
+        </div>
 
         </div>
         <div class="right-div">

@@ -176,7 +176,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
     ?>
     
     <div class="table_appointments">
-    <h2 class="title">Appointments</h2>
+        <div class="table_search">
+            <h2 class="title">Appointments</h2>
+            <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search for names...">
+        </div>
         <table>
             <thead>
                 <tr>

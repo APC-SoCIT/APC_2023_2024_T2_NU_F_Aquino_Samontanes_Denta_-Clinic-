@@ -27,7 +27,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
     $sql_cancel = "SELECT *
         FROM appointments 
         WHERE patient_id = $PatientID 
-        AND (appointment_condition = 'cancelled' OR appointment_condition = 'disapproved')
+        AND appointment_condition = 'cancelled'
         ORDER BY date_of_appointment";
 
 
