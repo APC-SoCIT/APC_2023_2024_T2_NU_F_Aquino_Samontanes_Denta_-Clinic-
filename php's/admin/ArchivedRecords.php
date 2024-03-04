@@ -20,6 +20,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Aquino Samontanes Dental Clinic</title>
         <link rel="stylesheet" type="text/css" href="../../css's/admin/admin.css">
+        <link rel="icon" href="../../pics/Logo.png" type="image/png">
 
         <script>
             document.addEventListener('click', function(event) {

@@ -20,6 +20,7 @@ if (isset($_SESSION['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aquino Samontanes Dental Clinic</title>
     <link rel="stylesheet" href="../../css's/patient/index.css">
+    <link rel="icon" href="../../pics/Logo.png" type="image/png">
 </head>
 <body>
 
@@ -75,7 +76,7 @@ if (isset($_SESSION['id'])) {
                 <h2>From family dentistry to braces and oral surgery, Aquino Samontanes Dental <br> Clinic offers your entire family comprehensive dental care that’s second to none.</h2>
             </div>
             <div class="container-main-content-button">
-                <a href="" class="btn-main">Service we Offer</a>
+                <a href="service.php" class="btn-main">Service we Offer</a>
             </div>
         </div>
     </div>

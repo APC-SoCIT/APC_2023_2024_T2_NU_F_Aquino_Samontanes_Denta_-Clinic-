@@ -85,6 +85,7 @@ if (isset($_GET['patient_id'])) {
 <head>
     <title>Aquino Samontanes Dental Clinic</title>
     <link rel="stylesheet" type="text/css" href="../../css's/patient/request.css">
+    <link rel="icon" href="../../pics/Logo.png" type="image/png">
     <style>
         /* Add this style to prevent resizing of the textarea */
         textarea {

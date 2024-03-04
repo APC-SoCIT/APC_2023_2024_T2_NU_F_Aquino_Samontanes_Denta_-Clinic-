@@ -46,6 +46,7 @@ if (isset($_GET['patient_id'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Aquino Samontanes Dental Clinic</title>
         <link rel="stylesheet" type="text/css" href="../../css's/admin/Create.css">
+        <link rel="icon" href="../../pics/Logo.png" type="image/png">
     </head>
 <html>
 <body>

@@ -35,6 +35,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aquino Samontanes Dental Clinic</title>
     <link rel="stylesheet" href="../../css's/patient/viewprfl.css">
+    <link rel="icon" href="../../pics/Logo.png" type="image/png">
 </head>
 <body>
 

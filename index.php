@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aquino Samontanes Dental Clinic</title>
     <link rel="stylesheet" href="css's/patient/index.css">
+    <link rel="icon" href="pics/Logo.png" type="image/png">
     
 </head>
 <body>
@@ -69,7 +70,7 @@
         <h3>Request an Appointment</h3>
         <p>A visit to one of our starts here.</p>
         <div class="main-bottom-button">
-            <a href="" class="btn-main-bottom">Start Here</a>  
+            <a href="php's/patient/Request.php" class="btn-main-bottom">Start Here</a>  
         </div>              
     </div>
 
