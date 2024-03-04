@@ -163,10 +163,12 @@ if (isset($_GET['patient_id'])) {
                 </div>
             </div>
 
-            <div class="info-item">
-                <span class="info-label">Allergies:</span>
-                <?php echo !empty($Allergies) ? "Yes, " . $SpecifiedAllergies : "None"; ?>
-            </div>
+            <?php if (!empty($Allergies)): ?>
+                <div class="info-item">
+                    <span class="info-label">Allergies:</span>
+                    <?php echo $Allergies == "yes" ? "Yes, " . $SpecifiedAllergies : "None"; ?>
+                </div>
+            <?php endif; ?>
 
             <div class="info-item">
                 <span class="info-label">Concerns:</span>
