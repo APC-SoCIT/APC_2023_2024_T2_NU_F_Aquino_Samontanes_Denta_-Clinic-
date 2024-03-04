@@ -60,7 +60,7 @@
             <h2>From family dentistry to braces and oral surgery, Aquino Samontanes Dental <br> Clinic offers your entire family comprehensive dental care that’s second to none.</h2>
            </div>
            <div class="container-main-content-button">
-            <a href="" class="btn-main">Service we Offer</a>
+            <a href="php's/patient/service.php" class="btn-main">Service we Offer</a>
            </div>
         </div>
     </div>

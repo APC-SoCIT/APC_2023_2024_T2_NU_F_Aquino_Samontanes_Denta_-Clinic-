@@ -117,95 +117,70 @@ if (isset($_GET['patient_id'])) {
 
             <div class="contact-details">
                 <div class="contact-item"> <!-- First column -->
-                    <div class="info-item2">
-                        <span class="info-label">Hypertension:</span>
-                        <?php
-                            if ($Hypertension == "yes") {
-                                echo "Yes";
-                            } else {
-                                echo "No";
-                            }
-                        ?>
-                    </div>
+                    <?php if (!empty($Hypertension)): ?>
+                        <div class="info-item2">
+                            <span class="info-label">Hypertension:</span>
+                            <?php echo $Hypertension == "yes" ? "Yes" : "No"; ?>
+                        </div>
+                    <?php endif; ?>
 
-                    <div class="info-item2">
-                        <span class="info-label">Diabetes:</span>
-                        <?php
-                            if ($Diabetes == "yes") {
-                                echo "Yes";
-                            } else {
-                                echo "No";
-                            }
-                        ?>
-                    </div>
+                    <?php if (!empty($Diabetes)): ?>
+                        <div class="info-item2">
+                            <span class="info-label">Diabetes:</span>
+                            <?php echo $Diabetes == "yes" ? "Yes" : "No"; ?>
+                        </div>
+                    <?php endif; ?>
 
-                    <div class="info-item2">
-                        <span class="info-label">High Uric Acid:</span>
-                        <?php
-                            if ($UricAcid == "yes") {
-                                echo "Yes";
-                            } else {
-                                echo "No";
-                            }
-                        ?>
-                    </div>
-
-
+                    <?php if (!empty($UricAcid)): ?>
+                        <div class="info-item2">
+                            <span class="info-label">High Uric Acid:</span>
+                            <?php echo $UricAcid == "yes" ? "Yes" : "No"; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
+
                 <div class="contact-item"> <!-- Second column -->
-                    <div class="info-item2">
-                        <span class="info-label">High Cholesterol:</span>
-                        <?php
-                            if ($Cholesterol == "yes") {
-                                echo "Yes";
-                            } else {
-                                echo "No";
-                            }
-                        ?>
-                    </div>
+                    <?php if (!empty($Cholesterol)): ?>
+                        <div class="info-item2">
+                            <span class="info-label">High Cholesterol:</span>
+                            <?php echo $Cholesterol == "yes" ? "Yes" : "No"; ?>
+                        </div>
+                    <?php endif; ?>
 
-                    <div class="info-item2">
-                        <span class="info-label">Asthma:</span>
-                        <?php
-                            if ($Asthma == "yes") {
-                                echo "Yes";
-                            } else {
-                                echo "No";
-                            }
-                        ?>
-                    </div>
+                    <?php if (!empty($Asthma)): ?>
+                        <div class="info-item2">
+                            <span class="info-label">Asthma:</span>
+                            <?php echo $Asthma == "yes" ? "Yes" : "No"; ?>
+                        </div>
+                    <?php endif; ?>
 
-                    <div class="info-item2">
-                        <span class="info-label">Medically Compromised:</span>
-                        <?php
-                            if ($MedicallyCompromised == "yes") {
-                                echo "Yes";
-                            } else {
-                                echo "No";
-                            }
-                        ?>
-                    </div>
+                    <?php if (!empty($MedicallyCompromised)): ?>
+                        <div class="info-item2">
+                            <span class="info-label">Medically Compromised:</span>
+                            <?php echo $MedicallyCompromised == "yes" ? "Yes" : "No"; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
 
             <div class="info-item">
                 <span class="info-label">Allergies:</span>
-                <?php
-                    if ($Allergies == "yes") {
-                        echo "Yes, " . $SpecifiedAllergies;
-                    } else {
-                        echo "None";
-                    }
-                ?>
+                <?php echo !empty($Allergies) ? "Yes, " . $SpecifiedAllergies : "None"; ?>
             </div>
-
 
             <div class="info-item">
-                <span class="info-label">Concerns:</span></br>
+                <span class="info-label">Concerns:</span>
                 <div class="comments-box">
-                    <textarea name="comments" rows="3" cols="50" readonly style="resize: none; width: 100%; max-width:100%; font-size:20px; margin-top:.4em"><?php echo $Concerns; ?></textarea>
+                    <?php if (!empty($Concerns)): ?>
+                        <textarea name="comments" rows="3" cols="50" readonly style="resize: none; width: 100%; max-width:100%; font-size:20px; margin-top:.4em"><?php echo $Concerns; ?></textarea>
+                    <?php else: ?>
+                        <span>Patient did not write anything yet</span>
+                    <?php endif; ?>
                 </div>
             </div>
+
+
+
 
         </div>
 

@@ -51,7 +51,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
         }
     }
 
-    $appointmentsql = "SELECT * FROM `appointments`";
+    $appointmentsql = "SELECT * FROM appointments WHERE appointment_condition IN ('pending', 'approved')";
     $appointmentresult = $conn->query($appointmentsql); 
 
     $dates = []; // Initialize an array to store appointment dates
@@ -426,7 +426,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
     <div class="popup" id="dateTimePopup">
         <h2>Select Date and Time</h2>
         <p class="popup_txt">We're open from <b>11am to 6pm</b> every day except <b style="color:red;">Sundays</b>.</p><br>
-        <input type="datetime-local" id="dateTimePicker" value="<?php echo $formattedDate ?>">
+        <input type="datetime-local" id="dateTimePicker">
         <button onclick="selectDateTime()" class="select_bttn">Select</button>
         <button onclick="closePopup()" class="close_bttn">Close</button>
     </div>

@@ -17,7 +17,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
     }
 
     $psql = "SELECT * FROM patients WHERE `patient_id`='$PID'";
-    $presult = $conn->query($psql); 
+    $presult = $conn->query($psql);
 
     if ($presult->num_rows > 0) {        
         while ($row = $presult->fetch_assoc()) {
@@ -98,6 +98,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
             }, 2000);
         </script>
     <?php } ?>
+
+    <?php if (isset($_GET['error'])) { ?>
+        <p class="error" id="errorMessage"><?php echo $_GET['error']; ?></p>
+        <script>
+            setTimeout(function() {
+                document.getElementById('errorMessage').classList.add('hide');
+            }, 2000);
+        </script>
+    <?php } ?>
     <!-- Center the container horizontally -->
     <div class="container">
         <button class="back-button" onclick="goBack()">Back</button>
@@ -117,21 +126,22 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                     <hr>
                     <div class="info">
                         <h1 style="font-family: 'Poppins'; font-size: larger;">Age</h1>
-                        <p><?php echo $Age ?></p>
+                        <p><?php echo isset($Age) ? $Age : "not yet added"; ?></p>
                     </div>
                     <div class="info">
                         <h1 style="font-family: 'Poppins'; font-size: larger;">Email Address</h1>
-                        <p><?php echo $EmailAddress ?></p>
+                        <p><?php echo isset($EmailAddress) ? $EmailAddress : "not yet added"; ?></p>
                     </div>
                     <div class="info">
                         <h1 style="font-family: 'Poppins'; font-size: larger;">Gender</h1>
-                        <p><?php echo $Gender ?></p>
+                        <p><?php echo isset($Gender) ? $Gender : "not yet added"; ?></p>
                     </div>
                     <div class="info">
                         <h1 style="font-family: 'Poppins'; font-size: larger;">Contact Number</h1>
-                        <p><?php echo $ContactNumber ?></p>
+                        <p><?php echo isset($ContactNumber) ? $ContactNumber : "not yet added"; ?></p>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

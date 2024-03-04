@@ -152,6 +152,10 @@ button[class='btn-nav cancel'] {
     background: #ff0000;
 }
 
+button[class='btn-nav confirm'] {
+    background:#33AA63;
+}
+
 .success, .error{
     position: absolute;
     top: 6rem;

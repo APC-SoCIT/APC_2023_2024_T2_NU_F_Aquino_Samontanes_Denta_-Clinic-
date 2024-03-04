@@ -14,7 +14,6 @@ if (isset($_GET['id'])) {
             $FirstName = $row['first_name'];
             $MiddleName = $row['middle_name'];
             $LastName = $row['last_name'];
-            $LastVisit = $row['last_visit'];
             $Age = $row['age'];
             $Gender = $row['gender'];
             $ContactNumber = $row['contact_number'];
@@ -79,17 +78,38 @@ if (isset($_GET['id'])) {
 
         $Uresult = mysqli_query($conn, $Usql);
 
-        $sql = "UPDATE patients SET
-                first_name = \"$FirstName\",
-                middle_name = \"$MiddleName\",
-                last_name = \"$LastName\",
-                age = '$Age',
-                weight = '$Weight',
-                email_address = \"$EmailAddress\",
-                contact_number = '$ContactNumber'
-            WHERE patient_id = '$PatientID'";
+        // Check if patient_id already exists
+        $checkQuery = "SELECT COUNT(*) as count FROM users WHERE patient_id = '$PatientID'";
+        $checkResult = $conn->query($checkQuery);
 
-        $result = mysqli_query($conn, $sql);
+        if ($checkResult->num_rows > 0) {
+            $row = $checkResult->fetch_assoc();
+            $patientExists = $row['count'] > 0;
+        } else {
+            $patientExists = false;
+        }
+
+        // Construct SQL query
+        if ($patientExists) {
+            // Perform an update
+            $Psql = "UPDATE patients SET
+                        first_name = \"$FirstName\",
+                        middle_name = \"$MiddleName\",
+                        last_name = \"$LastName\",
+                        age = '$Age',
+                        gender = '$Gender',
+                        weight = '$Weight',
+                        email_address = \"$EmailAddress\",
+                        contact_number = '$ContactNumber',
+                        created_at = '$currentDateTime'
+                    WHERE patient_id = '$PatientID'";
+        } else {
+            // Perform an insert
+            $Psql = "INSERT INTO `patients`(`patient_id`, `first_name`, `middle_name`, `last_name`, `age`, `gender`, `weight`, `email_address`, `contact_number`, `created_at`) 
+                    VALUES ('$PatientID', \"$FirstName\", \"$MiddleName\",\"$LastName\", '$Age', '$Gender', '$Weight', \"$EmailAddress\", '$ContactNumber', '$currentDateTime')";
+        }
+
+        $result = mysqli_query($conn, $Psql);
 
         if ($result && $Uresult == TRUE) {
             header("Location: view_profile.php?success=Profile Updated!");
@@ -99,10 +119,8 @@ if (isset($_GET['id'])) {
                     unset($_GET['success']);
                 }
         } else {
-            echo "Error:". $sql . "<br>". $conn->error;
+            echo "Error:". $Psql . "<br>". $conn->error;
         }
-
-
             $conn->close();  
         }
     }

@@ -120,10 +120,10 @@ button:hover {
 }
 
 .column1 {
-    flex: 40%;
+    flex: 55%;
 }
 .column2 {
-    flex:60%;
+    flex:45%;
     justify-content: center;
 }
 

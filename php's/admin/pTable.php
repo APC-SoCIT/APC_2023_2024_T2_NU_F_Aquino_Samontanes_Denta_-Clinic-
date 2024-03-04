@@ -124,7 +124,6 @@ if (mysqli_num_rows($result) > 0) {
             <tbody id="table-body">
                 <?php
                 while ($row = mysqli_fetch_assoc($result)) {
-                    // Your existing PHP loop code goes here
                 ?>
                     <tr>
                         <td><?= $row['patient_id'] ?></td>
@@ -136,7 +135,7 @@ if (mysqli_num_rows($result) > 0) {
                         <td style='margin: auto;'>
                             <a href='pView.php?patient_id=<?= $row['patient_id'] ?>'><button class="btn-nav">View</button></a>
                             <a href='pUpdate.php?patient_id=<?= $row['patient_id'] ?>'><button class="btn-nav">Update</button></a>
-                            <a href='#' class='custom-link' onclick='openModal();'><button class="btn-nav cancel">Archive</button></a>
+                            <button class="btn-nav cancel" onclick="openConfirmationModal('<?php echo $row['patient_id']; ?>')">Archive</button>
                         </td>
                     </tr>
                 <?php
@@ -181,28 +180,30 @@ if (mysqli_num_rows($result) > 0) {
 
 </div>
 
-    <script>
-        let userAction;
+<!-- Modal for confirmation -->
+<div id="myModal" class="modal">
+    <h2>Confirmation</h2>
+    <p>Are you sure you want to archive the record?</p>
+    <button class="btn-nav confirm" style="background:#33AA63;" onclick="cancelAction();">Cancel</button>
+    <button class="btn-nav cancel" onclick="proceed();">Proceed</button>
+</div>
 
-        function openModal() {
-            userAction = undefined;
-            document.getElementById('myModal').style.display = 'block';
-        }
+<script>
+    let patientIDToArchive;
 
-        function cancelAction() {
-            userAction = 'cancel';
-            closeModal();
-        }
+    function openConfirmationModal(patientID) {
+        patientIDToArchive = patientID;
+        document.getElementById('myModal').style.display = 'block';
+    }
 
-        function proceed() {
-            userAction = 'proceed';
-            closeModal();
-        }
+    function cancelAction() {
+        document.getElementById('myModal').style.display = 'none';
+    }
 
-        function closeModal() {
-            document.getElementById('myModal').style.display = 'none';
-        }
-    </script>
+    function proceed() {
+        window.location.href = 'pArchive.php?patient_id=' + patientIDToArchive;
+    }
+</script>
 
     </body>
     </html>

@@ -114,12 +114,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
             <tbody>
                 <?php
                 while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<div id="myModal" class="modal">';
-                    echo '<h2>Confirmation</h2>';
-                    echo '<p>Are you sure you want to retrieve the record back?</p>';
-                    echo '<button onclick="cancelAction();">Cancel</button>';
-                    echo '<a href="pRetrieve.php?patient_id=' . $row['patient_id'] . '">Proceed</a>';
-                    echo '</div>';
                     echo "<tr>";
                     echo "<td>{$row['patient_id']}</td>";
                     echo "<td>{$row['first_name']}</td>";
@@ -128,8 +122,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                     echo "<td>{$row['gender']}</td>";
                     echo "<td>{$row['contact_number']}</td>";
                     echo "<td style='margin: auto;'>
-                    <a href='#' class='custom-link' onclick='openModal();'><button>Retrieve</button></a>
-                    </td>";
+                            <button class=\"btn-nav\" onclick=\"openConfirmationModal('{$row['patient_id']}')\">Retrieve</button>
+                        </td>";
                     echo "</tr>";
                 }
                 ?>
@@ -143,28 +137,33 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
     ?>
 </div>
 
-    <script>
-        let userAction;
+    <!-- Modal for confirmation -->
+<div id="myModal" class="modal">
+    <h2>Confirmation</h2>
+    <p>Are you sure you want to retrieve the record back?</p>
+    <button class="btn-nav confirm" style="background:#33AA63;" onclick="cancelAction();">Cancel</button>
+    <button class="btn-nav cancel" onclick="proceed();">Proceed</button>
+</div>
 
-        function openModal() {
-            userAction = undefined;
-            document.getElementById('myModal').style.display = 'block';
-        }
+<script>
+    let patientIDToArchive;
 
-        function cancelAction() {
-            userAction = 'cancel';
-            closeModal();
-        }
+    function openConfirmationModal(patientID) {
+        patientIDToArchive = patientID;
+        document.getElementById('myModal').style.display = 'block';
+    }
 
-        function proceed() {
-            userAction = 'proceed';
-            closeModal();
-        }
+    function cancelAction() {
+        document.getElementById('myModal').style.display = 'none';
+    }
 
-        function closeModal() {
-            document.getElementById('myModal').style.display = 'none';
-        }
-    </script>
+    function proceed() {
+        window.location.href = 'pRetrieve.php?patient_id=' + patientIDToArchive;
+    }
+</script>
+
+    </body>
+    </html>
 
     </body>
     </html>
