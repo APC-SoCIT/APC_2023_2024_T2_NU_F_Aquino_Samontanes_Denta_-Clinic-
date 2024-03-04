@@ -72,20 +72,20 @@ if (isset($_GET['id'])) {
         }else{
 
         $Usql = "UPDATE users SET
-                first_name = \'$FirstName\',
-                last_name = \'$LastName\',
-                email_address = \'$EmailAddress\'
+                first_name = \"$FirstName\",
+                last_name = \"$LastName\",
+                email_address = \"$EmailAddress\"
             WHERE id = '$PatientID'";
 
         $Uresult = mysqli_query($conn, $Usql);
 
         $sql = "UPDATE patients SET
-                first_name = \'$FirstName\',
-                middle_name = \'$MiddleName\',
-                last_name = \'$LastName\',
+                first_name = \"$FirstName\",
+                middle_name = \"$MiddleName\",
+                last_name = \"$LastName\",
                 age = '$Age',
                 weight = '$Weight',
-                email_address = \'$EmailAddress\',
+                email_address = \"$EmailAddress\",
                 contact_number = '$ContactNumber'
             WHERE patient_id = '$PatientID'";
 

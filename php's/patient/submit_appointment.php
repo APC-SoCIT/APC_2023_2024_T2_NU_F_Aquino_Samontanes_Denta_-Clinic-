@@ -111,21 +111,21 @@ if (isset($_POST['submit'])) {
         if ($patientExists) {
             // Perform an update
             $Psql = "UPDATE patients SET
-                        first_name = '$FirstName',
-                        middle_name = '$MiddleName',
-                        last_name = '$LastName',
+                        first_name = \"$FirstName\",
+                        middle_name = \"$MiddleName\",
+                        last_name = \"$LastName\",
                         last_visit = '$LastVisit',
                         age = '$Age',
                         gender = '$Gender',
                         weight = '$Weight',
-                        email_address = '$EmailAddress',
+                        email_address = \"$EmailAddress\",
                         contact_number = '$ContactNumber',
                         created_at = '$currentDateTime'
                     WHERE patient_id = '$PatientID'";
         } else {
             // Perform an insert
             $Psql = "INSERT INTO `patients`(`patient_id`, `first_name`, `middle_name`, `last_name`, `last_visit`, `age`, `gender`, `weight`, `email_address`, `contact_number`, `created_at`) 
-                    VALUES ('$PatientID', \"$FirstName\", \"$MiddleName\",\"$LastName\", '$LastVisit', '$Age', '$Gender', '$Weight', '$EmailAddress', '$ContactNumber', '$currentDateTime')";
+                    VALUES ('$PatientID', \"$FirstName\", \"$MiddleName\",\"$LastName\", '$LastVisit', '$Age', '$Gender', '$Weight', \"$EmailAddress\", '$ContactNumber', '$currentDateTime')";
         }
 
         $Presult = mysqli_query($conn, $Psql);
@@ -136,9 +136,9 @@ if (isset($_POST['submit'])) {
         $result = mysqli_query($conn, $Asql);
 
         $Usql = "UPDATE users SET
-                    first_name = '$FirstName',
-                    last_name = '$LastName',
-                    email_address = '$EmailAddress'
+                    first_name = \"$FirstName\",
+                    last_name = \"$LastName\",
+                    email_address = \"$EmailAddress\"
                 WHERE id = '$PatientID'";
 
         $Uresult = mysqli_query($conn, $Usql);
