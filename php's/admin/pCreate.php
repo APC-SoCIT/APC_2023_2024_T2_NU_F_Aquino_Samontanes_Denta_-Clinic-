@@ -19,6 +19,7 @@
         $Cholesterol = $_POST['cholesterol'];
         $Asthma = $_POST['asthma'];
         $MedicallyCompromised = $_POST['medically_compromised'];
+        $UserRole = 'patient';
 
         if (empty($FirstName)) {
             header("Location: pCreate.php?error=First Name is required");
@@ -84,8 +85,14 @@
                 VALUES ('$newPatientID','$Allergies','$SpecifiedAllergies', '$Hypertension','$Diabetes','$UricAcid','$Cholesterol','$Asthma','$MedicallyCompromised','$currentDateTime')";
         
                 $insertResult2 = $conn->query($Msql);
+
+                $Usql = "INSERT INTO `users`(`first_name`, `last_name`, `email_address`, `user_role`, `created_at`) 
+                    VALUES (\"$FirstName\",\"$LastName\",\"$EmailAddress\",'$UserRole','$currentDateTime')";
+
+                $insertResult3 = $conn->query($Usql);
+                
         
-                if ($insertResult && $insertResult2 === TRUE) {
+                if ($insertResult && $insertResult2 && $insertResult3 === TRUE) {
                     header("Location: pCreate.php?success=Data Successfully Created!");
                     exit();
                 } else {

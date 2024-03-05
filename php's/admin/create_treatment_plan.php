@@ -190,7 +190,6 @@ if (isset($_GET['patient_id'])) {
                         <option value="Teeth Restoration">Teeth Restoration</option>
                         <option value="Root Canal Treatment">Root Canal Treatment</option>
                         <option value="Surgery">Surgery</option>
-                        <option value="Teeth Extraction">Teeth Extraction</option>
                         <option value="Removal Denture Construction">Removal Denture Construction</option>
                     </select>
                     </label>
