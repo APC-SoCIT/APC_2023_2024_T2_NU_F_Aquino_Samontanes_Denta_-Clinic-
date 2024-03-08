@@ -24,6 +24,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
             $ContactNumber = $row['contact_number'];
             $Age = $row['age'];
             $Gender = $row['gender'];
+            $BirthDate = $row['birthdate'];
+            $Weight = $row['weight'];
         }
     }
     ?>
@@ -130,12 +132,20 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
                         <p><?php echo isset($Age) ? $Age : "not yet added"; ?></p>
                     </div>
                     <div class="info">
-                        <h1 style="font-family: 'Poppins'; font-size: larger;">Email Address</h1>
-                        <p><?php echo isset($EmailAddress) ? $EmailAddress : "not yet added"; ?></p>
+                        <h1 style="font-family: 'Poppins'; font-size: larger;">Birthdate</h1>
+                        <p><?php echo isset($BirthDate) ? $BirthDate : "not yet added"; ?></p>
                     </div>
                     <div class="info">
                         <h1 style="font-family: 'Poppins'; font-size: larger;">Gender</h1>
                         <p><?php echo isset($Gender) ? $Gender : "not yet added"; ?></p>
+                    </div>
+                    <div class="info">
+                        <h1 style="font-family: 'Poppins'; font-size: larger;">Email Address</h1>
+                        <p><?php echo isset($EmailAddress) ? $EmailAddress : "not yet added"; ?></p>
+                    </div>
+                    <div class="info">
+                        <h1 style="font-family: 'Poppins'; font-size: larger;">Weight</h1>
+                        <p><?php echo isset($Weight) ? $Weight : "not yet added"; ?>kg</p>
                     </div>
                     <div class="info">
                         <h1 style="font-family: 'Poppins'; font-size: larger;">Contact Number</h1>

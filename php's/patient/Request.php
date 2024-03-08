@@ -15,6 +15,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
             $MiddleName = $row['middle_name'];
             $LastName = $row['last_name'];
             $LastVisit = $row['last_visit'];
+            $BirthDate = $row['birthdate'];
             $Age = $row['age'];
             $Gender = $row['gender'];
             $ContactNumber = $row['contact_number'];
@@ -296,11 +297,64 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
             <label for="more_than_a_year_ago">More than a year ago</label><br>
         </label><br>
 
+        <label>
+            <span>Birthdate <b class="star">*</b></span>
+            <!-- Day -->
+            <select name="birthdate_day" onchange="calculateAge()">
+                <?php for ($day = 1; $day <= 31; $day++) : ?>
+                    <option value="<?php echo $day; ?>" <?php if ($day == date('d', strtotime($BirthDate))) echo 'selected'; ?>><?php echo $day; ?></option>
+                <?php endfor; ?>
+            </select>
+            <!-- Month -->
+            <select name="birthdate_month" onchange="calculateAge()">
+                <?php
+                $months = [
+                    1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April', 5 => 'May', 6 => 'June',
+                    7 => 'July', 8 => 'August', 9 => 'September', 10 => 'October', 11 => 'November', 12 => 'December'
+                ];
+                foreach ($months as $monthNum => $monthName) : ?>
+                    <option value="<?php echo $monthNum; ?>" <?php if ($monthNum == date('m', strtotime($BirthDate))) echo 'selected'; ?>><?php echo $monthName; ?></option>
+                <?php endforeach; ?>
+            </select>
+            <!-- Year -->
+            <select name="birthdate_year" onchange="calculateAge()">
+                <?php
+                $currentYear = date('Y');
+                for ($year = $currentYear; $year >= $currentYear - 100; $year--) : ?>
+                    <option value="<?php echo $year; ?>" <?php if ($year == date('Y', strtotime($BirthDate))) echo 'selected'; ?>><?php echo $year; ?></option>
+                <?php endfor; ?>
+            </select>
+        </label><br>
 
         <label>
-            <span>Age <b class="star">*</b></span>
-            <input type="number" name="age" value="<?php echo isset($Age) ? $Age : '' ?>">
+            <span>Age</span>
+            <input type="number" id="age" name="age" value="<?php echo isset($Age) ? $Age : '' ?>" readonly>
         </label><br>
+
+        <script>
+            function calculateAge() {
+                var birthdate_day = document.getElementsByName('birthdate_day')[0].value;
+                var birthdate_month = document.getElementsByName('birthdate_month')[0].value;
+                var birthdate_year = document.getElementsByName('birthdate_year')[0].value;
+
+                // Create a new Date object using the birthdate components
+                var birthdate = new Date(birthdate_year, birthdate_month - 1, birthdate_day);
+
+                // Get the current date
+                var today = new Date();
+
+                // Calculate the age
+                var age = today.getFullYear() - birthdate.getFullYear();
+
+                // Adjust age if the birthday hasn't occurred yet this year
+                if (today.getMonth() < birthdate.getMonth() || (today.getMonth() == birthdate.getMonth() && today.getDate() < birthdate.getDate())) {
+                    age--;
+                }
+
+                // Update the age input field
+                document.getElementById('age').value = age;
+            }
+        </script>
 
         <label>
             <span>Contact Number <b class="star">*</b></span>
@@ -314,7 +368,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email_address'])) {
 
         <label>
             <span>Weight(kg)</span>
-            <input type="number" name="weight" value="<?php echo isset($Weight) ? $Weight : '' ?>">
+            <input type="number" name="weight" step="0.01" value="<?php echo isset($Weight) ? $Weight : '' ?>">
         </label><br>
 
         <label>

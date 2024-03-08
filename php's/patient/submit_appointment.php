@@ -8,6 +8,14 @@ if (isset($_POST['submit'])) {
     $MiddleName = $_POST['middle_name'];
     $LastName = $_POST['last_name'];
     $LastVisit = $_POST['last_visit'];
+
+    // Retrieve the selected values from the dropdowns
+    $birthdate_day = $_POST['birthdate_day'];
+    $birthdate_month = $_POST['birthdate_month'];
+    $birthdate_year = $_POST['birthdate_year'];
+
+    // Combine the values into a single date string in 'YYYY-MM-DD' format
+    $birthdate = $birthdate_year . '-' . $birthdate_month . '-' . $birthdate_day;
     $Age = $_POST['age'];
     $ContactNumber = $_POST['Contact_Number'];
     $EmailAddress = $_POST['email_address'];
@@ -116,6 +124,7 @@ if (isset($_POST['submit'])) {
                         last_name = \"$LastName\",
                         last_visit = '$LastVisit',
                         age = '$Age',
+                        birthdate = '$birthdate',
                         gender = '$Gender',
                         weight = '$Weight',
                         email_address = \"$EmailAddress\",
@@ -124,8 +133,8 @@ if (isset($_POST['submit'])) {
                     WHERE patient_id = '$PatientID'";
         } else {
             // Perform an insert
-            $Psql = "INSERT INTO `patients`(`patient_id`, `first_name`, `middle_name`, `last_name`, `last_visit`, `age`, `gender`, `weight`, `email_address`, `contact_number`, `created_at`) 
-                    VALUES ('$PatientID', \"$FirstName\", \"$MiddleName\",\"$LastName\", '$LastVisit', '$Age', '$Gender', '$Weight', \"$EmailAddress\", '$ContactNumber', '$currentDateTime')";
+            $Psql = "INSERT INTO `patients`(`patient_id`, `first_name`, `middle_name`, `last_name`, `last_visit`, `birthdate`, `age`, `gender`, `weight`, `email_address`, `contact_number`, `created_at`) 
+                    VALUES ('$PatientID', \"$FirstName\", \"$MiddleName\",\"$LastName\", '$LastVisit', '$birthdate', '$Age', '$Gender', '$Weight', \"$EmailAddress\", '$ContactNumber', '$currentDateTime')";
         }
 
         $Presult = mysqli_query($conn, $Psql);

@@ -144,10 +144,11 @@ body {
 }
 
 .staff-name {
-    font-size: 25px;
+    font-size: 35px;
     margin-bottom: 5px;
 }
 
 .staff-details {
-    line-height: 1.5rem;
+    font-size: 20px;
+    line-height: 1.8rem;
 }

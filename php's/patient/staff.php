@@ -84,7 +84,7 @@
             <img class="staff-circle" src="../../pics/dentist.jpg"></img>
             <div class="staff-text">
                 <div class="staff-name">Catherine Aquino Samontanes (Dentist) </div>
-                <div class="staff-details"><b>Age:</b> 55 years old&emsp;&emsp;<b>Birthdate:</b> Novermber 13, 1968<br>
+                <div class="staff-details">
                 <b>Occupation:</b> Doctor/Owner of Aquino-Samontanes Clinic<br>
                 <b>Contact Number:</b> 09271520198</div>
             </div>
@@ -92,7 +92,7 @@
         <div class="staff-container2">
             <div class="staff-text2">
                 <div class="staff-name">(Receptionist) Lazaro G. Samontanes  </div>
-                <div class="staff-details"><b>Birthdate:</b> March 15, 1959 &emsp;&emsp;<b>Age:</b> 64 years old<br>
+                <div class="staff-details">
                 <b>Occupation:</b> Retired OFW, 26 years in Saudi Arabia and has a small business</div>
             </div>
             <img class="staff-circle2" src="../../pics/receptionist.jpg"></img>

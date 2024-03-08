@@ -79,6 +79,7 @@ label {
     margin-bottom: 10px;
 }
 
+input[type="date"],
 input[type="text"],
 input[type="number"],
 input[type="datetime-local"],
@@ -86,6 +87,16 @@ textarea {
     width: 100%;
     padding: 8px;
     margin-bottom: 1px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+select {
+    width: 32%;
+    padding: 8px;
+    margin-bottom: 1px;
+    margin: 0 auto; /* Center the select element horizontally */
     border: 1px solid #ddd;
     border-radius: 4px;
     box-sizing: border-box;
